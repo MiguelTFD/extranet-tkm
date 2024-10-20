@@ -43,8 +43,10 @@
             </a>
         </div>
         @if($user)
-            <p>Hola, {{ $user->name }}</p>  <!-- Aquí se muestra el nombre del usuario -->
-            <a href="{{ route('logout') }}" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
                 Cerrar Sesión
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
@@ -54,6 +56,7 @@
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
         @endif
+
     </div>
 </nav>
 

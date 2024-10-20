@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     //Funcion para Evaluar el login
     public function login(Request $request){
-        
+
         $credentials = $request->only('username','password');
 
         $user = \App\Models\Usuario::where('username', $credentials['username'])->first();
@@ -32,11 +32,11 @@ class LoginController extends Controller
 
     //funcion para hacer un logout
     public function logout(Request $request){
-        
+
         Auth::guard('usuario')->logout();
-        
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+        return redirect()->intended('/');
     }
 }

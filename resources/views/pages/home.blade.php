@@ -1,6 +1,5 @@
 {{-- resources/views/pages/home.blade.php --}}
 
-<p>Hola, {{ $user->nombre }}</p>
 @extends('layouts.base')
 
 @section('content')
