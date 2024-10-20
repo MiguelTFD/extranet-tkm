@@ -93,95 +93,206 @@ select {
 @section('content')
 
     <div class="register-container">
-   <h2>REGISTRAR CLIENTE</h2>
-   <form action="/register" method="POST" class="register-form">
-      <div class="row">
-         <div class="form-group">
-            <label for="first_name">Nombres</label>
-            <input type="text" id="first_name" name="first_name" placeholder="Ingresa tus nombres" required>
-         </div>
-         <div class="form-group">
-            <label for="last_name">Apellidos</label>
-            <input type="text" id="last_name" name="last_name" placeholder="Ingresa tus apellidos" required>
-         </div>
-      </div>
-
-      <div class="row">
-         <div class="form-group">
-            <label for="phone">Teléfono</label>
-            <div class="phone-input">
-               <span class="country-code">🇵🇪 +51</span>
-               <input type="text" id="phone" name="phone" placeholder="Ingresa tu teléfono" required>
+   <h2>REGISTRAR USUARIO</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+   <form action="{{ route('crearusuario') }}" method="POST" class="register-form">
+       @csrf
+      <div class="row">
+         <div class="form-group">
+            <label for="nombre">Nombres</label>
+             <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}" placeholder="Ingresa tus nombres"  required>
+
          </div>
          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Ingresa tu email" required>
+            <label for="apellido">Apellidos</label>
+             <input type="text" name="apellido" class="form-control" id="apellido" value="{{ old('apellido') }}" placeholder="Ingresa tus apellidos" required>
          </div>
       </div>
 
       <div class="row">
          <div class="form-group">
-            <label for="doc_type">Doc. IDe</label>
-            <select id="doc_type" name="doc_type">
-               <option value="DNI">DNI</option>
-               <option value="Passport">Pasaporte</option>
-            </select>
-            <input type="text" id="doc_number" name="doc_number" placeholder="Ingresa tu documento de identidad" required>
+             <label for="telefono">Teléfono</label>
+             <input type="text" name="telefono" class="form-control" id="telefono" value="{{ old('telefono') }}" placeholder="Ingresa tu teléfono" required>
          </div>
          <div class="form-group">
-            <label for="dob">Fecha de Nacimiento</label>
-            <input type="date" id="dob" name="dob" value="2022-11-23" required>
+             <label for="correo">Correo</label>
+             <input type="email" name="correo" class="form-control" id="correo" value="{{ old('correo') }}" placeholder="Ingresa tu email" required>
          </div>
       </div>
 
       <div class="row">
          <div class="form-group">
-            <label for="country">País</label>
-            <select id="country" name="country">
-               <option value="">Selecciona tu País</option>
-               <!-- Opciones de países -->
-            </select>
-         </div>
-         <div class="form-group">
-            <label for="state">Estado/Región</label>
-            <select id="state" name="state">
-               <option value="">Selecciona tu Estado</option>
-               <!-- Opciones de estados -->
-            </select>
-         </div>
-         <div class="form-group">
-            <label for="city">Ciudad</label>
-            <select id="city" name="city">
-               <option value="">Selecciona tu Ciudad</option>
-               <!-- Opciones de ciudades -->
-            </select>
+             <label for="idTipoDocumentoIdentidad">Tipo de Documento de Identidad</label>
+             <select name="idTipoDocumentoIdentidad" class="form-control" id="idTipoDocumentoIdentidad" required>
+                 <option value="">Seleccione el tipo de documento</option>
+                 @foreach($tiposDocumento as $tipo)
+                     <option value="{{ $tipo->idTipoDocumentoIdentidad }}">{{ $tipo->nombreTipoDocumentoIdentidad }}</option>
+                 @endforeach
+             </select>
+             <label for="numeroDocumentoIdentidad">Número de Documento de Identidad</label>
+             <input type="text" name="numeroDocumentoIdentidad" class="form-control" id="numeroDocumentoIdentidad" value="{{ old('numeroDocumentoIdentidad') }}" placeholder="Ingresa tu documento de identidad"  required>
          </div>
       </div>
 
-      <div class="form-group">
-         <label for="address">Dirección</label>
-         <input type="text" id="address" name="address" placeholder="Ingresa tu dirección" required>
+       <div class="row">
+           <div class="form-group">
+               <label for="pais">País</label>
+               <select id="pais" name="pais">
+                   <option value="">Selecciona tu País</option>
+                   <!-- Aquí agregas los países desde la base de datos -->
+                   @foreach($paises as $pais)
+                       <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
+                   @endforeach
+               </select>
+           </div>
+
+           <div class="form-group">
+               <label for="departamento">Departamento</label>
+               <select id="departamento" name="departamento">
+                   <option value="">Selecciona tu Departamento</option>
+               </select>
+           </div>
+
+           <div class="form-group">
+               <label for="provincia">Provincia</label>
+               <select id="provincia" name="provincia">
+                   <option value="">Selecciona tu Provincia</option>
+               </select>
+           </div>
+
+           <div class="form-group">
+               <label for="idDistrito">Distrito</label>
+               <select id="idDistrito" name="idDistrito">
+                   <option value="">Selecciona tu Distrito</option>
+               </select>
+           </div>
+       </div>
+
+
+       <div class="form-group">
+          <label for="idTipoDireccion">Tipo de Dirección</label>
+          <select name="idTipoDireccion" class="form-control" id="idTipoDireccion" required>
+              <option value="">Seleccione el tipo de dirección</option>
+              @foreach($tiposDireccion as $tipoDireccion)
+                  <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
+              @endforeach
+          </select>
+          <label for="direccionExacta">Dirección Exacta</label>
+          <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
       </div>
+
+       <div class="form-group">
+           <label for="referencia">Referencia</label>
+           <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
+       </div>
+
 
       <div class="row">
          <div class="form-group">
-            <label for="username">Nombre de Usuario</label>
-            <input type="text" id="username" name="username" placeholder="Ingresa un nombre de usuario" required>
+
+             <label for="username">Username</label>
+             <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" placeholder="Ingresa un nombre de usuario" required>
          </div>
+
          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Ingresa una contraseña" required>
+             <label for="password">Password</label>
+             <input type="password" name="password" class="form-control" id="password" placeholder="Ingresa una contraseña"  required>
          </div>
-         <div class="form-group">
-            <label for="confirm_password">Contraseña</label>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repite nuevamente tu contraseña" required>
-         </div>
+
+
       </div>
 
       <button type="submit" class="register-btn">Registrarme</button>
    </form>
 </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Obtener departamentos cuando se selecciona un país
+            $('#pais').on('change', function() {
+                var paisId = $(this).val();
+                if (paisId) {
+                    $.ajax({
+                        url: '{{ route("getDepartamentos") }}',
+                        type: 'GET',
+                        data: { pais_id: paisId },
+                        success: function(data) {
+                            $('#departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+                            $.each(data, function(key, value) {
+                                $('#departamento').append('<option value="' + value.idDepartamento + '">' + value.nombreDepartamento + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+                    $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                    $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                }
+            });
+
+            // Obtener provincias cuando se selecciona un departamento
+            $('#departamento').on('change', function() {
+                var departamentoId = $(this).val();
+                if (departamentoId) {
+                    $.ajax({
+                        url: '{{ route("getProvincias") }}',
+                        type: 'GET',
+                        data: { departamento_id: departamentoId },
+                        success: function(data) {
+                            $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                            $.each(data, function(key, value) {
+                                $('#provincia').append('<option value="' + value.idProvincia + '">' + value.nombreProvincia + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                    $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                }
+            });
+
+            // Obtener distritos cuando se selecciona una provincia
+            $('#provincia').on('change', function() {
+                var provinciaId = $(this).val();
+                if (provinciaId) {
+                    $.ajax({
+                        url: '{{ route("getDistritos") }}',
+                        type: 'GET',
+                        data: { provincia_id: provinciaId },
+                        success: function(data) {
+                            $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                            $.each(data, function(key, value) {
+                                $('#idDistrito').append('<option value="' + value.idDistrito + '">' + value.nombreDistrito + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                }
+            });
+        });
+    </script>
 
 @endsection

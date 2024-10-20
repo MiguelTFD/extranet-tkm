@@ -27,7 +27,7 @@
                 href="{{ route('productos') }}"
                 class="nav-item nav-link"
             >
-
+                Productos
             </a>
             <a
                 href="{{ url('/gallery') }}"

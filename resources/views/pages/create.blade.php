@@ -91,12 +91,12 @@
 
         <div class="form-group">
             <label for="direccionExacta">Dirección Exacta</label>
-            <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" required>
+            <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
         </div>
 
         <div class="form-group">
             <label for="referencia">Referencia</label>
-            <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" required>
+            <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
         </div>
 
         <div class="form-group">

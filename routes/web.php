@@ -10,6 +10,7 @@ use App\Http\Controllers\iniciarSesionController;
 use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\RecuperarPasswordController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UbicacionController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,5 +33,9 @@ Route::get('login',[LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login',[LoginController::class, 'login']);
 Route::post('logout',[LoginController::class, 'logout'])->name('logout');
 
-Route::get('/create', [UsuarioController::class, 'create'])->name('create');
-Route::post('/store', [UsuarioController::class, 'store'])->name('store');
+Route::get('/registro', [UsuarioController::class, 'registro'])->name('registro');
+Route::post('/crearusuario', [UsuarioController::class, 'crearusuario'])->name('crearusuario');
+
+Route::get('/get-departamentos', [UbicacionController::class, 'getDepartamentos'])->name('getDepartamentos');
+Route::get('/get-provincias', [UbicacionController::class, 'getProvincias'])->name('getProvincias');
+Route::get('/get-distritos', [UbicacionController::class, 'getDistritos'])->name('getDistritos');

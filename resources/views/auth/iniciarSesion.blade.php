@@ -88,12 +88,12 @@ input[type="password"] {
 @section('content')
     <div class="iniSesCt">
         <h1 style="text-align:center">
-            Iniciar Sesion 
+            Iniciar Sesion
         </h1>
         <div class="login-container">
-            <form 
-               action="{{route('login')}}" 
-               method="POST" 
+            <form
+               action="{{route('login')}}"
+               method="POST"
                class="login-form"
             >
             @csrf
@@ -101,10 +101,10 @@ input[type="password"] {
                     <label for="username">
                         Usuario
                     </label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
                         placeholder="Ingresa tu nombre de usuario" required
                     >
                 </div>
@@ -112,31 +112,31 @@ input[type="password"] {
                     <label for="password">
                         Contraseña
                     </label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
                         placeholder="Ingresa tu contraseña" required
                     >
                 </div>
                 <div class="form-group">
-                <a 
-                    href="{{route('recuperarPassword')}}" 
+                <a
+                    href="{{route('recuperarPassword')}}"
                     class="forgot-password"
                 >
                     Olvide mi contraseña
                 </a>
                 </div>
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     class="login-btn"
                 >
                     Iniciar Sesion
                 </button>
                 <div class="register-link">
-                    <p>¿No tienes una cuenta?</p> 
-                    <a 
-                        href="{{route('registrarUsuario')}}"
+                    <p>¿No tienes una cuenta?</p>
+                    <a
+                        href="{{route('registro')}}"
                     >
                         Registrarme como cliente
                     </a>

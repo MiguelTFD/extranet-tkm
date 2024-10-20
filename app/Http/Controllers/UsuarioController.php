@@ -6,24 +6,24 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\TipoDocumentoIdentidad;
 use App\Models\Direccion;
-use App\Models\Distrito;
 use App\Models\TipoDireccion;
 use App\Models\DocumentoIdentidad;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Pais;
 
 class UsuarioController extends Controller
 {
-    
-    public function create()
+
+    public function registro()
     {
-        $tiposDocumento = TipoDocumentoIdentidad::all(); 
-        $distritos = Distrito::all(); 
+        $paises = Pais::all();
+        $tiposDocumento = TipoDocumentoIdentidad::all();
         $tiposDireccion = TipoDireccion::all(); // Para llenar el select de tipo dirección
-        return view('pages.create', compact('tiposDocumento', 'distritos', 'tiposDireccion'));
+        return view('pages.registrarUsuario', compact('tiposDocumento',  'tiposDireccion','paises'));
     }
 
-    public function store(Request $request)
+    public function crearusuario(Request $request)
     {
         // Validar los datos del formulario
         $validated = $request->validate([
@@ -41,6 +41,7 @@ class UsuarioController extends Controller
             'idTipoDocumentoIdentidad' => 'required' // Asumimos que viene desde un select
         ]);
 
+
         DB::beginTransaction(); // Inicia la transacción
 
         try {
@@ -52,16 +53,18 @@ class UsuarioController extends Controller
                 'idTipoDireccion' => $validated['idTipoDireccion']
             ]);
 
-            // Crear el usuario
-            $usuario = Usuario::create([
+            // Crear el usuario y solucionando el problema de la insercion masiva
+            $usuario = new Usuario([
                 'username' => $validated['username'],
-                'password' => Hash::make($validated['password']), // Hashear la contraseña
                 'nombre' => $validated['nombre'],
                 'apellido' => $validated['apellido'],
                 'telefono' => $validated['telefono'],
                 'correo' => $validated['correo'],
                 'idDireccion' => $direccion->idDireccion // Asignar la dirección creada
             ]);
+
+            $usuario->password = Hash::make($validated['password']); // Hashear la contraseña
+            $usuario->save();
 
             // Crear el documento de identidad y asociarlo al usuario
             DocumentoIdentidad::create([
@@ -84,7 +87,7 @@ class UsuarioController extends Controller
     }
     }
 
-    
+
 
 
 
