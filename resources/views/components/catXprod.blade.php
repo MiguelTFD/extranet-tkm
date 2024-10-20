@@ -7,6 +7,7 @@
 }
 </style>
 
+
 <div class="catXprodCt">
         @component('components.productCard')
         @endcomponent

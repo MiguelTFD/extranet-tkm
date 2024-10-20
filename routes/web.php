@@ -19,11 +19,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
+
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+
+Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
+
+
+
+
+
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
+
 
 Route::get('/registrarUsuario', [RegistrarUsuarioController::class, 'index'])->name('registrarUsuario');
 
@@ -35,6 +43,9 @@ Route::post('logout',[LoginController::class, 'logout'])->name('logout');
 
 Route::get('/registro', [UsuarioController::class, 'registro'])->name('registro');
 Route::post('/crearusuario', [UsuarioController::class, 'crearusuario'])->name('crearusuario');
+
+
+
 
 Route::get('/get-departamentos', [UbicacionController::class, 'getDepartamentos'])->name('getDepartamentos');
 Route::get('/get-provincias', [UbicacionController::class, 'getProvincias'])->name('getProvincias');
