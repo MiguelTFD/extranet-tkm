@@ -9,18 +9,8 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        if (empty($request->idCategoria)) {
-            $productos = Producto::with(['categoria', 'imagenes'])->get();
-        } else {
-            $productos = Producto::where('idCategoria', $request->idCategoria)
-                ->with(['categoria', 'imagenes'])
-                ->get();
-        }
-        session(['productos' => $productos]);
-        $categorias = Categoria::all();
-        session(['categorias' => $categorias]);
         return view('pages.productos');
     }
     public function show($id)
@@ -29,6 +19,22 @@ class ProductoController extends Controller
         return view('pages.detalleProducto', compact('producto'));
     }
 
+    public function filtrarPorCategoria(Request $request)
+    {
+        $id = $request->input('idCategoria'); // Obtener idCategoria del request
 
+        if (empty($id)) {
+            $productos = Producto::with(['categoria', 'imagenes'])->get();
+        } else {
+            $productos = Producto::where('idCategoria', $id)
+                ->with(['categoria', 'imagenes'])
+                ->get();
+        }
+        session(['productos' => $productos]);
+        $categorias = Categoria::all();
+        session(['categorias' => $categorias]);
+
+        return view('pages.productos');
+    }
 
 }

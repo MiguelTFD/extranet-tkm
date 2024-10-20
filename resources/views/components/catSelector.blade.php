@@ -28,7 +28,8 @@
     <ul>
         <!-- Opción para mostrar todos los productos -->
         <li>
-            <form action="{{ route('productos') }}" method="GET">
+            <form action="{{ route('filtrarProductos') }}" method="POST">
+                @csrf <!-- Token CSRF -->
                 <input type="hidden" name="idCategoria" value="">
                 <button type="submit" style="background: none; border: none; cursor: pointer;">
                     Todos
@@ -36,10 +37,10 @@
             </form>
         </li>
 
-        <!-- Listar las categorías desde la base de datos -->
         @foreach($categorias as $categoria)
             <li>
-                <form action="{{ route('productos') }}" method="GET">
+                <form action="{{ route('filtrarProductos') }}" method="POST">
+                    @csrf <!-- Token CSRF -->
                     <input type="hidden" name="idCategoria" value="{{ $categoria->idCategoria }}">
                     <button type="submit" style="background: none; border: none; cursor: pointer;">
                         {{ $categoria->nombreCategoria }}
@@ -49,4 +50,6 @@
         @endforeach
     </ul>
 </div>
+
+
 

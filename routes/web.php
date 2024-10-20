@@ -24,6 +24,7 @@ Route::get('/productos', [ProductoController::class, 'index'])->name('productos'
 
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
 
+Route::post('/productos/filtrar', [ProductoController::class, 'filtrarPorCategoria'])->name('filtrarProductos');
 
 
 
