@@ -30,50 +30,47 @@
                 Correo y Redes Sociales
             </h5>
             <p>
-               henry.management@thekingmoss.com 
+               henry.management@thekingmoss.com
             </p>
         </div>
         <div class="footer-center-container">
             <h4>
                 Descubre
             </h4>
-            <ul class="nav-links">
-                <li><a href="{{ url('/about') }}">Nosotros</a></li>
-                <li><a href="{{ url('/products') }}">Productos</a></li>
-                <li><a href="{{ url('/gallery') }}">Galeria</a></li>
-                <li><a href="{{ url('/contact') }}">Contáctenos</a></li>
-            </ul>
+            <p> <a href="{{ url('/about') }}">Nosotros</a></p>
+
+            <p><a href="{{ route('productos') }}">Productos</a></p>
+            <p><a href="{{ url('/gallery') }}">Galeria</a></p>
+            <p><a href="{{ url('/contact') }}">Contáctenos</a></p>
+
         </div>
         <div class="footer-right-container">
             <h4>
                 Atención al cliente
             </h4>
-            <ul class="nav-links">
-                <li>
-                    <a href="{{ url('/faq') }}">
+
+
+            <p><a href="{{ url('/faq') }}">
                         Preguntas frecuentes
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/shippments') }}">
+                    </a></p>
+
+            <p><a href="{{ url('/shippments') }}">
                         Envios y devoluciones
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/termsandconditions') }}">
+                    </a></p>
+
+
+            <p><a href="{{ url('/termsandconditions') }}">
                         Terminos y condiciones
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/complaintsbook') }}">
+                    </a></p>
+
+            <p><a href="{{ url('/complaintsbook') }}">
                         Contáctenos
-                    </a>
-                </li>
-            </ul>
+                    </a></p>
+
         </div>
     </div>
 
-<!-- Copyright Start -->
+
 <div class="container-fluid copyright py-4">
 <div class="container">
 <div class="row">
@@ -86,6 +83,6 @@
 </div>
 </div>
 </div>
-<!-- Copyright End -->    
+
 
 </footer>

@@ -15,7 +15,6 @@ class LoginController extends Controller
         return view('auth.iniciarSesion');
     }
 
-    //Funcion para Evaluar el login
     public function login(Request $request){
 
         $credentials = $request->only('username','password');
@@ -30,7 +29,6 @@ class LoginController extends Controller
         ]);
     }
 
-    //funcion para hacer un logout
     public function logout(Request $request){
 
         Auth::guard('usuario')->logout();

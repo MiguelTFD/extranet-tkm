@@ -2,6 +2,7 @@
 .treeSpaces{
     display:flex;
     justify-content: space-between;
+    flex-flow: row wrap;
 }
 .cntew{
 display:flex;
@@ -22,14 +23,17 @@ display:flex;
     <div class="treeSpaces">
        @component('components.productCard')
        @endcomponent
-       @component('components.productCard')
-       @endcomponent
-       @component('components.productCard')
-       @endcomponent
     </div>
     <div class="cntew">
-    <button class="addCar">
-        Ver todos los productos
-    </button>
+        <div class="cntew">
+            <form action="{{ route('filtrarProductos') }}" method="POST">
+                @csrf <!-- Token CSRF -->
+                <input type="hidden" name="idCategoria" value="">
+                <button class="addCar" type="submit" >
+                    Ver todos los productos
+                </button>
+            </form>
+        </div>
+
     </div>
 </div>

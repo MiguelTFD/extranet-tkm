@@ -1,5 +1,5 @@
 
-<!-- Facts Start -->
+
 <div class="container-fluid facts my-5 py-5" data-parallax="scroll"
     data-image-src="{{asset('images/carousel-1.webp')}}">
     <div class="container py-5">
@@ -17,4 +17,4 @@
         </div>
     </div>
 </div>
-<!-- Facts End -->
+

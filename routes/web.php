@@ -6,7 +6,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\iniciarSesionController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\RecuperarPasswordController;
 use App\Http\Controllers\UsuarioController;
@@ -19,7 +19,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
-
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
@@ -29,9 +28,7 @@ Route::post('/productos/filtrar', [ProductoController::class, 'filtrarPorCategor
 
 
 
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
 
 
 Route::get('/registrarUsuario', [RegistrarUsuarioController::class, 'index'])->name('registrarUsuario');
@@ -46,8 +43,12 @@ Route::get('/registro', [UsuarioController::class, 'registro'])->name('registro'
 Route::post('/crearusuario', [UsuarioController::class, 'crearusuario'])->name('crearusuario');
 
 
-
-
 Route::get('/get-departamentos', [UbicacionController::class, 'getDepartamentos'])->name('getDepartamentos');
 Route::get('/get-provincias', [UbicacionController::class, 'getProvincias'])->name('getProvincias');
 Route::get('/get-distritos', [UbicacionController::class, 'getDistritos'])->name('getDistritos');
+
+//para el carrito de compras
+Route::post('/cart/add', [CartController::class, 'add'])->name('add');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/cart/clear', [CartController::class, 'clear'])->name('clear');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('remove');

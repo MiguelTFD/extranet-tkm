@@ -12,8 +12,8 @@
 }
 
 @font-face {
-  font-family: 'Open Sans'; 
-  src: url('../fonts/OpenSans-Regular.ttf'); 
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular.ttf');
 }
 
 *{
@@ -106,7 +106,7 @@ h6,
 
 
 /*** Navbar ***/
-.navbar.sticky-top 
+.navbar.sticky-top
 {
     top: -100px;
     transition: .5s;
@@ -203,7 +203,7 @@ h6,
         position: relative;
         min-height: 450px;
     }
-    
+
     #header-carousel .carousel-item img {
         position: absolute;
         width: 100%;
@@ -240,7 +240,6 @@ h6,
 }
 
 
-/*** Top Feature ***/
 @media (min-width: 991.98px) {
     .top-feature {
         position: relative;
@@ -250,7 +249,6 @@ h6,
 }
 
 
-/*** Facts & Quote ***/
 .facts,
 .quote {
     background: rgba(146, 147, 2, 0.3);
@@ -637,7 +635,7 @@ h6,
 	position: relative;
 	overflow: auto;
 	padding: 20px 20px 32px !important;
-	max-height: 382px;	
+	max-height: 382px;
 	background: url("../img/background-whatsapp.jpg") center center / cover no-repeat;
 }
 .wsp-1-2-3{
@@ -982,7 +980,7 @@ font-size:1.6rem !important;
    height: 50vh;
 }
 @media(max-width:1000px){
-   
+
    #theader{
       display:flex !important;
    }
@@ -1031,13 +1029,14 @@ text-align:center;
     display:flex;
     width:100%;
     justify-content:space-around;
+    flex-flow: row wrap;
 }
 .imgMD{
     box-shadow: 0 0 0 6px #9293024f;
     margin:30px 0px;
     border:3px solid var(--primary);
     border-radius:360px;
-    height:300px; 
+    height:300px;
     width:300px;
     background-image: url('/images/musgoseco.png');
     background-size:cover;
@@ -1049,7 +1048,7 @@ text-align:center;
     margin:30px 0px;
     border:3px solid var(--primary);
     border-radius:360px;
-    height:300px; 
+    height:300px;
     width:300px;
     background-image: url('/images/musgovivo.png');
     background-size:cover;
@@ -1073,6 +1072,19 @@ text-align:center;
     flex-flow: row wrap;
     justify-content:space-around;
 }
+.footer-center-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+}
+.footer-right-container{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    min-width: 300px;
+}
+
 .copyright{
     background: #929302;
 }

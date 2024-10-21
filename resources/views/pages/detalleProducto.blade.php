@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 1200px) {
-    
+
     .prodSectionCt{
         display:flex;
         flex-direction:column;
@@ -18,14 +18,13 @@
 }
 
 @media (max-width: 400px) {
-    
+
     .prodSectionCt{
         display:flex;
         flex-direction:column;
     }
 }
 
-/* General container */
 .product-details-container {
     display: flex;
     justify-content: space-between;
@@ -42,7 +41,6 @@
     object-fit: cover;
 }
 
-/* Info section */
 .product-info {
     display: flex;
     flex-direction: column;
@@ -70,7 +68,6 @@
     padding:5px;
     font-family:"Jost",sans-serif !important;
 }
-/* Prices */
 .product-prices {
     margin-top: 15px;
 }
@@ -88,7 +85,6 @@
     color: #d3d3d3;
 }
 
-/* Quantity controls */
 .product-quantity {
     display: flex;
     align-items: left;
@@ -118,7 +114,6 @@
     margin: 0 5px;
 }
 
-/* Add to cart button */
 .add-to-cart-btn {
     background-color: #C4B400;
     border: none;
@@ -145,33 +140,31 @@ width: 100px !important;
 }
 </style>
 @section('content')
-<!-- Page Header Start --> 
 <div class="container-fluid page-header page-products py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container text-center py-5">
         <h1 class="display-3 text-white mb-4 animated slideInDown">
-           Productos 
+           Productos
         </h1>
         <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0"> 
+            <ol class="breadcrumb justify-content-center mb-0">
                 <li class="breadcrumb-item">
                    <a href="#">Inicio</a>
-                </li> 
+                </li>
                 <li class="breadcrumb-item">
                    <a href="#">Páginas</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Productos 
-                </li> 
+                  Productos
+                </li>
             </ol>
         </nav>
-    </div> 
-</div> 
-<!-- Page Header End -->
+    </div>
+</div>
 
 <div class="prodSectionCt">
     @component('components.catSelector')
     @endcomponent
-    
+
 
     <div class="product-details-container">
     <div class="product-image">
@@ -181,21 +174,21 @@ width: 100px !important;
             <img class="details-img-product" src="{{ asset('images/about.webp') }}" alt="Imagen por defecto">
         @endif
     </div>
-    
+
     @php
         $precioActual = $producto->precioUnitario - ($producto->precioUnitario * ($producto->descuento / 100));
 
     @endphp
 
     <div class="product-info">
-        
+
         <h1 style="color:#2D2D2E;margin-bottom:1em;">{{ $producto->nombreProducto }}</h1>
         <div class="product-discount">
             <p>{{ intval($producto->descuento) }}% descuento</p>
         </div>
 
         <p>
-            <strong>Categoría:</strong> 
+            <strong>Categoría:</strong>
             {{ $producto->categoria->nombreCategoria }}
         </p>
         <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
@@ -230,14 +223,14 @@ width: 100px !important;
 <script>
 function increment() {
     var cantidad = document.getElementById("cantidad");
-    cantidad.stepUp();  // Incrementar el valor
+    cantidad.stepUp();
 }
 
 function decrement() {
     var cantidad = document.getElementById("cantidad");
-    cantidad.stepDown();  // Decrementar el valor
+    cantidad.stepDown();
 }
 </script>
-    
+
 
 @endsection

@@ -159,7 +159,6 @@ select {
                <label for="pais">País</label>
                <select id="pais" name="pais">
                    <option value="">Selecciona tu País</option>
-                   <!-- Aquí agregas los países desde la base de datos -->
                    @foreach($paises as $pais)
                        <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
                    @endforeach
@@ -230,7 +229,6 @@ select {
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // Obtener departamentos cuando se selecciona un país
             $('#pais').on('change', function() {
                 var paisId = $(this).val();
                 if (paisId) {
@@ -252,7 +250,6 @@ select {
                 }
             });
 
-            // Obtener provincias cuando se selecciona un departamento
             $('#departamento').on('change', function() {
                 var departamentoId = $(this).val();
                 if (departamentoId) {
@@ -273,7 +270,6 @@ select {
                 }
             });
 
-            // Obtener distritos cuando se selecciona una provincia
             $('#provincia').on('change', function() {
                 var provinciaId = $(this).val();
                 if (provinciaId) {

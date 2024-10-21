@@ -1,7 +1,7 @@
 @extends('layouts.base')
     @section('content')
 
-<!-- Page Header Start -->
+
 <div class="container-fluid page-header page-contact py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container text-center py-5">
         <h1 class="display-3 text-white mb-4 animated slideInDown">Contacto</h1>
@@ -14,10 +14,9 @@
         </nav>
     </div>
 </div>
-<!-- Page Header End -->
 
 
-<!-- Contact Start -->
+
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
@@ -48,7 +47,9 @@
 
                         <div class="col-12">
                             <button id="sendEmailButton" class="btn btn-primary py-3 px-4" type="button">Enviar Mensaje</button>
-</form>
+                        </div>
+                    </div>
+                </form>
                         </div>
                     </div>
                 </form>
@@ -64,6 +65,5 @@
         </div>
     </div>
 </div>
-<!-- Contact End -->
 
     @endsection

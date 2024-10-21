@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Comparte el usuario autenticado en todas las vistas
-        // Usa View::composer para que la variable $user esté disponible después de la autenticación
+        // recuerda usar el View::composer para que la variable $user este disponible despues de la autenticacin
         View::composer('*', function ($view) {
             $view->with('user', Auth::user());
         });

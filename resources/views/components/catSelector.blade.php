@@ -3,7 +3,7 @@
         list-style-type: none;
     }
 
-    .selectorCate li:before {
+    .selectorCate .catList:before {
         position: relative;
         content: "•";
         left: -10px;
@@ -14,7 +14,7 @@
         top: -2px;
     }
 
-    .selectorCate li {
+    .selectorCate .catList {
         cursor: pointer;
     }
 </style>
@@ -31,7 +31,7 @@
             <form action="{{ route('filtrarProductos') }}" method="POST">
                 @csrf <!-- Token CSRF -->
                 <input type="hidden" name="idCategoria" value="">
-                <button type="submit" style="background: none; border: none; cursor: pointer;">
+                <button class="catList" type="submit" style="background: none; border: none; cursor: pointer;">
                     Todos
                 </button>
             </form>
@@ -42,7 +42,7 @@
                 <form action="{{ route('filtrarProductos') }}" method="POST">
                     @csrf <!-- Token CSRF -->
                     <input type="hidden" name="idCategoria" value="{{ $categoria->idCategoria }}">
-                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                    <button class="catList" type="submit" style="background: none; border: none; cursor: pointer;">
                         {{ $categoria->nombreCategoria }}
                     </button>
                 </form>

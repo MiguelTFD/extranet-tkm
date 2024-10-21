@@ -1,4 +1,3 @@
-<!-- Service Start -->
 <div class="container-xxl py-5" id="servicesTp">
     <div class="container">
         <div class="row g-4">
@@ -13,7 +12,7 @@
                         </div>
                         <h4 class="mb-3">Atencion Personalizada</h4>
                         <p class="mb-4">
-                            Contamos con expertos que te atenderan en 
+                            Contamos con expertos que te atenderan en
                             base a tus necesidades
                         </p>
                     </div>
@@ -30,7 +29,7 @@
                         </div>
                         <h4 class="mb-3">Envios a nivel nacional</h4>
                         <p class="mb-4">
-                            Hacemos envios de manera segura y confiable 
+                            Hacemos envios de manera segura y confiable
                             a cualquier parte del Pais
                         </p>
                     </div>
@@ -39,24 +38,24 @@
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item rounded d-flex h-100">
                     <div class="service-img rounded">
-                        <img 
-                            class="img-fluid" 
-                            src="{{asset('images/international.webp')}}" 
-                            alt="" loading="lazy" 
+                        <img
+                            class="img-fluid"
+                            src="{{asset('images/international.webp')}}"
+                            alt="" loading="lazy"
                         >
                     </div>
                     <div class="service-text rounded p-5">
                         <div class="btn-square rounded-circle mx-auto mb-3">
-                            <img 
-                                class="img-fluid" 
-                                src="{{asset('images/icon/icon-5.png')}}" 
-                                alt="Icon" 
-                                loading="lazy" 
+                            <img
+                                class="img-fluid"
+                                src="{{asset('images/icon/icon-5.png')}}"
+                                alt="Icon"
+                                loading="lazy"
                             >
                         </div>
                         <h4 class="mb-3">Exportacion a nivel internacional</h4>
                         <p class="mb-4">
-                            Nos aseguramos de cumplir con las normas 
+                            Nos aseguramos de cumplir con las normas
                             de seguridad y calidad, para que el producto
                             llegue en las mejores condiciones.
                         </p>
@@ -66,6 +65,5 @@
         </div>
     </div>
 </div>
-<!-- Service End -->
 
 

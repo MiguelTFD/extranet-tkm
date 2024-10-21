@@ -26,10 +26,8 @@
 @endif
 
 
-    {{-- Formulario para crear el usuario --}}
     <form action="{{ route('store') }}" method="POST">
-        @csrf  <!-- Asegúrate de incluir este token de CSRF -->
-        {{-- Datos del Usuario --}}
+        @csrf
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" required>
@@ -60,7 +58,6 @@
             <input type="email" name="correo" class="form-control" id="correo" value="{{ old('correo') }}" required>
         </div>
 
-        {{-- Documento de Identidad --}}
         <div class="form-group">
             <label for="numeroDocumentoIdentidad">Número de Documento de Identidad</label>
             <input type="text" name="numeroDocumentoIdentidad" class="form-control" id="numeroDocumentoIdentidad" value="{{ old('numeroDocumentoIdentidad') }}" required>
@@ -76,7 +73,6 @@
             </select>
         </div>
 
-        {{-- Dirección --}}
         <h4>Dirección</h4>
 
         <div class="form-group">
@@ -109,7 +105,6 @@
             </select>
         </div>
 
-        {{-- Botón de envío --}}
         <button type="submit" class="btn btn-primary">Registrar Usuario</button>
     </form>
 </div>

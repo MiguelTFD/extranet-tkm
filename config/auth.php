@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'usuario', // Cambiar a 'usuario' si deseas usarlo como guard predeterminado
-        'passwords' => 'usuario', // Cambia a 'usuario' si deseas un restablecimiento de contraseña para 'usuario'
+        'guard' => 'usuario', // esto hace que las variables de sesion esten para todos las paginas
+        'passwords' => 'usuario', //
     ],
 
     /*
