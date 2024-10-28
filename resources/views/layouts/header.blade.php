@@ -59,5 +59,8 @@
         @endif
 
     </div>
+
 </nav>
+
+@include('partials.msg')
 

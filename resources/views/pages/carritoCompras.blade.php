@@ -1,6 +1,5 @@
 @extends('layouts.base')
 
-@include('partials.msg')
 <style>
 
     #navbarCollapse{
@@ -82,6 +81,98 @@
     .navbar-toggler{
         display:none !important;
     }
+    .hidden-product-name{
+        display:none;
+    }
+    @media(max-width:900px){
+        .ima{
+            display:none;
+        }
+        .descripcion-item{
+            display:none;
+        }
+        .hidden-product-name{
+            display:flex;
+            width:100%;
+            justify-content:space-between;
+        }
+        .item-cart-product{
+            flex-direction: column !important;
+        } 
+        .name-item-product{
+            display:none;
+        }
+        .cart-content-summary{
+            flex-grow:0;
+            width:50%;
+        }
+        .a{
+            display:none !important;
+        } 
+        .cart-content-items{
+            width:60%;
+            flex-grow:0;
+        }
+        .item-cart-product-count_image{
+            order:3;
+        }
+        .qty-label{
+            flex-direction:row;
+        }
+        .cart-content-summary{
+            order:1;
+        }
+        .cart-content-items {
+            order: 2;
+        }
+        .hidden-product-image{
+            display:flex !important;
+            justify-content: center;
+        }
+        div.item-cart-product:nth-child(1) > div:nth-child(2) > div:nth-child(4) > h6:nth-child(1) {
+            text-align: center;
+        }
+        .imb{
+            width:80%  !important;
+            max-width: unset !important;
+            max-height: unset !important;
+            height: 80% !important;
+        }
+    }
+    .null-div{
+        display:contents;
+    }
+    .hidden-product-image{
+        display:none;
+    }
+    @media(max-width:672px){
+        .cart-content-items {
+            width:90% !important;
+            flex-grow:0;
+        }
+        .cart-content-summary {
+            flex-grow:0;
+            width:65%;
+        }  
+    }
+    @media(max-width:450px){
+        .item-cart-product {
+            width:90% !important;
+        }
+        .cart-content-summary {
+            width:90% !important;
+        }
+        button.btn {
+            padding: 1.4em;
+            font-size: 1.2em;
+        }
+        .img-cart-tumb.imb{
+            max-width: unset !important;
+            max-height: unset !important;
+            width:75% !important;
+            height:75% !important;
+        }
+    }
 </style>
 @section('content')
     <div class="cart-content-layout">
@@ -97,6 +188,37 @@
             @if (Cart::count())
                @foreach(Cart::content() as $item)
                   <div class="item-cart-product">
+                      <div class="hidden-product-name">
+                          <p></p>                 
+                        <p style="font-size:1.2em;font-weight:bold;">{{ $item->name }}
+                        <div class="removeItemSection b">
+                        <form action="{{route('remove')}}"
+                            method="post"
+                        >
+                        @csrf
+                           <input 
+                               type="hidden"
+                               name="rowId"
+                               value="{{$item->rowId}}"
+                            >
+                            <input
+                                type="submit"
+                                name="btn"
+                                class="btn btn-danger btn-sm"
+                                value="✕"
+                            >
+                        </form>
+                     </div>
+                      </div>
+                     <div class="null-div">
+                        <div class="hidden-product-image">
+                            <img 
+                                src="{{asset('images/' . $item->options->imagenes) }}" 
+                                alt="{{ $item->name }}" 
+                                style="max-width: 100px; max-height: 100px;"
+                                class="img-cart-tumb imb"
+                            >
+                        </div>
                      <div class="item-cart-product-count_image">
                         {{--Aumentar cantidad--}}
                         <div class="product-quantity">
@@ -142,12 +264,12 @@
                             src="{{asset('images/' . $item->options->imagenes) }}" 
                             alt="{{ $item->name }}" 
                             style="max-width: 100px; max-height: 100px;"
-                            class="img-cart-tumb"
+                            class="img-cart-tumb ima"
                         >
                      </div>
                      <div class="item-cart-product-name_description">
-                        <p style="font-size:1.4em;font-weight:bold;">{{ $item->name }} 
-                        <p>{{ $item->options->descripcion }} 
+                        <p class="name-item-product" style="font-size:1.4em;font-weight:bold;">{{ $item->name }} 
+                        <p class="descripcion-item">{{ $item->options->descripcion }} 
                      </div>
                      <div class="item-cart-product-pricesummary">
                         <h6>Total a pagar</h6>
@@ -158,7 +280,7 @@
                            S/{{ number_format($item->price * $item->qty, 2) }}
                         </span>
                      </div>
-                     <div class="removeItemSection">
+                     <div class="removeItemSection a">
                         <form action="{{route('remove')}}"
                             method="post"
                         >
@@ -176,6 +298,7 @@
                             >
                         </form>
                      </div>
+                          </div>
                      @php
                         $totalConDescuento += $item->qty * ($item->price - ($item->price * ($item->options->descuento / 100)));
                         $totalSinDescuento += $item->price * $item->qty;
