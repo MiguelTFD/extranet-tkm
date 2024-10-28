@@ -43,6 +43,10 @@ class Producto extends Model
     {
         return $this->hasMany(ImagenProducto::class, 'idProducto');
     }
-
+     // Método para obtener la URL de la primera imagen o una por defecto
+    public function obtenerImagenUrl()
+    {
+        return $this->imagenes->isNotEmpty() ? $this->imagenes->first()->urlImagenProducto : asset('images/bf5k.png');
+    }
 
 }

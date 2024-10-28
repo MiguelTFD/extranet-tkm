@@ -75,10 +75,11 @@
 <div class="container">
 <div class="row">
 	 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-		  &copy; <a class="border-bottom" href="https://thekingmoss.com">The King Moss</a>, All Right Reserved.
+		  &copy; <a class="border-bottom" href="https://thekingmoss.com">The
+              King Moss</a>, Todos los derechos reservados.
 	 </div>
 	 <div class="col-md-6 text-center text-md-end">
-		  Designed By <strong>Grupo Empresarial King Moss SAC</strong>
+		  Desarrollado por <strong>Grupo Empresarial King Moss SAC</strong>
 	 </div>
 </div>
 </div>

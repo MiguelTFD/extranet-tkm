@@ -2,7 +2,13 @@
 <style>
 .paymentsCt{
     display:flex;
-    justify-content:space-around;
+    justify-content:space-between;
+    flex-flow:row wrap;
+    gap: 3em 0;
+    margin:3em 0;
+}
+.svg-py-mt{
+    width:3em;
 }
 </style>
 
@@ -13,20 +19,27 @@
             <h2>
                 Paga en linea mediante OpenPay
             </h2>
-            <p>(Aceptamos todas las tarjetas de credito y debito)</p>
+            <p style="color:#9D9D9D;">(Aceptamos todas las tarjetas de credito y debito)</p>
             <div class="payList">
-                <span>Visa</span>
-                <span>mastercard</span>
-                <span>cmr</span>
+                <span><img class="svg-py-mt" src="{{asset('images/visa-svgrepo-com.svg')}}"></span>
+                <span>
+                    <img class="svg-py-mt"
+                         src="{{asset('images/mastercard-3-svgrepo-com.svg')}}">
+                </span>
             </div>
         </div>
         <div class="otherPay">
             <h2>
                 Tambien aceptamos...
             </h2>
-                 <span>yape</span>
-                <span>plin</span>
-
+                 <span>
+                     <img class="svg-py-mt"
+                     src="{{asset('images/icon/Yape-logo.png')}}">
+                 </span>
+                <span>
+                     <img class="svg-py-mt"
+                     src="{{asset('images/icon/Plin-logo.png')}}">
+                 </span>
         </div>
     </div>
 

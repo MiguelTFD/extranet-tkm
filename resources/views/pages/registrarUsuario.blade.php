@@ -1,13 +1,23 @@
 <style>
 .register-container {
-   width: 80%;
+   width: 90%; /* Cambiado de 80% a 90% para pantallas más pequeñas */
+   max-width: 600px; /* Añadido un ancho máximo */
    margin: 50px auto;
    padding: 20px;
    background-color: #fff;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
    border-radius: 10px;
 }
+.navbar-toggler{
+    display:none !important;
+}
+#btn-carrito{
+    display:none !important;
+}
+#navbarCollapse{
 
+    display:none !important;
+}
 .register-container h2 {
    text-align: center;
    color: #9A9B01;
@@ -22,12 +32,20 @@
 
 .row {
    display: flex;
+   flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
    justify-content: space-between;
 }
 
 .form-group {
-   flex: 1;
+   flex: 1 1 45%; /* Permitir que las columnas se reduzcan en tamaños más pequeños */
    margin: 0 10px 20px 10px;
+}
+
+@media (max-width: 600px) {
+   .form-group {
+      flex: 1 1 100%; /* En pantallas pequeñas, cada grupo ocupa el 100% */
+      margin: 0 0 20px 0; /* Margen reducido */
+   }
 }
 
 label {
@@ -76,15 +94,17 @@ select {
    border-radius: 5px;
    cursor: pointer;
    font-size: 16px;
+   margin-top: 10px; /* Añadido margen superior */
 }
 
 .register-btn:hover {
    background-color: #868901;
 }
 
-.footer-container{
-    display:none !important;
+.footer-container {
+   display: none !important;
 }
+
 
 </style>
 

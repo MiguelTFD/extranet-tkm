@@ -1055,8 +1055,6 @@ text-align:center;
     background-position:center;
     background-repeat:no-repeat;
 }
-.catFigureCt {
-}
 .catFigureCt figure h2{
     text-align: center;
 }
@@ -1091,5 +1089,40 @@ text-align:center;
 ul{
 list-style-type: none;
 }
+@media (max-width: 950px) {
+    .footer-center-container{
+        min-width:auto;
 
+    }
+    .footer-right-container{
+        min-width:auto;    
+    }
+}
+@media (max-width: 700px) {
+    .footer-center-container{
+        min-width:400px;    
+    }
+    .footer-right-container{
+        min-width:400px;
+        align-items:center;
+    }
+    .footer-left-container{
+       text-align:center; 
+    }
+    .footer-container{
+        gap:3em;    
+    }
 
+}
+.current-price {
+    font-size: 24px;
+    color: #929302;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.old-price {
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #d3d3d3;
+}

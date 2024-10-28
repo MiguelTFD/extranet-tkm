@@ -3,15 +3,23 @@
 
 <style>
 .login-container {
-   width: 500px;
+   max-width: 500px;
    heigth:600px;
-   margin: 100px auto;
+   margin: 0 auto;
    padding: 20px;
    background-color: #fff;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
    border-radius: 10px;
 }
+.navbar-toggler{
+    display:none !important;
+}
+#navbarCollapse{
 
+    display:none !important;
+}
+#btn-carrito{
+    display:none !important;
+}
 .login-form {
     padding:3em 2em;
    display: flex;
@@ -76,7 +84,7 @@ input[type="password"] {
    text-decoration: underline;
 }
 .iniSesCt{
-    height:100vh;
+    height:80vh;
 }
 .footer-container{
     display:none !important;
@@ -87,10 +95,10 @@ input[type="password"] {
 
 @section('content')
     <div class="iniSesCt">
-        <h1 style="text-align:center">
-            Iniciar Sesion
-        </h1>
         <div class="login-container">
+            <h1 style="text-align:center">
+                Iniciar Sesion
+            </h1>
             <form
                action="{{route('login')}}"
                method="POST"

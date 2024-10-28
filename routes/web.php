@@ -20,10 +20,9 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
-
+Route::post('/productos', [ProductoController::class, 'filtrarPorCategoria'])->name('filtrarProductos');
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
 
-Route::post('/productos/filtrar', [ProductoController::class, 'filtrarPorCategoria'])->name('filtrarProductos');
 
 
 
@@ -52,3 +51,5 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('add');
 Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('remove');
+Route::post('/cart/increaseQuantity', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+Route::post('/cart/decreaseQuantity', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');

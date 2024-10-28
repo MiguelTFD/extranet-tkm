@@ -3,6 +3,7 @@
     display:flex;
     justify-content: space-between;
     flex-flow: row wrap;
+    justify-content: center;
 }
 .cntew{
 display:flex;

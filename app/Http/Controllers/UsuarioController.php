@@ -35,10 +35,10 @@ class UsuarioController extends Controller
             'correo' => 'required|email|unique:usuario,correo',
             'direccionExacta' => 'required',
             'referencia' => 'required',
-            'idDistrito' => 'required', // Asumimos que viene desde un select
-            'idTipoDireccion' => 'required', // Asumimos que viene desde un select
+            'idDistrito' => 'required', 
+            'idTipoDireccion' => 'required', 
             'numeroDocumentoIdentidad' => 'required|unique:documentoIdentidad,numeroDocumentoIdentidad',
-            'idTipoDocumentoIdentidad' => 'required' // Asumimos que viene desde un select
+            'idTipoDocumentoIdentidad' => 'required' 
         ]);
 
 
@@ -60,21 +60,20 @@ class UsuarioController extends Controller
                 'apellido' => $validated['apellido'],
                 'telefono' => $validated['telefono'],
                 'correo' => $validated['correo'],
-                'idDireccion' => $direccion->idDireccion // Asignar la dirección creada
+                'idDireccion' => $direccion->idDireccion 
             ]);
 
             $usuario->password = Hash::make($validated['password']); // Hashear la contraseña
             $usuario->save();
 
-            // Crear el documento de identidad y asociarlo al usuario
+            
             DocumentoIdentidad::create([
                 'numeroDocumentoIdentidad' => $validated['numeroDocumentoIdentidad'],
                 'idTipoDocumentoIdentidad' => $validated['idTipoDocumentoIdentidad'],
-                'idUsuario' => $usuario->idUsuario // Relacionar con el usuario creado
+                'idUsuario' => $usuario->idUsuario 
             ]);
 
-            // Asignar el rol por defecto (idRol = 1)
-         $usuario->roles()->attach(1);  // Relación Many-to-Many a través de usuarioRol
+         $usuario->roles()->attach(1);  
 
             DB::commit(); // Confirma la transacción
 
@@ -82,7 +81,7 @@ class UsuarioController extends Controller
 
         }
          catch (\Exception $e) {
-            DB::rollBack(); // Deshace la transacción en caso de error
+            DB::rollBack(); 
             return redirect()->back()->withErrors(['error' => 'Error al registrar el usuario: ' . $e->getMessage()]);
     }
     }

@@ -1,5 +1,6 @@
 
 @extends('layouts.base')
+@include('partials.msg')
 
 <style>
 .prodSectionCt{
@@ -7,6 +8,7 @@
     grid-template-columns:25% 75%;
     width: 70%;
     margin: 0 auto;
+    min-height:100vh;
 }
 
 @media (max-width: 1200px) {
@@ -27,15 +29,15 @@
 
 .product-details-container {
     display: flex;
-    justify-content: space-between;
     padding: 20px;
     margin: 0 auto;
     width:100%;
     flex-flow:row wrap;
+    justify-content: space-evenly;
 }
 
-.product-image img {
-    width: 350px;
+.product-image .details-img-product{
+    max-width: 350px;
     height: auto;
     border-radius: 10px;
     object-fit: cover;
@@ -44,7 +46,6 @@
 .product-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-left: 20px;
     max-width: 350px;
 }
@@ -140,7 +141,10 @@ width: 100px !important;
 }
 </style>
 @section('content')
-<div class="container-fluid page-header page-products py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+<div 
+    class="container-fluid page-header page-products py-5 mb-5 wow fadeIn" 
+    data-wow-delay="0.1s"
+>
     <div class="container text-center py-5">
         <h1 class="display-3 text-white mb-4 animated slideInDown">
            Productos
@@ -215,7 +219,23 @@ width: 100px !important;
                 <button class="btn " type="button" onclick="increment()">+</button>
                 </div>
         </div>
-        <button class="add-to-cart-btn">Agregar al carrito</button>
+        <form  
+            action="{{route('add')}}" 
+            method="post"
+        >
+        @csrf
+            <input 
+                type="hidden" 
+                name="id" 
+                value="{{$producto->idProducto}}"
+            >
+            <button 
+                type="submit" 
+                class="add-to-cart-btn"
+            >
+                Agregar al carrito
+            </button>
+        </form>
     </div>
 </div>
 

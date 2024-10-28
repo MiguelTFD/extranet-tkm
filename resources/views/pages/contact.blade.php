@@ -37,19 +37,14 @@
                                 <label for="subject">Asunto</label>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Ingresa aqui tu duda o consulta..." id="message" name="message" style="height: 100px"></textarea>
                                 <label for="message">Mensaje</label>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <button id="sendEmailButton" class="btn btn-primary py-3 px-4" type="button">Enviar Mensaje</button>
-                        </div>
-                    </div>
-                </form>
                         </div>
                     </div>
                 </form>

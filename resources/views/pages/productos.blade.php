@@ -1,6 +1,6 @@
 
 @extends('layouts.base')
-
+@include('partials.msg')
 <style>
 .prodSectionCt{
     display:grid;
