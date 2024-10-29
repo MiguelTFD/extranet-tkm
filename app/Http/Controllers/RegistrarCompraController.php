@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RegistrarPagoController extends Controller
+class RegistrarCompraController extends Controller
 {
-
-    
-    public function verPasosDeCompra(){
+    public function index(){
         return view('pages.registrarOrdenCompra');
     }
 }

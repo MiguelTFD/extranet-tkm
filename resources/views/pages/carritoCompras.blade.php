@@ -330,9 +330,13 @@
                     </span>
                 </div>
                 <div class="cart-actions">
-                    <button style="width:100%" class="btn btn-primary" type="submit">
+                    <a 
+                        href="{{route('registrarCompra')}}" 
+                        style="width:100%" 
+                        class="btn btn-primary" 
+                    >
                         Proceder a pagar
-                    </button>
+                    </a>
                     <a 
                         href="{{ route('productos') }}"
                     >

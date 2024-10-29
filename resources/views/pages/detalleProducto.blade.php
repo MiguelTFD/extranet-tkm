@@ -2,6 +2,28 @@
 @extends('layouts.base')
 
 <style>
+.treeSpaces{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.productCardMain {
+    min-width: unset !important;
+    transform: scale(0.7); /* Reduce al 50% */
+    transform-origin: top left; /* Ajusta el punto de origen de la escala */
+}
+.container-lite{
+    width:100%;
+    margin-top: 6em;
+}
+.cntew{
+display:flex;
+    justify-content: center;
+    margin-top: 6em;
+    margin-bottom: 6em;
+}
+
+
 .prodSectionCt{
     display:grid;
     grid-template-columns:25% 75%;
@@ -236,6 +258,79 @@ width: 100px !important;
             </button>
         </form>
     </div>
+
+    <div class="container-lite">
+        <div class="titleCategories">
+            <h3 >Productos relacionados</h3>
+        </div>
+        <div class="treeSpaces">
+        @if ($productosRelacionados->isNotEmpty())
+                @foreach ($productosRelacionados as $relacionado)
+                    <div class="productCardMain">
+                        <div class="productCardDesc">
+                            <p>{{ intval($relacionado->descuento) }}%</p>
+                        </div>
+                        
+                        @php
+                            $precioActual = $relacionado->precioUnitario - 
+                            ($relacionado->precioUnitario * ($relacionado->descuento / 100));
+                            
+                            $precioAntes = $relacionado->precioUnitario;
+                            
+                            $imagenUrl = $relacionado->imagenes->first() 
+                                ? $relacionado->imagenes->first()->urlImagenProducto 
+                                : asset('images/bf5k.png'); 
+                        @endphp
+                        
+                        <figure>
+                            <img 
+                                class="productCardImage" 
+                                src="{{ asset('images/' . $imagenUrl) }}" 
+                                alt="{{ $relacionado->nombreProducto }}"
+                            >
+                            <figcaption class="nombreItem">
+                                <p class="product-name">
+                                    {{ $relacionado->nombreProducto }}
+                                </p>
+                            </figcaption>
+                            <figcaption class="preciosItems">
+                                <strong>
+                                    <p class="offert-price">
+                                        S/.{{ number_format($precioActual, 2) }}
+                                    </p>
+                                </strong>
+                                <p class="old-price">
+                                    S/.{{ number_format($precioAntes, 2) }}
+                                </p>
+                            </figcaption>
+                            <div class="btnItems">
+                                <div class="cart-add">
+                                    <form action="{{ route('add') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $relacionado->idProducto }}">
+                                        <button type="submit" class="addCar">Agregar al carrito</button>
+                                    </form>
+                                </div>
+                                <div class="cart-add">
+                                    <button class="viewMore">
+                                        <a href="{{ route('productosDetalle', $relacionado->idProducto) }}" class="viewMore">
+                                            Ver Más
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                @endforeach
+            @else
+                <p>No hay productos relacionados en esta categoría.</p>
+            @endif    
+        </div>
+    </div>
+</div>
+
+
+    
 </div>
 
 

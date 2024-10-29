@@ -16,13 +16,20 @@ class ProductoController extends Controller
     public function show($id)
     {
         $producto = Producto::with(['categoria', 'imagenes'])->findOrFail($id);
-        return view('pages.detalleProducto', compact('producto'));
+        
+        // Obtener productos relacionados por categoría, excluyendo el producto actual
+        $productosRelacionados = Producto::where('idCategoria', $producto->idCategoria)
+        ->where('idProducto', '!=', $id)
+        ->with(['categoria', 'imagenes'])
+        ->inRandomOrder() // Orden aleatorio
+        ->take(3) // Solo 3 productos
+        ->get();
+        return view('pages.detalleProducto', compact('producto', 'productosRelacionados'));
     }
 
     public function filtrarPorCategoria(Request $request)
     {
-        $id = $request->input('idCategoria'); // Obtener idCategoria del request
-
+        $id = $request->input('idCategoria'); 
         if (empty($id)) {
             $productos = Producto::with(['categoria', 'imagenes'])->get();
         } else {
@@ -33,7 +40,6 @@ class ProductoController extends Controller
         session(['productos' => $productos]);
         $categorias = Categoria::all();
         session(['categorias' => $categorias]);
-
         return view('pages.productos');
     }
 

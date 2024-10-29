@@ -22,7 +22,7 @@ display:flex;
     </div>
 
     <div class="treeSpaces">
-       @component('components.productCard')
+       @component('components.customListProducts')
        @endcomponent
     </div>
     <div class="cntew">

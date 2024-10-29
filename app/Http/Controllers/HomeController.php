@@ -1,14 +1,26 @@
 <?php
 namespace App\Http\Controllers;
 
+ 
+use App\Models\Producto;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        if (empty($id)) {
+            $productos = Producto::with(['categoria', 'imagenes'])->get();
+        } else {
+            $productos = Producto::where('idCategoria', $id)
+                ->with(['categoria', 'imagenes'])
+                ->get();
+        }
+        session(['productos' => $productos]);
         // Renderiza la vista 'pages.home'
         return view('pages.home');
+
     }
 }
 

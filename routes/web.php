@@ -11,7 +11,7 @@ use App\Http\Controllers\RegistrarUsuarioController;
 use App\Http\Controllers\RecuperarPasswordController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UbicacionController;
-
+use App\Http\Controllers\RegistrarCompraController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -23,7 +23,7 @@ Route::get('/productos', [ProductoController::class, 'index'])->name('productos'
 Route::post('/productos', [ProductoController::class, 'filtrarPorCategoria'])->name('filtrarProductos');
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
 
-
+Route::get('/registrarCompra',[RegistrarCompraController::class, 'index'])->name('registrarCompra');
 
 
 
