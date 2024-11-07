@@ -18,7 +18,6 @@ class HomeController extends Controller
                 ->get();
         }
         session(['productos' => $productos]);
-        // Renderiza la vista 'pages.home'
         return view('pages.home');
 
     }

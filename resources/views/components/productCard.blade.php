@@ -97,9 +97,6 @@
 }
 </style>
 
-@php
-    $productos = collect(session('productos', []));
-@endphp
 
 @if ($productos->isNotEmpty())
     @foreach ($productos as $producto)

@@ -50,20 +50,20 @@
             </h4>
 
 
-            <p><a href="{{ url('/faq') }}">
-                        Preguntas frecuentes
+            <p><a href="{{ url('/seguridadyprivacidad') }}">
+                       Seguridad y Privacidad 
                     </a></p>
 
-            <p><a href="{{ url('/shippments') }}">
-                        Envios y devoluciones
+            <p><a href="{{ url('/politicayprivacidad') }}">
+                       Politica de privacidad 
                     </a></p>
 
 
-            <p><a href="{{ url('/termsandconditions') }}">
+            <p><a href="{{ url('/terminosycondiciones') }}">
                         Terminos y condiciones
                     </a></p>
 
-            <p><a href="{{ url('/complaintsbook') }}">
+            <p><a href="{{ url('/contact') }}">
                         Contáctenos
                     </a></p>
 

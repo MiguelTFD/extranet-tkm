@@ -51,10 +51,6 @@
         cursor: pointer;
     }
 </style>
-@php
-    // Obtener las categorías desde la sesión
-    $categorias = collect(session('categorias', []));
-@endphp
 
 <div class="selectorCate">
     <h1>Categorías</h1>

@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+@section('content')
 <style>
 
     #navbarCollapse{
@@ -174,7 +174,6 @@
         }
     }
 </style>
-@section('content')
     <div class="cart-content-layout">
         <div class="cart-content-items">
             <h1 style="width:70%; margin:1em auto;">
@@ -184,6 +183,7 @@
             @php
                 $totalConDescuento = 0;
                 $totalSinDescuento = 0;
+                $productosMinimos= 0;
             @endphp
             @if (Cart::count())
                @foreach(Cart::content() as $item)
@@ -302,6 +302,7 @@
                      @php
                         $totalConDescuento += $item->qty * ($item->price - ($item->price * ($item->options->descuento / 100)));
                         $totalSinDescuento += $item->price * $item->qty;
+                        $productosMinimos += $item->qty;
                      @endphp
                   </div>
                @endforeach
@@ -330,7 +331,8 @@
                     </span>
                 </div>
                 <div class="cart-actions">
-                    <a 
+                    <a
+                        id="btn-registrarOrdenCompra"
                         href="{{route('registrarCompra')}}" 
                         style="width:100%" 
                         class="btn btn-primary" 
@@ -348,5 +350,23 @@
                 </div>
             </div>
     </div>
+   <script>
+    function evaluarCantidad() {
+        let botonComprar = document.getElementById("btn-registrarOrdenCompra");
+        let cantidadProductos = parseInt({{ $productosMinimos }}); 
+            
+        if (cantidadProductos > 0) {
+            botonComprar.classList.remove("disable");
+            botonComprar.style.pointerEvents = "auto";
+            botonComprar.style.opacity = "1"; 
+        } else {
+            botonComprar.classList.add("disable"); 
+            botonComprar.style.pointerEvents = "none"; 
+            botonComprar.style.opacity = "0.5"; 
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", evaluarCantidad); 
+</script> 
 @endsection
 

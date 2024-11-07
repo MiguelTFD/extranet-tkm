@@ -12,8 +12,18 @@ use App\Http\Controllers\RecuperarPasswordController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\RegistrarCompraController;
+use App\Http\Controllers\customerSupport;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//Rutas para soporte al cliente
+Route::get('/terminosycondiciones',[customerSupport::class, 'verTC'])->name('terminosycondiciones');
+Route::get('/politicayprivacidad',[customerSupport::class, 'verPP'])->name('politicayprivacidad');
+Route::get('/seguridadyprivacidad',[customerSupport::class, 'verSP'])->name('seguridadyprivacidad');
+
+
+
 
 // Ruta para la página de contacto
 Route::get('/about', [AboutController::class, 'index'])->name('about');

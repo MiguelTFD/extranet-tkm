@@ -1,3 +1,5 @@
+@extends('layouts.base')
+@section('content')
 <style>
 .register-container {
    width: 90%; /* Cambiado de 80% a 90% para pantallas más pequeñas */
@@ -108,9 +110,6 @@ select {
 
 </style>
 
-@extends('layouts.base')
-
-@section('content')
 
     <div class="register-container">
    <h2>REGISTRAR USUARIO</h2>
@@ -308,6 +307,7 @@ select {
                     $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
                 }
             });
+
         });
     </script>
 

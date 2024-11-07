@@ -1,5 +1,8 @@
 
 {{--resources/views/pages/iniciarSesion.blade.php--}}
+@extends('layouts.base')
+
+@section('content')
 
 <style>
 .login-container {
@@ -91,9 +94,6 @@ input[type="password"] {
 }
 </style>
 
-@extends('layouts.base')
-
-@section('content')
     <div class="iniSesCt">
         <div class="login-container">
             <h1 style="text-align:center">

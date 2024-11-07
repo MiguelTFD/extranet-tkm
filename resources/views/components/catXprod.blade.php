@@ -9,7 +9,6 @@
 
 
 <div class="catXprodCt">
-        @component('components.productCard')
-        @endcomponent
+        @include('components.productCard', ['productos' => $productos])
 </div>
 

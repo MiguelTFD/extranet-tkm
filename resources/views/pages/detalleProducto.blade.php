@@ -1,6 +1,6 @@
 
 @extends('layouts.base')
-
+@section('content')
 <style>
 .treeSpaces{
     display:flex;
@@ -161,7 +161,7 @@ input[type="number"]::-webkit-inner-spin-button {
 width: 100px !important;
 }
 </style>
-@section('content')
+
 <div 
     class="container-fluid page-header page-products py-5 mb-5 wow fadeIn" 
     data-wow-delay="0.1s"
@@ -187,9 +187,8 @@ width: 100px !important;
 </div>
 
 <div class="prodSectionCt">
-    @component('components.catSelector')
-    @endcomponent
-
+    {{--agregar las caegorias--}}
+    @include('components.catSelector',['categorias'=>$categorias])
 
     <div class="product-details-container">
     <div class="product-image">
@@ -202,7 +201,6 @@ width: 100px !important;
 
     @php
         $precioActual = $producto->precioUnitario - ($producto->precioUnitario * ($producto->descuento / 100));
-
     @endphp
 
     <div class="product-info">
