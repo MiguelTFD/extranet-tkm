@@ -18,6 +18,12 @@ class Categoria extends Model
         'nombreCategoria'    
     ];
 
+    public function ordenesCompra()
+    {
+        return $this->belongsToMany(OrdenCompra::class, 'detalleOrden', 'idProducto', 'idOrdenCompra')->withPivot('cantidad');
+    }
+
+
     public function productos()
     {
         return $this->hasMany(Producto::class, 'idCategoria');

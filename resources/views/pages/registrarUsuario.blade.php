@@ -176,8 +176,8 @@ select {
        <div class="row">
            <div class="form-group">
                <label for="pais">País</label>
-               <select id="pais" name="pais">
-                   <option value="">Selecciona tu País</option>
+               <select id="pais" name="pais" required>
+                   <option value="" selected>Selecciona tu País</option>
                    @foreach($paises as $pais)
                        <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
                    @endforeach
@@ -186,21 +186,21 @@ select {
 
            <div class="form-group">
                <label for="departamento">Departamento</label>
-               <select id="departamento" name="departamento">
+               <select id="departamento" name="departamento" required>
                    <option value="">Selecciona tu Departamento</option>
                </select>
            </div>
 
            <div class="form-group">
                <label for="provincia">Provincia</label>
-               <select id="provincia" name="provincia">
+               <select id="provincia" name="provincia" required>
                    <option value="">Selecciona tu Provincia</option>
                </select>
            </div>
 
            <div class="form-group">
                <label for="idDistrito">Distrito</label>
-               <select id="idDistrito" name="idDistrito">
+               <select id="idDistrito" name="idDistrito" required>
                    <option value="">Selecciona tu Distrito</option>
                </select>
            </div>
@@ -218,6 +218,7 @@ select {
           <label for="direccionExacta">Dirección Exacta</label>
           <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
       </div>
+
 
        <div class="form-group">
            <label for="referencia">Referencia</label>

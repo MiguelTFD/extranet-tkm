@@ -13,7 +13,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\RegistrarCompraController;
 use App\Http\Controllers\customerSupport;
-
+use App\Http\Controllers\usuarioDashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -36,7 +36,6 @@ Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('produc
 Route::get('/registrarCompra',[RegistrarCompraController::class, 'index'])->name('registrarCompra');
 
 
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 
@@ -52,9 +51,11 @@ Route::get('/registro', [UsuarioController::class, 'registro'])->name('registro'
 Route::post('/crearusuario', [UsuarioController::class, 'crearusuario'])->name('crearusuario');
 
 
+Route::get('/get-paises', [UbicacionController::class, 'getPaises'])->name('getPaises');
 Route::get('/get-departamentos', [UbicacionController::class, 'getDepartamentos'])->name('getDepartamentos');
 Route::get('/get-provincias', [UbicacionController::class, 'getProvincias'])->name('getProvincias');
 Route::get('/get-distritos', [UbicacionController::class, 'getDistritos'])->name('getDistritos');
+Route::post('/direccionNueva', [UbicacionController::class, 'newDirection'])->name('direccionNueva');
 
 //para el carrito de compras
 Route::post('/cart/add', [CartController::class, 'add'])->name('add');
@@ -63,3 +64,10 @@ Route::get('/cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('remove');
 Route::post('/cart/increaseQuantity', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
 Route::post('/cart/decreaseQuantity', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
+
+
+Route::get('/api/direcciones', [UbicacionController::class, 'obtenerDirecciones']);
+Route::post('/crearCompra', [RegistrarCompraController::class, 'crearOrdenCompra'])->name('crearCompra');
+
+//Perfil usuario
+Route::get('/verPerfil',[usuarioDashboardController::class,'mostrarDashboard'])->name('verPerfil');

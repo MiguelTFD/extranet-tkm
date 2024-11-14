@@ -20,7 +20,6 @@ class Usuario extends Authenticatable
         'apellido',
         'telefono',
         'correo',
-        'idDireccion'
     ];
     
     protected $hidden = [
@@ -32,16 +31,22 @@ class Usuario extends Authenticatable
         return $this->password;
     }
     
-    // Relacion Usuario  *-----1 Direccion
-    public function direccion()
+    // Relacion Usuario  *-----* Direccion (tabla pivote 'direccionXusuario')
+    public function direcciones()
     {
-        return $this->belongsTo(Direccion::class, 'idDireccion');
+        return $this->belongsToMany(Direccion::class, 'direccionXusuario','idUsuario','idDireccion');
     }
 
     // Relación Usuario *-----* Rol (tabla pivote 'usuarioRol')
     public function roles()
     {
         return $this->belongsToMany(Rol::class, 'usuarioRol', 'idUsuario', 'idRol');
+    }
+    
+    //Direccion *------ 1 ordenCompra
+    public function ordenes()
+    {
+        return $this->hasMany(OrdenCompra::class, 'idUsuario');
     }
 
     // Relación Usuario 1---1 DocIdentidad; 

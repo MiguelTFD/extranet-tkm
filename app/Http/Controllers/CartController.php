@@ -27,7 +27,10 @@ public function add(Request $request)
             'descripcion' => $producto->descripcion
         ]
     );
-    return redirect()->back()->with("success", "El producto " . $producto->nombreProducto . " fue agregado a su carrito");
+    return redirect()->back()->with(
+        "success", 
+        "El producto " . $producto->nombreProducto . 
+        " fue agregado a su carrito");
     }
 
     public function checkout(){

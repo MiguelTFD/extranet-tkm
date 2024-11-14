@@ -19,13 +19,12 @@ class UsuarioController extends Controller
     {
         $paises = Pais::all();
         $tiposDocumento = TipoDocumentoIdentidad::all();
-        $tiposDireccion = TipoDireccion::all(); // Para llenar el select de tipo dirección
+        $tiposDireccion = TipoDireccion::all(); // Para llenar el select de tipo direcion 
         return view('pages.registrarUsuario', compact('tiposDocumento',  'tiposDireccion','paises'));
     }
 
     public function crearusuario(Request $request)
     {
-        // Validar los datos del formulario
         $validated = $request->validate([
             'username' => 'required|unique:usuario,username',
             'password' => 'required',
@@ -40,52 +39,45 @@ class UsuarioController extends Controller
             'numeroDocumentoIdentidad' => 'required|unique:documentoIdentidad,numeroDocumentoIdentidad',
             'idTipoDocumentoIdentidad' => 'required' 
         ]);
-
-
-        DB::beginTransaction(); // Inicia la transacción
-
+        
+        DB::beginTransaction(); 
         try {
-            // Crear la dirección
             $direccion = Direccion::create([
                 'idDistrito' => $validated['idDistrito'],
                 'direccionExacta' => $validated['direccionExacta'],
                 'referencia' => $validated['referencia'],
                 'idTipoDireccion' => $validated['idTipoDireccion']
             ]);
-
-            // Crear el usuario y solucionando el problema de la insercion masiva
             $usuario = new Usuario([
                 'username' => $validated['username'],
                 'nombre' => $validated['nombre'],
                 'apellido' => $validated['apellido'],
                 'telefono' => $validated['telefono'],
                 'correo' => $validated['correo'],
-                'idDireccion' => $direccion->idDireccion 
             ]);
-
-            $usuario->password = Hash::make($validated['password']); // Hashear la contraseña
+                
+            $usuario->password = Hash::make($validated['password']); 
             $usuario->save();
-
+            
+            DB::table('direccionXusuario')->insert([
+                'idUsuario' => $usuario->idUsuario,
+                'idDireccion' => $direccion->idDireccion
+            ]);
             
             DocumentoIdentidad::create([
                 'numeroDocumentoIdentidad' => $validated['numeroDocumentoIdentidad'],
                 'idTipoDocumentoIdentidad' => $validated['idTipoDocumentoIdentidad'],
                 'idUsuario' => $usuario->idUsuario 
             ]);
-
-         $usuario->roles()->attach(1);  
-
-            DB::commit(); // Confirma la transacción
-
+            $usuario->roles()->attach(1);  
+            DB::commit(); 
             return redirect()->back()->with('success', 'Usuario registrado correctamente.');
-
         }
          catch (\Exception $e) {
             DB::rollBack(); 
             return redirect()->back()->withErrors(['error' => 'Error al registrar el usuario: ' . $e->getMessage()]);
+        }
     }
-    }
-
 
 
 

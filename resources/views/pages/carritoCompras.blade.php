@@ -120,10 +120,10 @@
             flex-direction:row;
         }
         .cart-content-summary{
-            order:1;
+            order:2;
         }
         .cart-content-items {
-            order: 2;
+            order: 1;
         }
         .hidden-product-image{
             display:flex !important;
@@ -176,7 +176,7 @@
 </style>
     <div class="cart-content-layout">
         <div class="cart-content-items">
-            <h1 style="width:70%; margin:1em auto;">
+            <h1 style="text-align:center;width:70%; margin:1em auto;">
                 Carrito de Compra
             </h1>
         <div class="cart-content-items-list">
@@ -219,7 +219,7 @@
                                 class="img-cart-tumb imb"
                             >
                         </div>
-                     <div class="item-cart-product-count_image">
+                    <div class="item-cart-product-count_image">
                         {{--Aumentar cantidad--}}
                         <div class="product-quantity">
                             <div class="qty-label">
@@ -266,7 +266,7 @@
                             style="max-width: 100px; max-height: 100px;"
                             class="img-cart-tumb ima"
                         >
-                     </div>
+                    </div>
                      <div class="item-cart-product-name_description">
                         <p class="name-item-product" style="font-size:1.4em;font-weight:bold;">{{ $item->name }} 
                         <p class="descripcion-item">{{ $item->options->descripcion }} 
@@ -315,7 +315,7 @@
         </div>
         </div>
         <div style="margin:0 3em;" class="cart-content-summary">
-            <h1 style="margin:1em auto">Resumen</h1>
+            <h1 style="margin:1em auto;text-align:center;">Resumen</h1>
             <div class="cart-content-summary-layout">
                 <div class="cart-content-summary-subtotal">
                     <span>Subtotal</span>
@@ -344,7 +344,7 @@
                     >
                         Seguir comprando
                     </a>
-                    <a href="{{ route('clear') }}">
+                    <a style="color:#8c8c8c" href="{{ route('clear') }}">
                         Vaciar carrito 
                     </a>
                 </div>

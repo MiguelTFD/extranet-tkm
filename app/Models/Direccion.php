@@ -19,6 +19,13 @@ class Direccion extends Model
         'referencia',
         'idTipoDireccion'
     ];
+    
+    //Direccion *------ 1 ordenCompra
+    public function ordenes()
+    {
+        return $this->hasMany(OrdenCompra::class, 'idDireccion');
+    }
+
 
     // Relación Direccion  *-----1 Distrito
     public function distrito()
@@ -32,10 +39,10 @@ class Direccion extends Model
         return $this->belongsTo(TipoDireccion::class, 'idTipoDireccion');
     }
     
-    // Relación Direccion 1----* Usuarios
+    // Relación con Usuario (tabla pivote 'direccionXusuario')
     public function usuarios()
     {
-        return $this->hasMany(Usuario::class, 'idDireccion');
+        return $this->belongsToMany(Usuario::class, 'direccionXusuario', 'idDireccion', 'idUsuario');
     }
 
 
