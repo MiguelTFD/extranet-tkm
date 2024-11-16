@@ -40,7 +40,6 @@
             <p> <a href="{{ url('/about') }}">Nosotros</a></p>
 
             <p><a href="{{ route('productos') }}">Productos</a></p>
-            <p><a href="{{ url('/gallery') }}">Galeria</a></p>
             <p><a href="{{ url('/contact') }}">Contáctenos</a></p>
 
         </div>

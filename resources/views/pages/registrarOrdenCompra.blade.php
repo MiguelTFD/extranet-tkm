@@ -40,6 +40,8 @@
         min-height:100vh;
         flex-flow:row wrap;
     }
+
+
     .item-cart-product{
        display:flex;
        justify-content: space-around;
@@ -199,6 +201,7 @@
     }
 
     .address-card {
+        width:100%;
         display: flex;
         align-items: center;
         background: #f0f0f0;
@@ -357,7 +360,7 @@
                         <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <button type="exit" class="btn btn-secondary">Cancelar</button>
+                        <button type="button" id="cerrarBtn" onclick="cerrarPopUp()" class="btn btn-secondary">Cancelar</button>
                         <button type="submit" class="btn btn-primary text-white">Agregar</button>
                     </div>
                 </form>
@@ -420,7 +423,7 @@
                                               <input class="form-check-input"
                                               type="radio" name="pago"
                                               id="bbvaAccount"
-                                              value="Transferencia BBVA">
+                                              value="Transferencia digital BBVA">
                                               <label class="form-check-label" 
                                                 for="bbvaAccount">
                                                   Usar cuenta BBVA
@@ -430,7 +433,7 @@
                                               <input class="form-check-input"
                                               type="radio" name="pago"
                                               id="bcpAccount"
-                                              value="Transferencia BCP">
+                                              value="Transferencia digital BCP">
                                               <label class="form-check-label" for="bcpAccount">
                                                   Usar cuenta BCP
                                               </label>
@@ -439,7 +442,7 @@
                                               <input class="form-check-input"
                                               type="radio" name="pago"
                                               id="bancoNacionAccount"
-                                              value="Deposito en Banco de la Nación">
+                                              value="Deposito en Banco de la Nacion">
                                               <label class="form-check-label" for="bancoNacionAccount">
                                                   Usar cuenta de Banco de la Nación
                                               </label>
@@ -568,6 +571,8 @@
                             </span>
                         </div>
                         <hr>
+                        <input type="hidden" name="precioTotal"
+                                             value="{{$totalConDescuento}}">
                         <div class="cart-content-summary-total">
                             <span>Total a pagar</span>
                             <span>
@@ -581,13 +586,15 @@
                             politica de privacidad.
                         </p>
                         <button type="submit" id="pagarBtn" class="btn btn-gotopay">
-                           PAGAR
+                           SOLICITAR 
                         </button>
                         </div>
                     </div>
-                    <button class="btn btn-secondary btn-continue-step-buy">
-                        Cancelar Compra
-                    </button>
+                    <a 
+                        href="{{route('checkout')}}"
+                        class="btn btn-secondary btn-continue-step-buy">
+                        Cancelar Solicitud 
+                    </a >
             </div>
         </div>
         <!-- Modal de confirmacion-->
@@ -613,6 +620,14 @@
     <script src="{{asset('js/addNewAddressPopUp.js')}}"></script>
     <script src="{{asset('js/sendOption.js')}}"></script>
     <script>
+        function cerrarPopUp(){
+            popUpLayout = document.getElementById('orderPopUp');
+            btnCancelar = document.getElementById('cerrarBtn');
+            btnCancelar.addEventListener('click',()=>{
+                popUpLayout.style.display = 'none';        
+            })
+        }
+
     document.addEventListener('DOMContentLoaded', function() {
     const continuarBtn = document.querySelector('.');
     

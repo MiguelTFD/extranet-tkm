@@ -43,7 +43,7 @@ function mostrarDelivery() {
                     </div>
                 </div>
                  <div class="row justify-content-center">
-                    <div class="col-md-6">
+                    <div class="col-md-6 w-100">
                         <div class="mb-3 text-center">
                             <label for="instruccionEntrega" class="form-label">Instrucciones de entrega</label>
                             <input 
@@ -54,7 +54,8 @@ function mostrarDelivery() {
                                 placeholder="Escribe aquí tus instrucciones..."
                             >
                         </div>
-        </div>
+                    </div>
+                </div>
                 <button type="button" class="btn btn-primary  btn-continue-step-buy" id="btnContinuar" disabled>
                     Continuar
                 </button>`;

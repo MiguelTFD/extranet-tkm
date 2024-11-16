@@ -1,6 +1,13 @@
 @extends('layouts.base')
-
 @section('content')
+<style>
+.footer-container{
+    display:none !important;
+}
+#navbarCollapse{
+    display:none !important;
+}
+</style>
 
 <div class="container-fluid">
     <div class="row">

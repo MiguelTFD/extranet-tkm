@@ -38,6 +38,7 @@ class RegistrarCompraController extends Controller
             'estadoOrdenCompra' => 'nullable|string|max:60',
             'informacionOrdenCompra' => 'nullable|string',
             'instruccionEntrega' => 'nullable|string',
+            'precioTotal'=>'nullable|string',
         ]);
         $usuario = Auth::guard('usuario')->user();
         try {
@@ -48,6 +49,7 @@ class RegistrarCompraController extends Controller
                 'idDireccion' => $validatedData['direcciones'],
                 'tipoEntrega' => $validatedData['tipoEntrega'] ?? 'Delivery',       
                 'metodoPago' => $validatedData['pago'] ?? null,
+                'precioTotal' => $validatedData['precioTotal'] ?? null,
                 'estadoOrdenCompra' => $validatedData['estadoOrdenCompra'] ?? 'Generada',
                 'informacionOrdenCompra' => $validatedData['informacionOrdenCompra'] ?? null,
                 'instruccionEntrega' => $validatedData['instruccionEntrega'] ?? null,

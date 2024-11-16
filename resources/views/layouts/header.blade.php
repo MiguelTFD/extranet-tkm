@@ -3,6 +3,11 @@
     $user = auth()->user();
 @endphp
 @include('components.cartButton')
+<style>
+#logout-div{
+    display:none !important ;
+}
+</style>
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <img class="tkmlogo" src="{{ asset('images/icon/TKMLogo.png')}}"/>
@@ -31,12 +36,6 @@
                 Productos
             </a>
             <a
-                href="{{ url('/gallery') }}"
-                class="nav-item nav-link"
-            >
-                Galeria
-            </a>
-            <a
                 href="{{ route('contact') }}"
                 class="nav-item nav-link"
             >
@@ -44,11 +43,8 @@
             </a>
         </div>
         @if($user)
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
-                Cerrar Sesión
+            <a href="{{ route('verPerfil') }}" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
+                Mi Perfil 
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
         @else
@@ -59,6 +55,18 @@
         @endif
 
     </div>
+        <div id="logout-div" class="w-100 d-flex justify-content-end">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <a
+            style="background:#7B311E;color:white;border:unset;width:fit-content" href="#" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" class="btn
+                btn-warning py-4 px-lg-4 rounded-0 d-none d-lg-block">
+                Cerrar Sesión
+                <i class="fa fa-arrow-right ms-3"></i>
+            </a>
+        </div>
 
 </nav>
 

@@ -1,29 +1,47 @@
+<style>
+
+#logout-div{
+    display:inherit !important;
+}
+
+
+</style>
 <nav class="col-md-3 col-lg-2 d-md-block sidebar">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">
+    <ul style="gap:3em;" class="nav flex-column">
+        <div>        
+            <p style="padding: 0.5rem 1rem;color:#707070;font-weight:bold;">
                 Perfil
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Personal
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Direcciones
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Compras
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                Mis pedidos
-            </a>
-        </li>
+            </p>
+            <li class="nav-item">
+                <a 
+                    class="nav-link {{ Request::routeIs('verPerfil') ? 'active' : '' }}" 
+                    href="{{ route('verPerfil') }}"
+                >
+                    Personal
+                </a>
+            </li>
+            <li class="nav-item">
+                <a 
+                    class="nav-link {{ Request::routeIs('verDirecciones') ? 'active' : '' }}" 
+                    href="{{ route('verDirecciones') }}"
+                >
+                    Direcciones
+                </a>
+            </li>
+        </div>
+        <div>
+            <p style="padding: 0.5rem 1rem;color:#707070;font-weight:bold;">
+                Compras 
+            </p>
+            <li class="nav-item">
+                <a 
+                    class="nav-link {{ Request::routeIs('verPedidos') ? 'active' : '' }}" 
+                    href="{{ route('verPedidos') }}"
+                >
+                    Mis pedidos
+                </a>
+            </li>
+        </div>
     </ul>
 </nav>
+

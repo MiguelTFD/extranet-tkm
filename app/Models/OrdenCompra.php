@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class OrdenCompra extends Model
 {
@@ -19,6 +20,7 @@ class OrdenCompra extends Model
         'instruccionEntrega',
         'idDireccion',
         'tipoEntrega',
+        'precioTotal',
         'metodoPago',
         'estadoOrdenCompra'
     ];
@@ -42,5 +44,8 @@ class OrdenCompra extends Model
     public function direccion(){
         return $this->belongsTo(Direccion::class,'idDireccion');
     }
-
+    public function getFechaOrdenCompraFormatoAttribute()
+{
+    return Carbon::parse($this->fechaOrdenCompra)->translatedFormat('j \d\e F \d\e\l Y');
+}
 }

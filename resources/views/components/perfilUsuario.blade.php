@@ -1,12 +1,19 @@
+<style>
+.table td{
+    padding:2em 0;
+}
+</style>
 
-@section('content')
-
+<div class="col-md-9 content">
     <div class="d-flex align-items-center mb-4">
         <span class="profile-picture me-3">
             <i class="bi bi-person-circle"></i>
         </span>
         <div>
-            <p class="profile-title">Quispe Lizarraga, Miguel Angel</p>
+            <p class="profile-title">
+                <span>{{$usuario->nombre}}</span>, 
+                <span>{{$usuario->apellido}}</span> 
+            </p>
         </div>
     </div>
     <table class="table table-borderless">
@@ -18,7 +25,7 @@
                 </strong>
             </td>
             <td>
-                MiguelTFD
+                {{$usuario->username}} 
             </td>
         </tr>
         <tr>
@@ -27,7 +34,9 @@
                     Teléfono
                 </strong>
             </td>
-            <td>+51 901638852</td>
+            <td>
+                {{$usuario->telefono}} 
+            </td>
         </tr>
         <tr>
             <td>
@@ -35,7 +44,9 @@
                     Documento de Identidad
                 </strong>
             </td>
-            <td>DNI</td>
+            <td>
+                {{$usuario->documentoIdentidad->tipoDocumentoIdentidad->nombreTipoDocumentoIdentidad}} 
+            </td>
         </tr>
         <tr>
             <td>
@@ -44,7 +55,7 @@
                 </strong>
             </td>
             <td>
-                76566722
+                {{$usuario->documentoIdentidad->numeroDocumentoIdentidad}} 
             </td>
         </tr>
         <tr>
@@ -54,12 +65,13 @@
                 </strong>
             </td>
             <td>
-                MiguelTFD@gmail.com
+                {{$usuario->correo}} 
             </td>
         </tr>
         </tbody>
     </table>
-    <div class="text-end">
+    <!-- Aun no agrego el actualizar usuario-->
+    <div style="display:none" class="text-end">
     <a href="#" class="edit-profile">Modificar perfil</a>
     </div>
-@endsection
+</div>

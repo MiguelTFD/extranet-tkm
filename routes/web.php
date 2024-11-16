@@ -35,9 +35,8 @@ Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('produc
 
 Route::get('/registrarCompra',[RegistrarCompraController::class, 'index'])->name('registrarCompra');
 
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-
+Route::post('/contact',[ContactController::class, 'store'])->name('enviarContacto');
 
 Route::get('/registrarUsuario', [RegistrarUsuarioController::class, 'index'])->name('registrarUsuario');
 
@@ -71,3 +70,10 @@ Route::post('/crearCompra', [RegistrarCompraController::class, 'crearOrdenCompra
 
 //Perfil usuario
 Route::get('/verPerfil',[usuarioDashboardController::class,'mostrarDashboard'])->name('verPerfil');
+Route::get('/verDirecciones',[usuarioDashboardController::class,'mostrarDirecciones'])->name('verDirecciones');
+Route::get('/verPedidos',[usuarioDashboardController::class,'mostrarPedidos'])->name('verPedidos');
+Route::post('/mostrar-orden-compra', [UsuarioDashboardController::class, 'mostrarOrdenCompra'])->name('mostrarOrdenCompra');
+Route::post('/mostrar-orden-compra/pdf',[usuarioDashboardController::class,'generarPdf'])->name('generarPdf');
+
+
+

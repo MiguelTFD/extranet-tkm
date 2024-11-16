@@ -23,28 +23,78 @@
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <p class="fs-5 fw-bold text-primary">Contactanos!</p>
                 <h1 class="display-5 mb-5">Si tienes alguna duda o consulta, Contactanos por favor</h1>
-                <form id="contactForm">
+                <form id="contactForm" action="{{route('enviarContacto')}}"
+                    method="POST">
+                    @csrf
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tu nombre">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="name" 
+                                    name="name" 
+                                    value="{{old('name')}}"
+                                    placeholder="Ingresa tu nombre"
+                                >
                                 <label for="name">Nombre</label>
+                                @error('name')
+                                    <h6>{{$message}} </h6>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Ingresa el asunto de tu consulta">
+                                <input 
+                                    type="text" 
+                                    class="form-control"
+                                    id="email" 
+                                    value="{{old('email')}}"
+                                    name="email" 
+                                    placeholder="Ingresa tu email"
+                                >
+                                <label for="email">Correo Electronico</label>
+                                @error('email')
+                                    <h6>{{$message}} </h6>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="subject" 
+                                    name="subject" 
+                                    value="{{old('subject')}}"
+                                    placeholder="Ingresa el asunto de tu consulta"
+                                >
                                 <label for="subject">Asunto</label>
+                                @error('subject')
+                                    <h6>{{$message}} </h6>
+                                @enderror
+
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Ingresa aqui tu duda o consulta..." id="message" name="message" style="height: 100px"></textarea>
+                                <textarea 
+                                    class="form-control" 
+                                    placeholder="Ingresa aqui tu duda o consulta..." 
+                                    id="message" 
+                                    name="message" 
+                                    value="{{old('message')}}"
+                                    style="height: 100px">
+                                </textarea>
                                 <label for="message">Mensaje</label>
+                                @error('message')
+                                <h6>{{$message}} </h6>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
-                            <button id="sendEmailButton" class="btn btn-primary py-3 px-4" type="button">Enviar Mensaje</button>
+                            <button id="sendEmailButton" class="btn btn-primary
+                                py-3 px-4" type="submit">Enviar Mensaje</button>
                         </div>
                     </div>
                 </form>
