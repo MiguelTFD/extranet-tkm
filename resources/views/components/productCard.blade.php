@@ -35,20 +35,7 @@
     justify-content: space-evenly;
 }
 
-.productCardDesc {
-    width: 50px;
-    margin: 3px;
-    background: #C4B400;
-    color: white;
-    border-radius: 100%;
-    height:50px;
-    position:relative;
-    top:35;
-}
 
-.productCardDesc p {
-    padding: 10px;
-}
 
 .addCar {
     all: unset;

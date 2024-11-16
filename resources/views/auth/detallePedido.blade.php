@@ -5,6 +5,9 @@
 .footer-container{
     display:none !important;
 }
+#iniciarSesionBtn{
+    display:none !important;
+}
 .tb-dp{
     background:#E9E9E9;
     padding:3em;

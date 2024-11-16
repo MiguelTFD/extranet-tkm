@@ -1,4 +1,6 @@
 @extends('layouts.base')
+
+@section('content')
 <style>
 #frm-ped{
 width: 100%;
@@ -6,14 +8,14 @@ align-content: center;
 display: flex;
 justify-content: center;
 }
+#iniciarSesionBtn{
+    display:none !important;
+}
 .footer-container{
     display:none !important;
 }
-#navbarCollapse{
-    display:none !important;
-}
+
 .content {
-    margin-left: 220px;
     padding: 20px;
 }
 .order-card {
@@ -40,7 +42,7 @@ justify-content: center;
 }
 </style>
   
-@section('content')
+
     <div class="container-fluid">
         <div class="row">
             @include('components.opcionesUsuario')

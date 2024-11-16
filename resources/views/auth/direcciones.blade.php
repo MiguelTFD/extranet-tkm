@@ -5,6 +5,18 @@
 .entrega-options{
     justify-content: right !important;
 }
+@media(max-width:767px){
+    .entrega-options{
+        justify-content: center !important;
+    }
+    .entrega-options-1{
+        margin-right:unset !important;
+    }
+}
+
+#iniciarSesionBtn{
+    display:none !important;
+}
 .entrega-options-1 {
   margin-right: 4.3em;
   margin-top: 2em;
@@ -268,9 +280,7 @@
 .footer-container{
     display:none !important;
 }
-#navbarCollapse{
-    display:none !important;
-}
+
 #orderPopUp {
         position: fixed;
         width: 100%;

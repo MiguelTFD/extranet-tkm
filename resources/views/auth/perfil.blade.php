@@ -4,7 +4,7 @@
 .footer-container{
     display:none !important;
 }
-#navbarCollapse{
+#iniciarSesionBtn{
     display:none !important;
 }
 </style>

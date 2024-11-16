@@ -4,8 +4,15 @@
 @endphp
 @include('components.cartButton')
 <style>
+
 #logout-div{
     display:none !important ;
+}
+#cerrarSesionBtn{
+    display:none !important ;
+}
+#iniciarSesionBtn{
+    display: inherit !important;
 }
 </style>
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
@@ -43,30 +50,28 @@
             </a>
         </div>
         @if($user)
-            <a href="{{ route('verPerfil') }}" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
+            <a id="iniciarSesionBtn" href="{{ route('verPerfil') }}" class="btn btn-primary py-4 px-lg-4 rounded-0  d-lg-block">
                 Mi Perfil 
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
-        @else
-            <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
-                Iniciar Sesión
-                <i class="fa fa-arrow-right ms-3"></i>
-            </a>
-        @endif
-
-    </div>
-        <div id="logout-div" class="w-100 d-flex justify-content-end">
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            <a
-            style="background:#7B311E;color:white;border:unset;width:fit-content" href="#" onclick="event.preventDefault();
+            <a id="cerrarSesionBtn"
+                    style="background:#7B311E;color:white;border:unset;" href="#" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();" class="btn
                 btn-warning py-4 px-lg-4 rounded-0 d-none d-lg-block">
                 Cerrar Sesión
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
-        </div>
+        @else
+            <a  href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">
+                Iniciar Sesión
+                <i class="fa fa-arrow-right ms-3"></i>
+            </a>
+        @endif
+
+
 
 </nav>
 

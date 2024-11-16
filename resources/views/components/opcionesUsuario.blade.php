@@ -3,7 +3,12 @@
 #logout-div{
     display:inherit !important;
 }
-
+#iniciarSesionBtn{
+    display:none !important;
+}
+#cerrarSesionBtn{
+    display:inherit !important ;
+}
 
 </style>
 <nav class="col-md-3 col-lg-2 d-md-block sidebar">
