@@ -276,9 +276,11 @@
                         <span class="current-price">
                           S/{{ number_format($item->qty * ($item->price - ($item->price * ($item->options->descuento / 100))), 2) }}
                         </span>
+                        @if($item->options->descuento>0)
                         <span class="old-price">
                            S/{{ number_format($item->price * $item->qty, 2) }}
                         </span>
+                        @endif
                      </div>
                      <div class="removeItemSection a">
                         <form action="{{route('remove')}}"
@@ -317,6 +319,7 @@
         <div style="margin:0 3em;" class="cart-content-summary">
             <h1 style="margin:1em auto;text-align:center;">Resumen</h1>
             <div class="cart-content-summary-layout">
+                @if($totalSinDescuento != $totalConDescuento)
                 <div class="cart-content-summary-subtotal">
                     <span>Subtotal</span>
                     <span>
@@ -324,6 +327,7 @@
                     </span>
                 </div>
                 <hr>
+                @endif
                 <div class="cart-content-summary-total">
                     <span>Total</span>
                     <span>
@@ -337,12 +341,12 @@
                         style="width:100%" 
                         class="btn btn-primary" 
                     >
-                        Proceder a pagar
+                        Generar Solicitud
                     </a>
                     <a 
                         href="{{ route('productos') }}"
                     >
-                        Seguir comprando
+                        Agregar mas productos
                     </a>
                     <a style="color:#8c8c8c" href="{{ route('clear') }}">
                         Vaciar carrito 

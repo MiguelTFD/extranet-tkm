@@ -8,6 +8,10 @@ align-content: center;
 display: flex;
 justify-content: center;
 }
+
+    .wsp-1-2 , #btn-carrito{
+        display:none !important;
+    }
 #iniciarSesionBtn{
     display:none !important;
 }

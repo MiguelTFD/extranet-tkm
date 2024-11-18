@@ -2,11 +2,7 @@
 @extends('layouts.base')
 @section('content')
 <style>
-.treeSpaces{
-    display:flex;
-    flex-flow: row wrap;
-    justify-content: center;
-}
+
 
 .container-lite{
     width:100%;
@@ -36,7 +32,7 @@ display:flex;
         flex-direction:column;
     }
 }
-@media (max-width: 1057px) {
+@media (max-width: 1000px) {
 
     .product-info{
         text-align: center;
@@ -202,7 +198,7 @@ width: 100px !important;
 
     <div class="product-details-container">
     <div class="product-image">
-        @if ($producto->imagenes->isNotEmpty())
+@if ($producto->imagenes->isNotEmpty())
             <img class="details-img-product" src="{{ asset('images/' . $producto->imagenes->first()->urlImagenProducto) }}" alt="{{ $producto->nombreProducto }}">
         @else
             <img class="details-img-product" src="{{ asset('images/about.webp') }}" alt="Imagen por defecto">
@@ -214,22 +210,29 @@ width: 100px !important;
     @endphp
 
     <div class="product-info">
-
         <h1 style="color:#2D2D2E;margin-bottom:1em;">{{ $producto->nombreProducto }}</h1>
+        @if($producto->descuento > 0)
         <div class="product-discount">
             <p>{{ intval($producto->descuento) }}% descuento</p>
         </div>
-
+        @endif
+       
         <p>
             <strong>Categoría:</strong>
             {{ $producto->categoria->nombreCategoria }}
         </p>
+        @if($producto->descripcion)
         <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
+        @endif
+        @if($producto->tamanio)
         <p><strong>Medidas:</strong> {{$producto->tamanio}}</p>
-
+        @endif
+        
         <div class="product-prices">
-            <span class="current-price">S/{{number_format($precioActual,2)}}</span>
+            <span class="current-price">S/{{number_format($precioActual,2)}}</span> 
+          @if($producto->descuento > 0)
             <span class="old-price">S/{{ number_format($producto->precioUnitario, 2) }}</span>
+           @endif
         </div>
 
         <div class="product-quantity">
@@ -267,7 +270,7 @@ width: 100px !important;
         </form>
     </div>
 
-    <div class="container-lite">
+    <div style="margin-top:9em" class="catXprodCt">
         <div class="titleCategories">
             <h3 >Productos relacionados</h3>
         </div>
@@ -275,9 +278,16 @@ width: 100px !important;
         @if ($productosRelacionados->isNotEmpty())
                 @foreach ($productosRelacionados as $relacionado)
                     <div class="productCardMain">
+                        
+                        @if($relacionado->descuento > 0)
                         <div class="productCardDesc">
                             <p>{{ intval($relacionado->descuento) }}%</p>
                         </div>
+                        @else   
+                        <div style="background:white;color:white" class="productCardDesc">
+                            <p>.</p>
+                        </div>
+                        @endif
                         
                         @php
                             $precioActual = $relacionado->precioUnitario - 
@@ -307,9 +317,11 @@ width: 100px !important;
                                         S/.{{ number_format($precioActual, 2) }}
                                     </p>
                                 </strong>
+                                @if($relacionado->descuento > 0)
                                 <p class="old-price">
                                     S/.{{ number_format($precioAntes, 2) }}
                                 </p>
+                                @endif
                             </figcaption>
                             <div class="btnItems">
                                 <div class="cart-add">
@@ -335,6 +347,7 @@ width: 100px !important;
             @endif    
         </div>
     </div>
+</div>
 </div>
 
 

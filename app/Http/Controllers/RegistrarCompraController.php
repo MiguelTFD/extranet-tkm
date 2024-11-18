@@ -62,7 +62,7 @@ class RegistrarCompraController extends Controller
             }
             DB::commit();
             Cart::destroy();
-            return redirect('/')->with('success', 'Compra realizada con éxito.');
+            return redirect('/verPedidos')->with('success', 'Compra realizada con éxito.');
         } catch (\Exception $e) {
             DB::rollBack();
 

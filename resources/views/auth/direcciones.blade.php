@@ -2,6 +2,11 @@
 
 @section('content')
 <style>
+
+    .wsp-1-2 , #btn-carrito{
+        display:none !important;
+    }
+
 .entrega-options{
     justify-content: right !important;
 }
@@ -91,9 +96,7 @@
         margin: 0 auto;
         fill: #b9b9b9;
     }
-    .navbar-toggler{
-        display:none !important;
-    }
+
     .hidden-product-name{
         display:none;
     }
@@ -292,6 +295,10 @@
         justify-content: center;
         align-items: center;
     }
+.abc{
+    height: fit-content;
+    margin: 3% auto;
+}
     </style>
 
        <div id="orderPopUp">
@@ -372,10 +379,11 @@
 <div class="container-fluid">
     <div class="row">
         @include('components.opcionesUsuario')
-        <div style="background:white;" class="col-md-9 content">
+        <div style="background:white;" class="col-md-9 content abc">
 <div id="te-layout">
 
 </div>
+         </div>
 </div>
  </div>
 </div>
@@ -388,7 +396,7 @@ function cerrarPopUp(){
             btnCancelar.addEventListener('click',()=>{
                 popUpLayout.style.display = 'none';        
             })
-        }
+}
     $(document).ready(function() {
         $('#pais').on('change', function() {
             var paisId = $(this).val();
@@ -451,6 +459,30 @@ function cerrarPopUp(){
         });
 
     });
+document.addEventListener('DOMContentLoaded', () => {
+    // Maneja el clic en el botón "Editar"
+    document.querySelectorAll('.btn-edit').forEach(button => {
+        button.addEventListener('click', event => {
+            const id = event.target.dataset.id; // Obtén el ID de la dirección
+            const form = document.getElementById(`editForm-${id}`);
+            const otherForms = document.querySelectorAll('.edit-form:not(#editForm-' + id + ')');
+
+            // Oculta otros formularios abiertos
+            otherForms.forEach(f => f.classList.add('d-none'));
+
+            // Alterna la visibilidad del formulario
+            form.classList.toggle('d-none');
+        });
+    });
+
+    // Maneja el clic en el botón "Cancelar"
+    document.querySelectorAll('.btn-cancel').forEach(button => {
+        button.addEventListener('click', event => {
+            const form = event.target.closest('.edit-form');
+            form.classList.add('d-none'); // Oculta el formulario
+        });
+    });
+});
 
 </script>
 
@@ -482,7 +514,7 @@ function viewPopUpNewAddress() {
                                 <p>${direccion.direccionExacta}</p>
                                 <p>${direccion.referencia}</p>
                             </div>
-                        </div>`;
+                                                    </div>`;
                 });
             }
             htmlContent += `

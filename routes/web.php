@@ -68,6 +68,7 @@ Route::post('/cart/decreaseQuantity', [CartController::class, 'decreaseQuantity'
 Route::get('/api/direcciones', [UbicacionController::class, 'obtenerDirecciones']);
 Route::post('/crearCompra', [RegistrarCompraController::class, 'crearOrdenCompra'])->name('crearCompra');
 
+
 //Perfil usuario
 Route::get('/verPerfil',[usuarioDashboardController::class,'mostrarDashboard'])->name('verPerfil');
 Route::get('/verDirecciones',[usuarioDashboardController::class,'mostrarDirecciones'])->name('verDirecciones');
@@ -76,4 +77,5 @@ Route::post('/mostrar-orden-compra', [UsuarioDashboardController::class, 'mostra
 Route::post('/mostrar-orden-compra/pdf',[usuarioDashboardController::class,'generarPdf'])->name('generarPdf');
 
 
-
+Route::put('/usuario/actualizar', [usuarioDashboardController::class, 'update'])->name('updateUsu');
+Route::post('/verDirecciones/actualizar', [usuarioDashboardController::class, 'actualizarDir'])->name('direccionActualizar');

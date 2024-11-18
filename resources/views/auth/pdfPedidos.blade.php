@@ -93,14 +93,16 @@
             font-size: 12px;
             color: #888;
         }
+        .tinyimg{
+            width:20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div>
-                <!--Imagen logo-->
-                <img src="logo.png" alt="Logo" />
+                <h2> The King Moss</h2>
             </div>
             <div class="header-info">
                 <b>Fecha: </b> {{ $datosOrdenCompra['fechaOrdenCompra'] }}<br />
@@ -131,6 +133,9 @@
                         Username: {{$usuario->username}}<br />
                         Doc: {{$usuario->documentoIdentidad->tipoDocumentoIdentidad->nombreTipoDocumentoIdentidad}}
                         |{{$usuario->documentoIdentidad->numeroDocumentoIdentidad}}<br />
+                        Loc: {{ $datosOrdenCompra['direccion']}}<br/>
+                        Dir: {{ $datosOrdenCompra['direccionExacta']}}<br/>
+                        Ref: {{ $datosOrdenCompra['referencia']}}<br/>
                         </td>
                     </tr>
                 </tbody>

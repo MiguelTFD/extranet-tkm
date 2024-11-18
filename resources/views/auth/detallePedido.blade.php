@@ -2,6 +2,51 @@
 
 @section('content')
 <style>
+.qr-modal {
+    display: none; /* Inicialmente oculto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo difuso */
+    overflow: auto;
+    padding-top: 60px;
+}
+
+.qr-modal-content {
+    background-color: white;
+    margin: 6em auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#qrImage {
+    width: 100%;
+    height: auto;
+}
+
+
 .footer-container{
     display:none !important;
 }
@@ -19,9 +64,7 @@ thead tr{
 .tb-dp *{
     padding:1.3em !important;
 }
-#navbarCollapse{
-    display:none !important;
-}
+
 .mb-2{
     margin-bottom: 2.5rem !important;
 }
@@ -35,8 +78,18 @@ thead tr{
 .card{
     border:unset;
 }
-</style>
 
+
+    .wsp-1-2 , #btn-carrito{
+        display:none !important;
+    }
+</style>
+<div id="qrModal" class="qr-modal" style="display: none;">
+    <div class="qr-modal-content">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <img id="qrImage" src="" alt="QR" />
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         @include('components.opcionesUsuario')
@@ -94,6 +147,31 @@ thead tr{
                         </p>
                     </div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Localidad</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $datosOrdenCompra['direccion']}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Direccion</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $datosOrdenCompra['direccionExacta']}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Referencia</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $datosOrdenCompra['referencia']}}
+                        </p>
+                    </div>
+                </div>
+
                 <div class="row mb-2">
                     <div class="col-6"><strong>Método de pago</strong></div>
                     <div class="col-6 text-end">

@@ -8,7 +8,7 @@ let pagoEnYape=`
     Destinatario: Henry Obed Cholan Romero<br>
     <i class="fa-solid fa-qrcode">
     </i>
-    <a href="#" class="text-decoration-none">
+    <a href="#" id="verQr"  class="text-decoration-none">
         Ver QR
     </a>
 `;
@@ -17,7 +17,7 @@ let pagoEnPlin=`
     Destinatario: Henry Obed Cholan Romero<br>
     <i class="fa-solid fa-qrcode">
     </i>
-    <a href="#" class="text-decoration-none">
+    <a href="#" id="verQr"  class="text-decoration-none">
         Ver QR
     </a>
 `;
@@ -63,7 +63,7 @@ let transferenciaBCP=`
             console.log('yape');
             metodoPagoLayout.innerHTML = pagoEnYape;  
             break;
-        case 'Pago con Plin':
+        case 'Pago en plin':
             console.log('plin');
             metodoPagoLayout.innerHTML = pagoEnPlin;  
             break;
@@ -83,5 +83,37 @@ let transferenciaBCP=`
             metodoPagoLayout.innerHTML = `<p>Algo salio mal :(`;
             console.log('error');
     }
+
+    // Lógica para mostrar el modal con la imagen del QR
+    const qrModal = document.getElementById('qrModal');
+    const qrImage = document.getElementById('qrImage');
+    const closeModal = document.getElementById('closeModal');
+    const verQr = document.getElementById('verQr');
+
+    verQr.addEventListener('click', (e) => {
+        e.preventDefault(); // Evita que se recargue la página al hacer clic
+
+        // Dependiendo del método de pago, asignar una imagen diferente
+        if (pagoElegido === 'Pago en yape') {
+            qrImage.src = 'images/yape-qr.png'; // Ruta de la imagen para Yape
+        } else if (pagoElegido === 'Pago en plin') {
+            qrImage.src = 'images/plin-qr.png'; // Ruta de la imagen para Plin
+        }
+        // Mostrar el modal
+        qrModal.style.display = 'block';
+    });
+
+    // Cerrar el modal al hacer clic en la X
+    closeModal.addEventListener('click', () => {
+        qrModal.style.display = 'none';
+    });
+
+    // Cerrar el modal si se hace clic fuera del contenido
+    window.addEventListener('click', (e) => {
+        if (e.target === qrModal) {
+            qrModal.style.display = 'none';
+        }
+    });
+
 
 })

@@ -590,13 +590,12 @@ h6,
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 30px 0px;
 }
 .dnf-inner{
-
+    margin-bottom: 30px !important;
 	position:fixed;
 	z-index: 2147483647;
 	width: 360px;
 	transition: opacity 0.3s ease 0s, margin 0.3s ease 0s, visibility 0.3s ease 0s;
 	touch-action: auto;
-	margin-bottom: 20px;
 	opacity: 1;
 	pointer-events: all;
 	visibility: visible;
@@ -636,7 +635,7 @@ h6,
 	overflow: auto;
 	padding: 20px 20px 32px !important;
 	max-height: 382px;
-	background: url("../img/background-whatsapp.jpg") center center / cover no-repeat;
+	background: url("../images/background-whatsapp.jpg") center center / cover no-repeat;
 }
 .wsp-1-2-3{
 		  background-color: white;
@@ -726,7 +725,7 @@ font-size:1.6rem !important;
 	}
 	.dnf-inner{
 		width:300px;
-		margin-bottom: 9px !important;
+		margin-bottom: 35px !important;
 	}
 	.var-txt-vm{
 			  width:90% !important;
@@ -1138,6 +1137,7 @@ list-style-type: none;
     display: block;
     margin: 0px auto;
     border-radius:15px;
+    width: 70%;
 }
 
 .nombreItem {
@@ -1324,7 +1324,7 @@ border-radius: 15px;
  background: #EEEEEE;
  justify-content: space-between;
  align-items: center;
-
+width: 100%;
 
 }
 .forma-entrega-layout{
@@ -1387,4 +1387,9 @@ border-radius: 15px;
 }
 .logout-div{
     display:none;
+}
+.treeSpaces{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }

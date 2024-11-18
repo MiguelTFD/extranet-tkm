@@ -5,6 +5,9 @@
 .formaPago-layout{
     display:none;
 }
+    .wsp-1-2{
+        display:none;
+    }
     @media(max-width:480px){
         .pay-img-max{
         display:none; 
@@ -551,9 +554,11 @@
                                         ($item->price *
                                         ($item->options->descuento / 100))), 2) }}
                                     </p>
-                               <p class="old-price">
-                                  S/{{ number_format($item->price * $item->qty, 2) }}
-                               </p >
+                                    @if($item->options->descuento>0)
+                                    <p class="old-price">
+                                       S/{{ number_format($item->price * $item->qty, 2) }}
+                                    </p >
+                                    @endif
                             </div>
                         </div>
                         @php
@@ -564,6 +569,7 @@
                         @endforeach
                         @endif
                     </div>
+                        @if($totalConDescuento != $totalSinDescuento)
                         <div class="cart-content-summary-subtotal">
                             <span>Subtotal</span>
                             <span>
@@ -571,6 +577,7 @@
                             </span>
                         </div>
                         <hr>
+                        @endif
                         <input type="hidden" name="precioTotal"
                                              value="{{$totalConDescuento}}">
                         <div class="cart-content-summary-total">
@@ -581,7 +588,7 @@
                         </div>
                         <div class="terms-btn-pagar">
                         <p style="color:#949494;">
-                            Al hacer click en “pagar”, aceptas nuestros
+                            Al hacer click en “Solicitar”, aceptas nuestros
                             terminos y condiciones y
                             politica de privacidad.
                         </p>

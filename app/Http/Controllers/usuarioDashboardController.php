@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pais;
 use App\Models\OrdenCompra;
+use App\Models\DocumentoIdentidad;
+use App\Models\TipoDocumentoIdentidad;
 use App\Models\TipoDireccion;
+use App\Models\Direccion;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class usuarioDashboardController extends Controller
@@ -17,11 +22,65 @@ class usuarioDashboardController extends Controller
     }
 
     public function mostrarDashboard(){
-        
         $usuario = Auth::guard('usuario')->user();
-        
-        return view('auth.perfil',compact('usuario'));
+        $documentoIdentidad = $usuario->documentoIdentidad;
+        $tiposDocumento = TipoDocumentoIdentidad::all();
+        return view('auth.perfil', compact('usuario', 'documentoIdentidad', 'tiposDocumento'));        
     } 
+
+    public function update(Request $request)
+    {
+        // Validar los datos de entrada
+        $validated = $request->validate([
+            'username' => 'required|unique:usuario,username,' . Auth::id() . ',idUsuario',
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required',
+            'correo' => 'required|email|unique:usuario,correo,' . Auth::id() . ',idUsuario',
+            'numeroDocumentoIdentidad' => 'required|unique:documentoIdentidad,numeroDocumentoIdentidad,' . Auth::user()->documentoIdentidad->idDocumentoIdentidad . ',idDocumentoIdentidad',
+            'idTipoDocumentoIdentidad' => 'required|exists:tipoDocumentoIdentidad,idTipoDocumentoIdentidad',
+                    'password' => 'nullable|min:8', 
+        ]);
+        $usuario = Auth::guard('usuario')->user();
+
+        $usuario->update([
+            'username' => $validated['username'],
+            'nombre' => $validated['nombre'],
+            'apellido' => $validated['apellido'],
+            'telefono' => $validated['telefono'],
+            'correo' => $validated['correo'],
+        ]);
+
+    if (!empty($validated['password'])) {
+        $usuario->password = bcrypt($validated['password']); // Hashea la contraseña
+        $usuario->save(); // Guarda los cambios
+    }
+
+
+        $usuario->documentoIdentidad->update([
+            'numeroDocumentoIdentidad' => $validated['numeroDocumentoIdentidad'],
+            'idTipoDocumentoIdentidad' => $validated['idTipoDocumentoIdentidad'],
+        ]);
+       return redirect()->route('verPerfil')->with('success', '¡Datos actualizados correctamente!');
+    }
+    
+    public function actualizarDir(Request $request)
+    {
+    $validatedData = $request->validate([
+        'pais' => 'required',
+        'departamento' => 'required',
+        'provincia' => 'required',
+        'idDistrito' => 'required',
+        'direccionExacta' => 'required|string|max:255',
+        'referencia' => 'nullable|string|max:255',
+    ]);
+
+    $direccion = Direccion::findOrFail($request->idDireccion);
+    $direccion->update($validatedData);
+
+    return redirect()->back()->with('success', 'Dirección actualizada correctamente.');
+    }
+
     public function mostrarDirecciones(){
         $paises = Pais::all();
         $tiposDireccion = TipoDireccion::all(); 
@@ -34,15 +93,27 @@ class usuarioDashboardController extends Controller
     }
 
     public function mostrarOrdenCompra(Request $request)
-    {
+{
     $idOrdenCompra = $request->input('idOrdenCompra');
 
-    $ordenCompra = OrdenCompra::with(['direccion', 'productos'])
-        ->where('idOrdenCompra', $idOrdenCompra)
-        ->firstOrFail();
+  
+    $ordenCompra = OrdenCompra::with([
+        'direccion.distrito.provincia.departamento.pais', // Relación encadenada
+        'productos'
+    ])->where('idOrdenCompra', $idOrdenCompra)->firstOrFail();
 
+ 
     $ordenCompra->informacionOrdenCompra = $ordenCompra->informacionOrdenCompra ?? 'No Aplica';
     $ordenCompra->instruccionEntrega = $ordenCompra->instruccionEntrega ?? 'No Aplica';
+
+    $direccion = $ordenCompra->direccion;
+    $nombreDireccion = "{$direccion->distrito->provincia->departamento->pais->nombrePais}/" .
+                       "{$direccion->distrito->provincia->departamento->nombreDepartamento}/" .
+                       "{$direccion->distrito->provincia->nombreProvincia}/" .
+                       "{$direccion->distrito->nombreDistrito}";
+
+    $direccionExacta= $direccion->direccionExacta;
+    $referencia = $direccion->referencia;
 
     $datosOrdenCompra = [
         'idOrdenCompra' => $ordenCompra->idOrdenCompra,
@@ -51,11 +122,15 @@ class usuarioDashboardController extends Controller
         'instruccionEntrega' => $ordenCompra->instruccionEntrega,
         'tipoEntrega' => $ordenCompra->tipoEntrega,
         'metodoPago' => $ordenCompra->metodoPago,
+        'direccionExacta' => $direccionExacta,
+        'referencia' => $referencia, 
+        'direccion' => $nombreDireccion, 
         'estadoOrdenCompra' => $ordenCompra->estadoOrdenCompra,
         'precioTotal' => $ordenCompra->precioTotal,
         'detalles' => []
     ];
 
+   
     foreach ($ordenCompra->productos as $producto) {
         $datosOrdenCompra['detalles'][] = [
             'nombreProducto' => $producto->nombreProducto,
@@ -66,15 +141,27 @@ class usuarioDashboardController extends Controller
     return view('auth.detallePedido', compact('datosOrdenCompra'));
 }
 
+
     public function generarPdf(Request $request){
     $idOrdenCompra = $request->input('idOrdenCompra');
 
-    $ordenCompra = OrdenCompra::with(['direccion', 'productos'])
-        ->where('idOrdenCompra', $idOrdenCompra)
-        ->firstOrFail();
+
+    $ordenCompra = OrdenCompra::with([
+        'direccion.distrito.provincia.departamento.pais', 
+        'productos'
+    ])->where('idOrdenCompra', $idOrdenCompra)->firstOrFail();
 
     $ordenCompra->informacionOrdenCompra = $ordenCompra->informacionOrdenCompra ?? 'No Aplica';
     $ordenCompra->instruccionEntrega = $ordenCompra->instruccionEntrega ?? 'No Aplica';
+
+    $direccion = $ordenCompra->direccion;
+    $nombreDireccion = "{$direccion->distrito->provincia->departamento->pais->nombrePais}/" .
+                       "{$direccion->distrito->provincia->departamento->nombreDepartamento}/" .
+                       "{$direccion->distrito->provincia->nombreProvincia}/" .
+                       "{$direccion->distrito->nombreDistrito}";
+
+    $direccionExacta= $direccion->direccionExacta;
+    $referencia = $direccion->referencia;
 
     $datosOrdenCompra = [
         'idOrdenCompra' => $ordenCompra->idOrdenCompra,
@@ -83,17 +170,23 @@ class usuarioDashboardController extends Controller
         'instruccionEntrega' => $ordenCompra->instruccionEntrega,
         'tipoEntrega' => $ordenCompra->tipoEntrega,
         'metodoPago' => $ordenCompra->metodoPago,
+        'direccionExacta' => $direccionExacta,
+        'referencia' => $referencia, 
+        'direccion' => $nombreDireccion, 
         'estadoOrdenCompra' => $ordenCompra->estadoOrdenCompra,
         'precioTotal' => $ordenCompra->precioTotal,
         'detalles' => []
     ];
 
+    
     foreach ($ordenCompra->productos as $producto) {
         $datosOrdenCompra['detalles'][] = [
             'nombreProducto' => $producto->nombreProducto,
             'cantidad' => $producto->pivot->cantidad,
         ];
     }
+
+ 
     
     
         $pagoElegido= $ordenCompra->metodoPago;

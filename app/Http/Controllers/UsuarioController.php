@@ -11,6 +11,7 @@ use App\Models\DocumentoIdentidad;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pais;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -71,7 +72,10 @@ class UsuarioController extends Controller
             ]);
             $usuario->roles()->attach(1);  
             DB::commit(); 
-            return redirect()->back()->with('success', 'Usuario registrado correctamente.');
+        
+        Auth::login($usuario);
+
+        return redirect()->route('home')->with('success', '¡Bienvenido ' . $usuario->nombre . '!');
         }
          catch (\Exception $e) {
             DB::rollBack(); 

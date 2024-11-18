@@ -13,14 +13,6 @@
     }
 }
 
-.productCardImage {
-    max-width:300px;
-    max-height:300px;
-    display: block;
-    margin: 0px auto;
-    border-radius:15px;
-}
-
 .nombreItem {
     text-align: center;
 }
@@ -88,9 +80,15 @@
 @if ($productos->isNotEmpty())
     @foreach ($productos as $producto)
         <div class="productCardMain">
+            @if($producto->descuento > 0)
             <div class="productCardDesc">
                 <p>{{ intval($producto->descuento) }}%</p>
             </div>
+            @else   
+            <div style="background:white;color:white" class="productCardDesc">
+                <p>.</p>
+            </div>
+            @endif
             
             @php
                 $precioActual = $producto->precioUnitario - 
@@ -129,11 +127,13 @@
                             S/.{{ number_format($precioActual, 2) }}
                         </p>
                     </strong>
+                    @if($producto->descuento > 0)
                     <p 
                         class="old-price"
                     >
                         S/.{{ number_format($precioAntes, 2) }}
                     </p>
+                @endif
                 </figcaption>
                 <div 
                     class="btnItems"

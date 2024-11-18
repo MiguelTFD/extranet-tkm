@@ -233,11 +233,26 @@ select {
              <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" placeholder="Ingresa un nombre de usuario" required>
          </div>
 
-         <div class="form-group">
-             <label for="password">Password</label>
-             <input type="password" name="password" class="form-control" id="password" placeholder="Ingresa una contraseña"  required>
-         </div>
+<div class="form-group">
+  <label for="password">Contraseña</label>
+  <div class="input-group">
+    <input type="password" name="password" class="form-control" id="password" placeholder="Ingresa una contraseña" required>
+    <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('password')">
+      <i class="fas fa-eye" id="togglePasswordIcon"></i>
+    </button>
+  </div>
+</div>
 
+<div class="form-group">
+  <label for="confirm-password">Confirmar Contraseña</label>
+  <div class="input-group">
+    <input type="password" name="confirm-password" class="form-control" id="confirm-password" placeholder="Confirma tu contraseña" required>
+    <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('confirm-password')">
+      <i class="fas fa-eye" id="toggleConfirmPasswordIcon"></i>
+    </button>
+  </div>
+  <small style="color:white" id="password-match-message">.</small>
+</div>
 
       </div>
 
@@ -311,5 +326,47 @@ select {
 
         });
     </script>
+
+<script>
+const passwordField = document.getElementById('password');
+const confirmPasswordField = document.getElementById('confirm-password');
+const passwordMatchMessage = document.getElementById('password-match-message');
+
+
+ // Mostrar/ocultar contraseña
+  function togglePassword(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    const icon = passwordField.nextElementSibling.firstElementChild;
+    
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = "password";
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  }
+
+// Función para validar las contraseñas
+function validatePasswords() {
+  if (confirmPasswordField.value === passwordField.value && passwordField.value !== '') {
+    passwordMatchMessage.textContent = '✓ Las contraseñas coinciden.';
+    passwordMatchMessage.style.color = 'green';
+  } else if (confirmPasswordField.value !== passwordField.value) {
+    passwordMatchMessage.textContent = '❌ Las contraseñas no coinciden.';
+    passwordMatchMessage.style.color = 'red';
+  } else {
+    passwordMatchMessage.textContent = '';
+  }
+}
+
+// Escuchar cambios en ambos campos
+passwordField.addEventListener('input', validatePasswords);
+confirmPasswordField.addEventListener('input', validatePasswords);
+ 
+</script>
+
 
 @endsection
