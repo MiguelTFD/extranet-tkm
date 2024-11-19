@@ -19,6 +19,7 @@
     }
 }
 
+
 #iniciarSesionBtn{
     display:none !important;
 }
@@ -284,7 +285,7 @@
     display:none !important;
 }
 
-#orderPopUp {
+    #orderPopUp {
         position: fixed;
         width: 100%;
         backdrop-filter: blur(5px);
@@ -295,11 +296,97 @@
         justify-content: center;
         align-items: center;
     }
-.abc{
-    height: fit-content;
-    margin: 3% auto;
-}
-    </style>
+    .abc{
+        height: fit-content;
+        margin: 3% auto;
+    }
+#editPopUp{
+    position: fixed;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    height: 100%;
+    top: 0;
+    z-index: 100000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    }
+
+</style>
+
+
+<div id="editPopUp"  style="display: none;">
+    <div class="popUpModal">
+    <div class="modal-content p-4">
+        <h2 class="text-center mb-4">Editar dirección</h2>
+        <form id="editForm" method="POST" action="{{ route('direccionActualizar') }}">
+            @csrf
+            <input type="hidden" name="idDireccion" id="editIdDireccion">
+            <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="pais" 
+                            class="form-label"
+                        >
+                            País
+                        </label>
+                        <select id="pais" name="pais" class="form-select">
+                            <option value="" selected>Selecciona tu País</option>
+                            @foreach($paises as $pais)
+                                <option value="{{ $pais->idPais }}">
+                                    {{ $pais->nombrePais }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select id="departamento" name="departamento" class="form-select">
+                            <option selected disabled>Selecciona tu Departamento</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="provincia" class="form-label">Provincia</label>
+                        <select id="provincia" name="provincia" class="form-select">
+                            <option value="">Selecciona tu Provincia</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="idDistrito" class="form-label">Distrito</label>
+                        <select id="idDistrito" name="idDistrito" class="form-select">
+                            <option value="">Selecciona tu Distrito</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="idTipoDireccion" class="form-label">Tipo de Dirección</label>
+                        <select name="idTipoDireccion" class="form-select" id="idTipoDireccion" required>
+                            <option value="">Seleccione el tipo de dirección</option>
+                            @foreach($tiposDireccion as $tipoDireccion)
+                                <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="direccionExacta" class="form-label">Dirección Exacta</label>
+                        <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="referencia" class="form-label">Referencia</label>
+                    <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
+                </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button style="padding:1em;" type="button" id="btn-cancelar-dir" class="btn btn-secondary">Cancelar</button>
+                <button style="padding:1em;" type="submit" class="btn btn-primary text-white">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<!--a-->
 
        <div id="orderPopUp">
                 <div class="popUpModal">
@@ -360,7 +447,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="direccionExacta" class="form-label">Dirección Exacta</label>
-                                        <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
+                                        <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" 
+                                        value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -486,6 +574,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+
+
+
+
 <script>
 function viewPopUpNewAddress() {
     let popUp = document.getElementById('orderPopUp');
@@ -514,7 +606,10 @@ function viewPopUpNewAddress() {
                                 <p>${direccion.direccionExacta}</p>
                                 <p>${direccion.referencia}</p>
                             </div>
-                                                    </div>`;
+                            <button class="btn btn-primary btn-edit" style="padding:1em;" data-id="${direccion.idDireccion}">Editar</button>
+                        </div>
+                        
+                        `;
                 });
             }
             htmlContent += `
@@ -527,6 +622,36 @@ function viewPopUpNewAddress() {
                 </div>
                 `;
             formaEntregaContainer.innerHTML = htmlContent;
+            
+            popUpLayout = document.getElementById('editPopUp');
+
+            btnCancelar = document.getElementById('btn-cancelar-dir');
+            btnCancelar.addEventListener('click',()=>{
+                popUpLayout.style.display = 'none';        
+            })
+
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', event => {
+                    const idDireccion = event.target.dataset.id;
+
+                    fetch(`/api/direccion/${idDireccion}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('editIdDireccion').value = data.idDireccion;
+                            document.getElementById('pais').value = data.pais;
+                            document.getElementById('departamento').value = data.departamento;
+                            document.getElementById('provincia').value = data.provincia;
+                            document.getElementById('idDistrito').value = data.distrito;
+                            document.getElementById('idTipoDireccion').value = data.idTipoDireccion;
+                            document.getElementById('direccionExacta').value = data.direccionExacta;
+                            document.getElementById('referencia').value = data.referencia;
+
+                            // Show the edit popup
+                            document.getElementById('editPopUp').style.display = 'flex';
+                        })
+                        .catch(error => console.error('Error cargando dirección:', error));
+                });
+            });
             document.getElementById('addNewAddressPopUp')
                 .addEventListener('click', viewPopUpNewAddress); 
             
@@ -538,5 +663,8 @@ function viewPopUpNewAddress() {
 document.addEventListener("DOMContentLoaded", function() {
     mostrarDirecciones();
 });
+
+
 </script>
+
 @endsection

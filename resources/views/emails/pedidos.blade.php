@@ -1,6 +1,42 @@
-@extends('layouts.base')
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+    <link rel="shortcut icon" type="x-icon" href="{{asset('images/icon/Logo.png')}}" >
+    <title>The King Moss</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta content="" name="keywords">
+	<meta content="" name="description">
 
-@section('content')
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Validator -->
+
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+   
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+
+
+
 <style>
 .qr-modal {
     display: none; /* Inicialmente oculto */
@@ -84,46 +120,9 @@ thead tr{
         display:none !important;
     }
 </style>
-<div id="qrModal" class="qr-modal" style="display: none;">
-    <div class="qr-modal-content">
-        <span class="close-btn" id="closeModal">&times;</span>
-        <img id="qrImage" src="" alt="QR" />
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        @include('components.opcionesUsuario')
-        <div class="col-md-9 content">
-<div class="alert alert-info d-flex align-items-center" role="alert">
-                                <i class="bi bi-info-circle-fill me-2"></i>
-                                <p> Envia la <b> Constancia de tu pago </b>
-                                    a nuestro <a
-                                        href="https://api.whatsapp.com/send?phone=51983929015" target="_blank">Whatsapp</a> o a
-                                    nuestro correo electronico <a 
-                                        href="mailto:henry.management@thekingmoss.com" target="_blank" > 
-                                        henry.management@thekingmoss.com </a> 
-                                </p>
-                              </div>
-    <div>
-        @php
-            $carnivora = 0;
-        @endphp
-        @foreach($datosOrdenCompra['detalles'] as $detalle)
-            @if($detalle['idCategoria']==1)
-                @php
-                $carnivora += 1; 
-            @endphp
-            @endif
-        @endforeach
-        @if($carnivora >0)
-        <p>Mira este manual para los cuidados de tu planta carnivora: <a
-                href="https://drive.google.com/file/d/1Vq6C3SlNoL7OddajESp5w6FgIY44BREW/view?usp=sharing"
-                target="_blank">Click
-                aqui</a> </p>
-        @endif
 
-    </div>
-
+<h1> Nueva pedido: </h1>
+    
  <div class="container my-5">
         <div class="card shadow-sm">
             <div class="card-body">
@@ -132,7 +131,8 @@ thead tr{
                     <div class="col-6"><strong>N° Orden Compra</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['idOrdenCompra'] }}
+
+                        {{ $data['idOrdenCompra'] }}
                         </p>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ thead tr{
                     <div class="col-6"><strong>Total a pagar</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        S/{{ $datosOrdenCompra['precioTotal'] }}
+                        S/{{ $data['precioTotal'] }}
                         <p>
                     </div>
                 </div>
@@ -148,7 +148,39 @@ thead tr{
                     <div class="col-6"><strong>Fecha</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['fechaOrdenCompra'] }}
+                        {{ $data['fechaOrdenCompra'] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Nombre del cliente</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $data['nombreCliente'] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Telefono del cliente</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $data['telefono'] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Correo del cliente</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $data['correo'] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6"><strong>Doc Ide. del cliente</strong></div>
+                    <div class="col-6 text-end">
+                        <p style="color:#2D2D2E;font-weight:bold"> 
+                        {{ $data['DocIdentidad'] }}|{{$data['numDocIdentidad']}}
                         </p>
                     </div>
                 </div>
@@ -156,7 +188,7 @@ thead tr{
                     <div class="col-6"><strong>Información de la compra</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['informacionOrdenCompra'] }}
+                        {{ $data['informacionOrdenCompra'] }}
                         </p>
                     </div>
                 </div>
@@ -164,7 +196,7 @@ thead tr{
                     <div class="col-6"><strong>Instrucción de entrega</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['instruccionEntrega'] }}
+                        {{ $data['instruccionEntrega'] }}
                         </p>
                     </div>
                 </div>
@@ -172,7 +204,7 @@ thead tr{
                     <div class="col-6"><strong>Tipo de entrega</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['tipoEntrega'] }}
+                        {{ $data['tipoEntrega'] }}
                         </p>
                     </div>
                 </div>
@@ -180,7 +212,7 @@ thead tr{
                     <div class="col-6"><strong>Localidad</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['direccion']}}
+                        {{ $data['direccion']}}
                         </p>
                     </div>
                 </div>
@@ -188,7 +220,7 @@ thead tr{
                     <div class="col-6"><strong>Direccion</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['direccionExacta']}}
+                        {{ $data['direccionExacta']}}
                         </p>
                     </div>
                 </div>
@@ -196,7 +228,7 @@ thead tr{
                     <div class="col-6"><strong>Referencia</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['referencia']}}
+                        {{ $data['referencia']}}
                         </p>
                     </div>
                 </div>
@@ -205,21 +237,15 @@ thead tr{
                     <div class="col-6"><strong>Método de pago</strong></div>
                     <div class="col-6 text-end">
                         <p id="pagoElegido">
-                            {{$datosOrdenCompra['metodoPago']}}
+                            {{$data['metodoPago']}}
                         </p>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-6"><strong>Detalles para el pago</strong></div>
-                    <div id="opcionDePago" class="col-6 text-end">
-                     
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Estado</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['estadoOrdenCompra'] }}
+                        {{ $data['estadoOrdenCompra'] }}
                         </p>
                     </div>
                 </div>
@@ -232,37 +258,36 @@ thead tr{
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($datosOrdenCompra['detalles'] as $detalle)
+                        @foreach($data['detalles'] as $dt)
                             <tr>
                                 <td>
-                                    {{ $detalle['nombreProducto'] }}
+                                    {{ $dt['nombreProducto'] }}
                                 </td>
                                 <td 
                                     class="text-end"
                                 >
-                                    {{ $detalle['cantidad'] }}
+                                    {{ $dt['cantidad'] }}
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-                <div class="text-center mt-4">
-                    <form action="{{ route('generarPdf') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="idOrdenCompra" 
-                            value="{{ $datosOrdenCompra['idOrdenCompra'] }}">
-                            <button style="margin:0 auto"
-                                class="btn btn-primary order-details-btn" type="submit">Imprimir
-                            pedido</button>
-                        </form>
-                </div>
-            </div>
-        </div>
-    </div>
-        <a href="{{ url()->previous() }}">Volver</a>
-        </div>
-    </div>
-</div>
-<script src="{{asset('js/showPayOption.js')}}"></script>
-@endsection
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+    <script src="{{asset('lib/wow/wow.min.js')}}"></script>
+    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('lib/counterup/counterup.min.js')}}"></script>
+    <script src="{{asset('lib/parallax/parallax.min.js')}}"></script>
+    <script src="{{asset('lib/lightbox/js/lightbox.min.js')}}"></script>
+    <script src="{{asset('lib/isotope/isotope.pkgd.min.js')}}"></script>  
+    <script src="{{asset('js/main.js')}}"></script> 
+
+
+</body>
+</html>

@@ -100,4 +100,37 @@ class UbicacionController extends Controller
         return response()->json($direccionesConNombres);
     }
 
+public function getDireccion($id) {
+    $direccion = Direccion::with(['distrito', 'distrito.provincia', 'distrito.provincia.departamento', 'distrito.provincia.departamento.pais'])
+        ->findOrFail($id);
+
+    return response()->json([
+        'idDireccion' => $direccion->idDireccion,
+        'direccionExacta' => $direccion->direccionExacta,
+        'referencia' => $direccion->referencia,
+        'distrito' => $direccion->distrito->idDistrito,
+        'provincia' => $direccion->distrito->provincia->idProvincia,
+        'departamento' => $direccion->distrito->provincia->departamento->idDepartamento,
+        'pais' => $direccion->distrito->provincia->departamento->pais->idPais,
+        'idTipoDireccion' => $direccion->idTipoDireccion,
+    ]);
+}
+public function updateDirection(Request $request) {
+    $validated = $request->validate([
+        'idDireccion' => 'required|exists:direccion,idDireccion',
+        'direccionExacta' => 'required',
+        'referencia' => 'required',
+        'idDistrito' => 'required',
+        'idTipoDireccion' => 'required',
+    ]);
+
+    try {
+        $direccion = Direccion::findOrFail($validated['idDireccion']);
+        $direccion->update($validated);
+        return redirect()->back()->with('success', 'Dirección actualizada correctamente.');
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => 'Error al actualizar la dirección: ' . $e->getMessage()]);
+    }
+}
+
 }

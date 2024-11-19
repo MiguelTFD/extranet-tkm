@@ -79,3 +79,8 @@ Route::post('/mostrar-orden-compra/pdf',[usuarioDashboardController::class,'gene
 
 Route::put('/usuario/actualizar', [usuarioDashboardController::class, 'update'])->name('updateUsu');
 Route::post('/verDirecciones/actualizar', [usuarioDashboardController::class, 'actualizarDir'])->name('direccionActualizar');
+
+
+Route::get('/api/direccion/{id}', [UbicacionController::class, 'getDireccion']);
+Route::post('/direccion-actualizar', [UbicacionController::class, 'updateDirection'])->name('direccionActualizar');
+

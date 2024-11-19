@@ -64,33 +64,20 @@ class usuarioDashboardController extends Controller
        return redirect()->route('verPerfil')->with('success', '¡Datos actualizados correctamente!');
     }
     
-    public function actualizarDir(Request $request)
-    {
-    $validatedData = $request->validate([
-        'pais' => 'required',
-        'departamento' => 'required',
-        'provincia' => 'required',
-        'idDistrito' => 'required',
-        'direccionExacta' => 'required|string|max:255',
-        'referencia' => 'nullable|string|max:255',
-    ]);
-
-    $direccion = Direccion::findOrFail($request->idDireccion);
-    $direccion->update($validatedData);
-
-    return redirect()->back()->with('success', 'Dirección actualizada correctamente.');
-    }
 
     public function mostrarDirecciones(){
         $paises = Pais::all();
         $tiposDireccion = TipoDireccion::all(); 
         return view('auth.direcciones',compact('paises','tiposDireccion'));
     }
+
     public function mostrarPedidos(){
-        $usuario = Auth::guard('usuario')->user();
-        $pedidos = $usuario->ordenes()->get();
-        return view('auth.pedidos',compact('pedidos'));
-    }
+    $usuario = Auth::guard('usuario')->user();
+    $pedidos = $usuario->ordenes()->orderBy('idOrdenCompra', 'desc')->get();
+    return view('auth.pedidos', compact('pedidos'));
+}
+
+
 
     public function mostrarOrdenCompra(Request $request)
 {
@@ -134,6 +121,7 @@ class usuarioDashboardController extends Controller
     foreach ($ordenCompra->productos as $producto) {
         $datosOrdenCompra['detalles'][] = [
             'nombreProducto' => $producto->nombreProducto,
+            'idCategoria' => $producto->idCategoria,
             'cantidad' => $producto->pivot->cantidad,
         ];
     }
