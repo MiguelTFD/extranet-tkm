@@ -223,41 +223,42 @@
                         {{--Aumentar cantidad--}}
                         <div class="product-quantity">
                             <div class="qty-label">
-                                <form 
-                                    action="{{route('increaseQuantity')}}"
-                                    method="post"
+                                <form
+                                        action="{{route('decreaseQuantity')}}"
+                                        method="post"
                                 >
                                     @csrf
-                                    <input 
-                                        type="hidden"
-                                        name="rowId"
-                                        value="{{$item->rowId}}"
+                                    <input
+                                            type="hidden"
+                                            name="rowId"
+                                            value="{{$item->rowId}}"
                                     >
                                     <input
-                                        class="btn"
-                                        type="submit"
-                                        name="btn"
-                                        value="+"
+                                            class="btn"
+                                            type="submit"
+                                            name="btn"
+                                            value="-"
                                     >
                                 </form>
-                                <p class="form-control text-center my-1">{{$item->qty}}</p>        
-                                 <form
-                                    action="{{route('decreaseQuantity')}}"
-                                    method="post"
+
+                                <p class="form-control text-center my-1">{{$item->qty}}</p>
+                                <form
+                                        action="{{route('increaseQuantity')}}"
+                                        method="post"
                                 >
                                     @csrf
                                     <input
-                                        type="hidden"
-                                        name="rowId"
-                                        value="{{$item->rowId}}"
+                                            type="hidden"
+                                            name="rowId"
+                                            value="{{$item->rowId}}"
                                     >
                                     <input
-                                        class="btn"
-                                        type="submit"
-                                        name="btn"
-                                        value="-"
+                                            class="btn"
+                                            type="submit"
+                                            name="btn"
+                                            value="+"
                                     >
-                                </form>       
+                                </form>
                             </div>
                         </div>
                         <img 

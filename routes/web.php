@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
@@ -15,30 +15,33 @@ use App\Http\Controllers\RegistrarCompraController;
 use App\Http\Controllers\customerSupport;
 use App\Http\Controllers\usuarioDashboardController;
 
+//=====================Page navigations=====================
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [NavigationController::class, 'showAboutPage'])->name('about');
+Route::get('/passwordRestore', [NavigationController::class, 'showPasswordRestorePage'])->name('passwordRestore');
+Route::get('/customerRegistration', [NavigationController::class, 'showCustomerRegistrationPage'])->name('customerRegistration');
+Route::get('/orderRequest',[RegistrarCompraController::class, 'showOrderRequestPage'])->name('orderRequest');
 
-//Rutas para soporte al cliente
-Route::get('/terminosycondiciones',[customerSupport::class, 'verTC'])->name('terminosycondiciones');
-Route::get('/politicayprivacidad',[customerSupport::class, 'verPP'])->name('politicayprivacidad');
-Route::get('/seguridadyprivacidad',[customerSupport::class, 'verSP'])->name('seguridadyprivacidad');
 
+Route::get('/termsandConditions',[NavigationController::class, 'showTermsandConditionsPage'])->name('termsandConditions');
+Route::get('/privacyPolicy',[NavigationController::class, 'showPrivacyPolicyPage'])->name('privacyPolicy');
+Route::get('/securityandPrivacy',[NavigationController::class, 'showSecurityandPrivacyPage'])->name('securityandPrivacy');
+
+//-----------------------------------------------------------
 
 
 
 // Ruta para la página de contacto
-Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
 Route::post('/productos', [ProductoController::class, 'filtrarPorCategoria'])->name('filtrarProductos');
 Route::get('/productos/{id}', [ProductoController::class, 'show'])->name('productosDetalle');
 
-Route::get('/registrarCompra',[RegistrarCompraController::class, 'index'])->name('registrarCompra');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact',[ContactController::class, 'store'])->name('enviarContacto');
 
-Route::get('/registrarUsuario', [RegistrarUsuarioController::class, 'index'])->name('registrarUsuario');
 
 Route::get('/recuperarPassword', [RecuperarPasswordController::class, 'index'])->name('recuperarPassword');
 
@@ -63,7 +66,7 @@ Route::get('/cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('remove');
 Route::post('/cart/increaseQuantity', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
 Route::post('/cart/decreaseQuantity', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
-
+Route::get('/cart/count', [CartController::class, 'countCart'])->name('countCart');
 
 Route::get('/api/direcciones', [UbicacionController::class, 'obtenerDirecciones']);
 Route::post('/crearCompra', [RegistrarCompraController::class, 'crearOrdenCompra'])->name('crearCompra');

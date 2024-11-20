@@ -101,7 +101,10 @@
                 $producto->imagenes->first()->urlImagenProducto :
                 asset('images/bf5k.png'); // Imagen por defecto si no hay
             @endphp
-            
+                <a
+                        href="{{ route('productosDetalle',
+                                $producto->idProducto) }}"
+                >
             <figure>
                 <img 
                     class="productCardImage" 
@@ -117,6 +120,7 @@
                         {{$producto->nombreProducto }}
                     </p>
                 </figcaption>
+                </a>
                 <figcaption 
                     class="preciosItems"
                 >
@@ -138,39 +142,22 @@
                 <div 
                     class="btnItems"
                 >
-                    <div 
-                        class="cart-add"
-                    >
-                        <form  
-                            action="{{route('add')}}" 
-                            method="post"
-                        >
-                        @csrf
-                            <input 
-                                type="hidden" 
-                                name="id" 
-                                value="{{$producto->idProducto}}"
+                    <div class="cart-add">
+                        <form id="addToCartForm" action="{{ route('add') }}" method="POST">
+                            @csrf
+                            <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{$producto->idProducto}}"
                             >
-                            <button 
-                                type="submit" 
-                                class="addCar"
+                            <button
+                                    type="button"
+                                    class="addCar"
+                                    onclick="addToCart(this)"
                             >
                                 Agregar al carrito
                             </button>
                         </form>
-                    </div>
-                     <div 
-                        class="cart-add"
-                    >
-                        <button class="viewMore">
-                            <a 
-                                href="{{ route('productosDetalle', 
-                                $producto->idProducto) }}" 
-                                class="viewMore"
-                            >
-                                Ver Más
-                            </a>
-                        </button>
                     </div>
                 </div>
             </figure>
@@ -180,3 +167,47 @@
     <p>No hay productos disponibles.</p>
 @endif
 
+<script>
+    function addToCart(button) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+        // Obtener el formulario relacionado
+        const form = button.closest('form');
+        const formData = new FormData(form);
+
+        // Enviar la solicitud AJAX
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json', // Asegúrate de solicitar JSON
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Esto convierte la respuesta JSON automáticamente
+            })
+            .then(data => {
+                if (data.success) {
+                    // Mostrar mensaje de éxito
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'alert alert-success';
+                    messageDiv.textContent = data.message;
+                    document.body.appendChild(messageDiv);
+
+                    // Ocultar el mensaje después de 3 segundos
+                    setTimeout(() => {
+                        messageDiv.remove();
+                    }, 3000);
+                } else {
+                    alert('Hubo un error al agregar el producto.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+
+</script>

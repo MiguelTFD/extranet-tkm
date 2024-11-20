@@ -7,8 +7,9 @@
     <title>Contacto Enviado</title>
 </head>
 <body>
-    <h1> Nueva Mensaje de Contacto: </h1>
+    <h1> Nueva Mensaje de Contacto:{{$data['subject']}} </h1>
     <p><b>Nombre: </b></p><p>{{$data['name']}}</p>
+    <p><b>Telefono: </b></p><p>{{$data['telefono']}}</p>
     <p><b>Correo: </b></p><p>{{$data['email']}}</p>
     <p><b>Mensaje: </b></p>
      <p>

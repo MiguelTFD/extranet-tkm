@@ -52,8 +52,8 @@ class usuarioDashboardController extends Controller
         ]);
 
     if (!empty($validated['password'])) {
-        $usuario->password = bcrypt($validated['password']); // Hashea la contraseña
-        $usuario->save(); // Guarda los cambios
+        $usuario->password = bcrypt($validated['password']);
+        $usuario->save();
     }
 
 

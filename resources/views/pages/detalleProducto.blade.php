@@ -251,19 +251,17 @@ width: 100px !important;
                 <button class="btn " type="button" onclick="increment()">+</button>
                 </div>
         </div>
-        <form  
-            action="{{route('add')}}" 
-            method="post"
-        >
-        @csrf
-            <input 
-                type="hidden" 
-                name="id" 
-                value="{{$producto->idProducto}}"
+        <form id="addToCartForm" action="{{ route('add') }}" method="POST">
+            @csrf
+            <input
+                    type="hidden"
+                    name="id"
+                    value="{{$producto->idProducto}}"
             >
-            <button 
-                type="submit" 
-                class="add-to-cart-btn"
+            <button
+                    type="button"
+                    class="addCar"
+                    onclick="addToCart(this)"
             >
                 Agregar al carrito
             </button>
@@ -299,7 +297,8 @@ width: 100px !important;
                                 ? $relacionado->imagenes->first()->urlImagenProducto 
                                 : asset('images/bf5k.png'); 
                         @endphp
-                        
+
+                            <a href="{{ route('productosDetalle', $relacionado->idProducto) }}" >
                         <figure>
                             <img 
                                 class="productCardImage" 
@@ -311,6 +310,7 @@ width: 100px !important;
                                     {{ $relacionado->nombreProducto }}
                                 </p>
                             </figcaption>
+                            </a>
                             <figcaption class="preciosItems">
                                 <strong>
                                     <p class="offert-price">
@@ -331,13 +331,7 @@ width: 100px !important;
                                         <button type="submit" class="addCar">Agregar al carrito</button>
                                     </form>
                                 </div>
-                                <div class="cart-add">
-                                    <button class="viewMore">
-                                        <a href="{{ route('productosDetalle', $relacionado->idProducto) }}" class="viewMore">
-                                            Ver Más
-                                        </a>
-                                    </button>
-                                </div>
+
                             </div>
                         </figure>
                     </div>
@@ -367,5 +361,49 @@ function decrement() {
 }
 </script>
 
+<script>
+    function addToCart(button) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+        // Obtener el formulario relacionado
+        const form = button.closest('form');
+        const formData = new FormData(form);
+
+        // Enviar la solicitud AJAX
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json', // Asegúrate de solicitar JSON
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Esto convierte la respuesta JSON automáticamente
+            })
+            .then(data => {
+                if (data.success) {
+                    // Mostrar mensaje de éxito
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'alert alert-success';
+                    messageDiv.textContent = data.message;
+                    document.body.appendChild(messageDiv);
+
+                    // Ocultar el mensaje después de 3 segundos
+                    setTimeout(() => {
+                        messageDiv.remove();
+                    }, 3000);
+                } else {
+                    alert('Hubo un error al agregar el producto.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+
+</script>
 
 @endsection

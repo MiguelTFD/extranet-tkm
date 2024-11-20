@@ -15,8 +15,6 @@
     @endcomponent
     @component('components.bestProducts')
     @endcomponent
-    @component('components.services')
-    @endcomponent
     @component('components.paymentsMethods')
     @endcomponent
 

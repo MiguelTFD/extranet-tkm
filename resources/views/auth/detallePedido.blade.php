@@ -78,30 +78,38 @@ thead tr{
 .card{
     border:unset;
 }
+@media (max-width: 500px) {
+    .rdp{
+        width: 100%;
+        text-align: unset !important;
+    }
+}
 
 
     .wsp-1-2 , #btn-carrito{
         display:none !important;
     }
 </style>
-<div id="qrModal" class="qr-modal" style="display: none;">
-    <div class="qr-modal-content">
-        <span class="close-btn" id="closeModal">&times;</span>
-        <img id="qrImage" src="" alt="QR" />
-    </div>
-</div>
+
 <div class="container-fluid">
     <div class="row">
         @include('components.opcionesUsuario')
         <div class="col-md-9 content">
-<div class="alert alert-info d-flex align-items-center" role="alert">
+            <div class="alert alert-warning align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <p> Recuerda enviar tu <b>Número de pedido</b> o tu <b> nombre completo</b> al momento de hacer el pago en <b>Yape</b> o por <b>BCP</b>
+
+                </p>
+            </div>
+<div class="alert alert-info align-items-center" role="alert">
                                 <i class="bi bi-info-circle-fill me-2"></i>
                                 <p> Envia la <b> Constancia de tu pago </b>
                                     a nuestro <a
                                         href="https://api.whatsapp.com/send?phone=51983929015" target="_blank">Whatsapp</a> o a
                                     nuestro correo electronico <a 
-                                        href="mailto:henry.management@thekingmoss.com" target="_blank" > 
-                                        henry.management@thekingmoss.com </a> 
+                                        href="mailto:henry.management@thekingmoss.com" target="_blank" >
+                                       henry.management@thekingmoss.com
+                                       </a>
                                 </p>
                               </div>
     <div>
@@ -116,10 +124,16 @@ thead tr{
             @endif
         @endforeach
         @if($carnivora >0)
-        <p>Mira este manual para los cuidados de tu planta carnivora: <a
+            <div style="flex-direction: column" class="d-flex align-items-center justify-content-center">
+        <h3>Manual para el cuidado de plantas carnivoras: </h3>
+            <a style="max-width: 300px;"
                 href="https://drive.google.com/file/d/1Vq6C3SlNoL7OddajESp5w6FgIY44BREW/view?usp=sharing"
-                target="_blank">Click
-                aqui</a> </p>
+                target="_blank">
+                <img style="width: 100%" src="{{ asset('images/manualCarnivoras.png') }}"
+                >
+            </a>
+            </div>
+            <hr>
         @endif
 
     </div>
@@ -130,7 +144,7 @@ thead tr{
                 <h5 class="card-title text-center mb-4">Detalles de la Orden</h5>
                 <div class="row mb-2">
                     <div class="col-6"><strong>N° Orden Compra</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['idOrdenCompra'] }}
                         </p>
@@ -138,7 +152,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Total a pagar</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         S/{{ $datosOrdenCompra['precioTotal'] }}
                         <p>
@@ -146,7 +160,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Fecha</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['fechaOrdenCompra'] }}
                         </p>
@@ -154,7 +168,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Información de la compra</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['informacionOrdenCompra'] }}
                         </p>
@@ -162,7 +176,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Instrucción de entrega</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['instruccionEntrega'] }}
                         </p>
@@ -170,7 +184,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Tipo de entrega</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['tipoEntrega'] }}
                         </p>
@@ -178,7 +192,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Localidad</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['direccion']}}
                         </p>
@@ -186,7 +200,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Direccion</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['direccionExacta']}}
                         </p>
@@ -194,7 +208,7 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Referencia</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['referencia']}}
                         </p>
@@ -203,7 +217,7 @@ thead tr{
 
                 <div class="row mb-2">
                     <div class="col-6"><strong>Método de pago</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p id="pagoElegido">
                             {{$datosOrdenCompra['metodoPago']}}
                         </p>
@@ -211,13 +225,13 @@ thead tr{
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Detalles para el pago</strong></div>
-                    <div id="opcionDePago" class="col-6 text-end">
-                     
+                    <div id="opcionDePago" class=" col-6 text-end rdp">
+
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col-6"><strong>Estado</strong></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $datosOrdenCompra['estadoOrdenCompra'] }}
                         </p>

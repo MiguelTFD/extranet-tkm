@@ -2,7 +2,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
+    <script>
+        function getCartCount() {
+            fetch("{{ route('countCart') }}")  // Llama a la ruta de countCart
+                .then(response => response.json())  // Convierte la respuesta en JSON
+                .then(data => {
+                    if (data.cantidadCarro !== undefined) {
+                        // Actualiza el contador del carrito en el elemento con id "cart-count-number"
+                        document.getElementById("cart-count-number").textContent = data.cantidadCarro;
+                    }
+                })
+                .catch(error => console.error('Error al obtener el carrito:', error));
+        }
+
+        // Llama a la función cada 500 milisegundos para obtener la cantidad actualizada del carrito
+        setInterval(getCartCount, 100);
+    </script>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="x-icon" href="{{asset('images/icon/Logo.png')}}" >
     <title>The King Moss</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -33,6 +50,7 @@
 
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 <body>
     @include('layouts.topbar')
@@ -57,7 +75,9 @@
     <script src="{{asset('lib/parallax/parallax.min.js')}}"></script>
     <script src="{{asset('lib/lightbox/js/lightbox.min.js')}}"></script>
     <script src="{{asset('lib/isotope/isotope.pkgd.min.js')}}"></script>  
-    <script src="{{asset('js/main.js')}}"></script> 
+    <script src="{{asset('js/main.js')}}"></script>
+
+
 </body>
 </html>
 

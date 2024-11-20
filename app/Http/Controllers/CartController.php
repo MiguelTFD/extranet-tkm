@@ -11,6 +11,7 @@ class CartController extends Controller
 
 public function add(Request $request)
 {
+
     $producto = Producto::with(['categoria', 'imagenes'])->find($request->id);
     if (empty($producto)) {
         return redirect('/')->with('error', 'Producto no encontrado.');
@@ -27,10 +28,20 @@ public function add(Request $request)
             'descripcion' => $producto->descripcion
         ]
     );
-    return redirect()->back()->with(
-        "success", 
-        "El producto " . $producto->nombreProducto . 
-        " fue agregado a su carrito");
+    $this->countCart();
+    return response()->json([
+        'success' => true,
+        'message' => "El producto " . $producto->nombreProducto . " fue agregado a su carrito"
+    ]);
+
+
+}
+
+    public function countCart(){
+       $totalCarro =  Cart::count();
+        return response()->json([
+            'cantidadCarro' => $totalCarro
+        ]);
     }
 
     public function checkout(){

@@ -45,6 +45,22 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="telefono"
+                                        value="{{old('telefono')}}"
+                                        name="telefono"
+                                        placeholder="Ingresa tu telefono"
+                                >
+                                <label for="telefono">Telefono</label>
+                                @error('telefono')
+                                <h6>{{$message}} </h6>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
                                 <input 
                                     type="text" 
                                     class="form-control"

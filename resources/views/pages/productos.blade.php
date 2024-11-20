@@ -57,4 +57,22 @@ margin: 0 auto;
     @include('components.catXprod', ['productos' => $productos])
 </div>
 
+    <script>
+        fetch('/tu-endpoint', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message); // Mostrar el mensaje de éxito
+                }
+            });
+
+    </script>
+
 @endsection

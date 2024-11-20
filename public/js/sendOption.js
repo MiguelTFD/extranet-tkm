@@ -36,6 +36,11 @@ function mostrarDelivery() {
 
             htmlContent += `
                 </div>
+                <style>
+                .info-icon::before{
+                    content:url(images/icon/info.svg);
+                }
+                </style>
                 <div class="entrega-options">
                     <div class="entrega-options-1">
                         <small>Agregar otra dirección de entrega</small>
@@ -44,15 +49,17 @@ function mostrarDelivery() {
                 </div>
                  <div class="row justify-content-center">
                     <div class="col-md-6 w-100">
-                        <div class="mb-3 text-center">
-                            <label for="instruccionEntrega" class="form-label">Instrucciones de entrega</label>
+                        <div class="mb-3 ">
+                            <label style="text-align:left;margin-left:0px !important" for="instruccionEntrega" class="form-label"><b>Elige tu agencia de envios</b></label>
                             <input 
                                 type="text" 
                                 class="form-control" 
                                 id="instruccionEntrega" 
                                 name="instruccionEntrega" 
-                                placeholder="Escribe aquí tus instrucciones..."
+                                placeholder="Shalom.."
+                                required
                             >
+                            <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
                         </div>
                     </div>
                 </div>

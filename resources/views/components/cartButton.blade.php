@@ -18,7 +18,7 @@
     id="cart-count-number"
     class="badge bg-danger"
 >
-    {{\Cart::count()}}
+
 </span>
 
     <img 

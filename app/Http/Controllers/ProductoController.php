@@ -15,6 +15,8 @@ class ProductoController extends Controller
         return $this->filtrarPorCategoria($rq);
     }
 
+
+
     public function show($id)
     {
         $producto = Producto::with(['categoria', 'imagenes'])->findOrFail($id);

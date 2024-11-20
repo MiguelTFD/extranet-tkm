@@ -6,20 +6,19 @@ let pagoElegido = document.getElementById('pagoElegido').innerText;
 let pagoEnYape=`
     Número de destino: +51 983 929 015<br>
     Destinatario: Henry Obed Cholan Romero<br>
-    <i class="fa-solid fa-qrcode">
-    </i>
-    <a href="#" id="verQr"  class="text-decoration-none">
-        Ver QR
-    </a>
+    <p>    <i class="fa-solid fa-qrcode">
+    </i><span>QR:</span></p>
+
+
+     <img style="max-width: 400px; width: 100%" src="images/yape-qr.png" alt="QR" />
 `;
 let pagoEnPlin=`
     Número de destino: +51 983 929 015<br>
     Destinatario: Henry Obed Cholan Romero<br>
-    <i class="fa-solid fa-qrcode">
-    </i>
-    <a href="#" id="verQr"  class="text-decoration-none">
-        Ver QR
-    </a>
+    <p>    <i class="fa-solid fa-qrcode">
+    </i><span>QR:</span></p>
+     <img style="max-width: 400px; width: 100%" src="images/plin-qr.png" alt="QR" />
+
 `;
 
 let depositoBancoNacion=`

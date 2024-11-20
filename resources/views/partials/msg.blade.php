@@ -1,4 +1,6 @@
 
+
+
 @section('content')
     @if (\Session::get("success"))
         <div id="success-notification" class="alert alert-success text-center notification">
@@ -94,36 +96,52 @@
         }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Función para mostrar la notificación
-            function showNotification(notificationId) {
-                var notification = document.getElementById(notificationId);
-                
-                // Muestra la notificación
-                notification.style.display = 'block';
+        <script>
+            // Función para manejar la respuesta del servidor
+            function handleServerResponse(response) {
+            if (response.success) {
+            showNotification('success-notification', response.message);
+        } else {
+            showNotification('error-notification', response.message);
+        }
+        }
 
-                // Después de 6 segundos, aplicar el efecto de desvanecimiento y ocultar
-                setTimeout(function() {
-                    notification.classList.add('fade-out');
-                    
-                    // Después de que la animación de desvanecimiento termine, ocultamos la notificación completamente
-                    setTimeout(function() {
-                        notification.style.display = 'none';
-                        notification.classList.remove('fade-out');
-                    }, 1000); // Tiempo de fade-out (1 segundo)
-                }, 6000); // 6 segundos
-            }
+            // Función para mostrar notificaciones
+            function showNotification(notificationId, message) {
+            var notification = document.getElementById(notificationId);
 
-            // Mostrar las notificaciones si existen
-            if (document.getElementById('success-notification')) {
-                showNotification('success-notification');
-            }
-            if (document.getElementById('error-notification')) {
-                showNotification('error-notification');
-            }
-        });
+            // Actualiza el contenido de la notificación
+            notification.querySelector('p').textContent = message;
+
+            // Muestra la notificación
+            notification.style.display = 'block';
+
+            // Después de 6 segundos, aplicar el efecto de desvanecimiento y ocultar
+            setTimeout(function () {
+            notification.classList.add('fade-out');
+
+            // Después de que la animación de desvanecimiento termine, ocultar completamente
+            setTimeout(function () {
+            notification.style.display = 'none';
+            notification.classList.remove('fade-out');
+        }, 1000); // Tiempo del fade-out (1 segundo)
+        }, 6000); // Tiempo de visualización (6 segundos)
+        }
+
+            // Ejemplo de llamada AJAX que recibe el JSON
+            fetch('/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+            body: JSON.stringify({ key: 'value' }) // Datos enviados
+        })
+            .then(response => response.json())
+            .then(data => handleServerResponse(data))
+            .catch(error => console.error('Error:', error));
     </script>
+
 
     @endif
 

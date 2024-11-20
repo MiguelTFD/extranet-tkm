@@ -9,25 +9,15 @@
             <h5>
                 Nuestra Oficina
             </h5>
+
             <p>
-                <strong>
-                Horario de atencion:
-                </strong>
-                <p>
-                    Lun a Sab: 7:00am a 7:30pm
-                </p>
-                <p>
-                    Dom: 7:00am a 5:00pm
-                </p>
-            </p>
-            <p>
-                Satipo Rio Negro
+                Perú / Junín / Satipo / Río Negro
             </p>
             <p>
                 +51 983 929 015
             </p>
             <h5>
-                Correo y Redes Sociales
+                Correo
             </h5>
             <p>
                henry.management@thekingmoss.com
