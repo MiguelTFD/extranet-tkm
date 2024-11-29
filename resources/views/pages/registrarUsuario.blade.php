@@ -109,158 +109,229 @@ select {
 
 
 </style>
-
-
     <div class="register-container">
-   <h2>REGISTRAR USUARIO</h2>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <h2>REGISTRAR USUARIO</h2>
+        <form 
+            action="{{ route('createUser') }}" 
+            method="POST" 
+            class="register-form"
+        >
+        @csrf
+            <div class="row">
+                <div class="form-group">
+                    <label for="nombre">Nombres</label>
+                        <input 
+                            type="text" 
+                            name="nombre" 
+                            class="form-control" 
+                            id="nombre" 
+                            value="{{ old('nombre') }}" 
+                            placeholder="Ingresa tus nombres"  
+                            required
+                        >
+                </div>
+                <div 
+                    class="form-group"
+                >
+                    <label 
+                        for="apellido"
+                    >
+                        Apellidos
+                    </label>
+                    <input 
+                        type="text" 
+                        name="apellido" 
+                        class="form-control" 
+                        id="apellido" 
+                        value="{{ old('apellido') }}" 
+                        placeholder="Ingresa tus apellidos" 
+                        required
+                    >
+                </div>
             </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+            <div class="row">
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input 
+                        type="text" 
+                        name="telefono" 
+                        class="form-control" 
+                        id="telefono" 
+                        value="{{ old('telefono') }}" 
+                        placeholder="Ingresa tu teléfono" 
+                        required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input 
+                        type="email" 
+                        name="correo" 
+                        class="form-control" 
+                        id="correo" 
+                        value="{{ old('correo') }}" 
+                        placeholder="Ingresa tu email" 
+                        required
+                    >
+                </div>
             </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
+            <div class="row">
+                <div class="form-group">
+                    <label 
+                        for="idTipoDocumentoIdentidad"
+                    >
+                        Tipo de Documento de Identidad
+                    </label>
+                    <select 
+                        name="idTipoDocumentoIdentidad" 
+                        class="form-control" 
+                        id="idTipoDocumentoIdentidad" 
+                        required
+                    >
+                        <option value="">
+                            Seleccione el tipo de documento
+                        </option>
+                        @foreach($tDocumentos as $tipo)
+                            <option 
+                                value="{{ $tipo->idTipoDocumentoIdentidad }}"
+                            >
+                                {{ $tipo->nombreTipoDocumentoIdentidad }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <label 
+                        for="numeroDocumentoIdentidad"
+                    >
+                        Número de Documento de Identidad
+                    </label>
+                    <input 
+                        type="text" 
+                        name="numeroDocumentoIdentidad" 
+                        class="form-control" 
+                        id="numeroDocumentoIdentidad" 
+                        value="{{ old('numeroDocumentoIdentidad') }}" 
+                        placeholder="Ingresa tu documento de identidad"  
+                        required
+                    >
+                </div>
             </div>
-        @endif
+            <div class="row">
+                <div class="form-group">
+                    <label for="pais">País</label>
+                    <select id="pais" name="pais" required>
+                        <option value="" selected>Selecciona tu País</option>
+                        @foreach($paises as $pais)
+                            <option 
+                                value="{{ $pais->idPais }}"
+                            >
+                                {{ $pais->nombrePais }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departamento">Departamento</label>
+                    <select id="departamento" name="departamento" required>
+                        <option value="">Selecciona tu Departamento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia</label>
+                    <select id="provincia" name="provincia" required>
+                        <option value="">Selecciona tu Provincia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="idDistrito">Distrito</label>
+                    <select id="idDistrito" name="idDistrito" required>
+                        <option value="">Selecciona tu Distrito</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="agencia">Dirección Exacta</label>
+                    <input 
+                        type="text" 
+                        name="agencia" 
+                        class="form-control" 
+                        id="agencia" 
+                        value="{{ old('agencia') }}" 
+                        placeholder="Ingresa tu dirección exacta" 
+                        required
+                    >
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        name="username" 
+                        class="form-control" 
+                        id="username" 
+                        value="{{ old('username') }}" 
+                        placeholder="Ingresa un nombre de usuario" 
+                        required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="input-group">
+                        <input 
+                            type="password" 
+                            name="password" 
+                            class="form-control" 
+                            id="password" 
+                            placeholder="Ingresa una contraseña" 
+                            required
+                        >
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-secondary toggle-password" 
+                            onclick="togglePassword('password')"
+                        >
+                        <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Contraseña</label>
+                    <div class="input-group">
+                        <input 
+                            type="password" 
+                            name="confirm-password" 
+                            class="form-control" 
+                            id="confirm-password" 
+                            placeholder="Confirma tu contraseña" 
+                            required
+                        >
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-secondary toggle-password" 
+                            onclick="togglePassword('confirm-password')"
+                        >
+                            <i 
+                                class="fas fa-eye" 
+                                id="toggleConfirmPasswordIcon"
+                            >
+                            </i>
+                        </button>
+                    </div>
+                    <small 
+                        style="color:white" 
+                        id="password-match-message"
+                    >
+                        .
+                    </small>
+                </div>
+            </div>
+            <button type="submit" class="register-btn">Registrarme</button>
+        </form>
+    </div>
 
-   <form action="{{ route('crearusuario') }}" method="POST" class="register-form">
-       @csrf
-      <div class="row">
-         <div class="form-group">
-            <label for="nombre">Nombres</label>
-             <input type="text" name="nombre" class="form-control" id="nombre" value="{{ old('nombre') }}" placeholder="Ingresa tus nombres"  required>
-
-         </div>
-         <div class="form-group">
-            <label for="apellido">Apellidos</label>
-             <input type="text" name="apellido" class="form-control" id="apellido" value="{{ old('apellido') }}" placeholder="Ingresa tus apellidos" required>
-         </div>
-      </div>
-
-      <div class="row">
-         <div class="form-group">
-             <label for="telefono">Teléfono</label>
-             <input type="text" name="telefono" class="form-control" id="telefono" value="{{ old('telefono') }}" placeholder="Ingresa tu teléfono" required>
-         </div>
-         <div class="form-group">
-             <label for="correo">Correo</label>
-             <input type="email" name="correo" class="form-control" id="correo" value="{{ old('correo') }}" placeholder="Ingresa tu email" required>
-         </div>
-      </div>
-
-      <div class="row">
-         <div class="form-group">
-             <label for="idTipoDocumentoIdentidad">Tipo de Documento de Identidad</label>
-             <select name="idTipoDocumentoIdentidad" class="form-control" id="idTipoDocumentoIdentidad" required>
-                 <option value="">Seleccione el tipo de documento</option>
-                 @foreach($tiposDocumento as $tipo)
-                     <option value="{{ $tipo->idTipoDocumentoIdentidad }}">{{ $tipo->nombreTipoDocumentoIdentidad }}</option>
-                 @endforeach
-             </select>
-             <label for="numeroDocumentoIdentidad">Número de Documento de Identidad</label>
-             <input type="text" name="numeroDocumentoIdentidad" class="form-control" id="numeroDocumentoIdentidad" value="{{ old('numeroDocumentoIdentidad') }}" placeholder="Ingresa tu documento de identidad"  required>
-         </div>
-      </div>
-
-       <div class="row">
-           <div class="form-group">
-               <label for="pais">País</label>
-               <select id="pais" name="pais" required>
-                   <option value="" selected>Selecciona tu País</option>
-                   @foreach($paises as $pais)
-                       <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
-                   @endforeach
-               </select>
-           </div>
-
-           <div class="form-group">
-               <label for="departamento">Departamento</label>
-               <select id="departamento" name="departamento" required>
-                   <option value="">Selecciona tu Departamento</option>
-               </select>
-           </div>
-
-           <div class="form-group">
-               <label for="provincia">Provincia</label>
-               <select id="provincia" name="provincia" required>
-                   <option value="">Selecciona tu Provincia</option>
-               </select>
-           </div>
-
-           <div class="form-group">
-               <label for="idDistrito">Distrito</label>
-               <select id="idDistrito" name="idDistrito" required>
-                   <option value="">Selecciona tu Distrito</option>
-               </select>
-           </div>
-       </div>
-
-
-       <div class="form-group">
-          <label for="idTipoDireccion">Tipo de Dirección</label>
-          <select name="idTipoDireccion" class="form-control" id="idTipoDireccion" required>
-              <option value="">Seleccione el tipo de dirección</option>
-              @foreach($tiposDireccion as $tipoDireccion)
-                  <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
-              @endforeach
-          </select>
-          <label for="direccionExacta">Dirección Exacta</label>
-          <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
-      </div>
-
-
-       <div class="form-group">
-           <label for="referencia">Referencia</label>
-           <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
-       </div>
-
-
-      <div class="row">
-         <div class="form-group">
-
-             <label for="username">Username</label>
-             <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}" placeholder="Ingresa un nombre de usuario" required>
-         </div>
-
-<div class="form-group">
-  <label for="password">Contraseña</label>
-  <div class="input-group">
-    <input type="password" name="password" class="form-control" id="password" placeholder="Ingresa una contraseña" required>
-    <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('password')">
-      <i class="fas fa-eye" id="togglePasswordIcon"></i>
-    </button>
-  </div>
-</div>
-
-<div class="form-group">
-  <label for="confirm-password">Confirmar Contraseña</label>
-  <div class="input-group">
-    <input type="password" name="confirm-password" class="form-control" id="confirm-password" placeholder="Confirma tu contraseña" required>
-    <button type="button" class="btn btn-outline-secondary toggle-password" onclick="togglePassword('confirm-password')">
-      <i class="fas fa-eye" id="toggleConfirmPasswordIcon"></i>
-    </button>
-  </div>
-  <small style="color:white" id="password-match-message">.</small>
-</div>
-
-      </div>
-
-      <button type="submit" class="register-btn">Registrarme</button>
-   </form>
-</div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script 
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    >
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {

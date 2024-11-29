@@ -70,11 +70,24 @@ justify-content: center;
                             <p><strong>Estado:</strong>
                                 {{$pedido->estadoOrdenCompra}}</p>
                         </div>
-                        <form id="frm-ped" action="{{ route('mostrarOrdenCompra') }}" method="POST">
+                        <form 
+                            id="frm-ped" 
+                            action="{{ route('getOrder') }}" 
+                            method="POST"
+                        >
                             @csrf
-                            <input type="hidden" name="idOrdenCompra" value="{{
-                            $pedido->idOrdenCompra }}">
-                            <button style="margin:0 auto" class="order-details-btn" type="submit">Ver Detalles</button>
+                            <input 
+                                type="hidden" 
+                                name="idOrdenCompra" 
+                                value="{{$pedido->idOrdenCompra }}"
+                            >
+                            <button 
+                                style="margin:0 auto" 
+                                class="order-details-btn" 
+                                type="submit"
+                            >
+                                Ver Detalles
+                            </button>
                         </form>
                     </div>
                     @endforeach

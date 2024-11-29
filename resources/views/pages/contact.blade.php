@@ -1,19 +1,8 @@
 @extends('layouts.base')
-    @section('content')
 
+@section('content')
 
-<div class="container-fluid page-header page-contact py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-3 text-white mb-4 animated slideInDown">Contacto</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="#">Páginas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contacto</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@include('components.bannerPageInfo')
 
 
 
@@ -22,8 +11,12 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <p class="fs-5 fw-bold text-primary">Contactanos!</p>
-                <h1 class="display-5 mb-5">Si tienes alguna duda o consulta, Contactanos por favor</h1>
-                <form id="contactForm" action="{{route('enviarContacto')}}"
+                <h1 
+                    class="display-5 mb-5"
+                >
+                    Si tienes alguna duda o consulta, Contactanos por favor
+                </h1>
+                <form id="contactForm" action="{{route('sendContactEmail')}}"
                     method="POST">
                     @csrf
                     <div class="row g-3">
@@ -127,4 +120,4 @@
     </div>
 </div>
 
-    @endsection
+@endsection

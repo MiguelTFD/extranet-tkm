@@ -76,6 +76,8 @@
     <script src="{{asset('lib/lightbox/js/lightbox.min.js')}}"></script>
     <script src="{{asset('lib/isotope/isotope.pkgd.min.js')}}"></script>  
     <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{asset('js/bannerPage.js')}}"></script>
+    <script src="{{asset('js/products.js')}}"></script>
 
 
 </body>

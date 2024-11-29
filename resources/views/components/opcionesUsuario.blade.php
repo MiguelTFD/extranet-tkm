@@ -19,16 +19,16 @@
             </p>
             <li class="nav-item">
                 <a 
-                    class="nav-link {{ Request::routeIs('verPerfil') ? 'active' : '' }}" 
-                    href="{{ route('verPerfil') }}"
+                    class="nav-link {{ Request::routeIs('showUserProfile') ? 'active' : '' }}" 
+                    href="{{ route('showUserProfile') }}"
                 >
                     Personal
                 </a>
             </li>
             <li class="nav-item">
                 <a 
-                    class="nav-link {{ Request::routeIs('verDirecciones') ? 'active' : '' }}" 
-                    href="{{ route('verDirecciones') }}"
+                    class="nav-link {{ Request::routeIs('getUserAddress') ? 'active' : '' }}" 
+                    href="{{ route('getUserAddress') }}"
                 >
                     Direcciones
                 </a>
@@ -40,8 +40,8 @@
             </p>
             <li class="nav-item">
                 <a 
-                    class="nav-link {{ Request::routeIs('verPedidos') ? 'active' : '' }}" 
-                    href="{{ route('verPedidos') }}"
+                    class="nav-link {{ Request::routeIs('getUserOrders') ? 'active' : '' }}" 
+                    href="{{ route('getUserOrders') }}"
                 >
                     Mis pedidos
                 </a>

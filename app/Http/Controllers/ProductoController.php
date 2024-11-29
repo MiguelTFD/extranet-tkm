@@ -9,13 +9,13 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
+    
+/*
     public function index()
     {
         $rq = new Request();
         return $this->filtrarPorCategoria($rq);
     }
-
-
 
     public function show($id)
     {
@@ -30,6 +30,7 @@ class ProductoController extends Controller
         return view('pages.detalleProducto', compact('producto','categorias', 'productosRelacionados'));
     }
 
+
     public function filtrarPorCategoria(Request $request)
     {
         $id = $request->input('idCategoria'); 
@@ -42,6 +43,29 @@ class ProductoController extends Controller
         }
         $categorias = Categoria::all();
         return view('pages.productos',compact('productos','categorias'));
+    }
+     */
+
+    public function getCategories(){
+        $categorias = Categoria::all();
+        return response()->json([
+            'categorias'=>$categorias
+        ]);
+    }
+    
+    public function filterProductsByCategory(Request $request){
+        $id = $request->input('idCategoria'); 
+        if(empty($id)){
+            $productos = Producto::with(['categoria', 'imagenes'])->get();
+        }else {
+            $productos = Producto::where('idCategoria', $id)
+                ->with(['categoria', 'imagenes'])
+                ->get();
+        }
+            
+        return response()->json([
+            'productos' => $productos
+        ]);
     }
 
 }

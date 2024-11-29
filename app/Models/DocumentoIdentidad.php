@@ -5,6 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 
+ *
+ * @property int $idDocumentoIdentidad
+ * @property string $numeroDocumentoIdentidad
+ * @property int $idTipoDocumentoIdentidad
+ * @property int $idUsuario
+ * @property-read \App\Models\TipoDocumentoIdentidad $tipoDocumentoIdentidad
+ * @property-read \App\Models\Usuario $usuario
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad whereIdDocumentoIdentidad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad whereIdTipoDocumentoIdentidad($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad whereIdUsuario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DocumentoIdentidad whereNumeroDocumentoIdentidad($value)
+ * @mixin \Eloquent
+ */
 class DocumentoIdentidad extends Model
 {
     use HasFactory;

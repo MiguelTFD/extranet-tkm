@@ -32,7 +32,7 @@
     <div class="popUpModal">
     <div class="container">
     <h2>Editar Perfil</h2>
-    <form action="{{ route('updateUsu') }}" method="POST">
+    <form action="{{ route('updateUser') }}" method="POST">
         @csrf
         @method('PUT')
 

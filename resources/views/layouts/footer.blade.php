@@ -29,7 +29,7 @@
             </h4>
             <p> <a href="{{ url('/about') }}">Nosotros</a></p>
 
-            <p><a href="{{ route('productos') }}">Productos</a></p>
+            <p><a href="{{ route('products') }}">Productos</a></p>
             <p><a href="{{ url('/contact') }}">Contáctenos</a></p>
 
         </div>
@@ -38,17 +38,16 @@
                 Atención al cliente
             </h4>
 
-
-            <p><a href="{{ url('/seguridadyprivacidad') }}">
+            <p><a href="{{ url('/securityAndPrivacy') }}">
                        Seguridad y Privacidad 
                     </a></p>
 
-            <p><a href="{{ url('/politicayprivacidad') }}">
+            <p><a href="{{ url('/privacyPolicy') }}">
                        Politica de privacidad 
                     </a></p>
 
 
-            <p><a href="{{ url('/terminosycondiciones') }}">
+            <p><a href="{{ url('/termsAndConditions') }}">
                         Terminos y condiciones
                     </a></p>
 

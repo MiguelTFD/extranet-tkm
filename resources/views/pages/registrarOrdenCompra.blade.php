@@ -320,14 +320,32 @@
                             <select id="pais" name="pais" class="form-select">
                                 <option value="">Selecciona tu País</option>
                                 @foreach($paises as $pais)
-                                    <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
+                                    <option 
+                                        value="{{ $pais->idPais }}"
+                                    >
+                                        {{ $pais->nombrePais }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="departamento" class="form-label">Departamento</label>
-                            <select id="departamento" name="departamento" class="form-select">
-                                <option selected disabled>Selecciona tu Departamento</option>
+                            <label 
+                                for="departamento" 
+                                class="form-label"
+                            >
+                                Departamento
+                            </label>
+                            <select 
+                                id="departamento" 
+                                name="departamento" 
+                                class="form-select"
+                            >
+                                <option 
+                                    selected 
+                                    disabled
+                                >
+                                    Selecciona tu Departamento
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -374,7 +392,7 @@
     <h1 style="text-align:center;">
         Registar Compra
     </h1>
-    <form method="Post" action="{{ route('crearCompra') }}">
+    <form method="Post" action="{{ route('newOrderRequest') }}">
     @csrf    
         <div class="registrarCompra-layout">
                 <div class="steps-content">

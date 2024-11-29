@@ -33,19 +33,12 @@ public function add(Request $request)
         'success' => true,
         'message' => "El producto " . $producto->nombreProducto . " fue agregado a su carrito"
     ]);
-
-
 }
-
     public function countCart(){
        $totalCarro =  Cart::count();
         return response()->json([
             'cantidadCarro' => $totalCarro
         ]);
-    }
-
-    public function checkout(){
-        return view('pages.carritoCompras');
     }
 
     public function remove(Request $request){

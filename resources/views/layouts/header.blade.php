@@ -19,7 +19,9 @@
 }
 </style>
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-    <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{ url('/') }}" 
+        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
+    >
         <img class="tkmlogo" src="{{ asset('images/icon/TKMLogo.png')}}"/>
         <h1 id="lgD" class="m-0">The King Moss</h1>
     </a>
@@ -40,7 +42,7 @@
                 Nosotros
             </a>
             <a
-                href="{{ route('productos') }}"
+                href="{{ route('products') }}"
                 class="nav-item nav-link"
             >
                 Tienda
@@ -53,22 +55,34 @@
             </a>
         </div>
         @if($user)
-            <a id="iniciarSesionBtn" href="{{ route('verPerfil') }}" class="btn btn-primary py-4 px-lg-4 rounded-0  d-lg-block">
+            <a 
+                id="iniciarSesionBtn" 
+                href="{{ route('showUserProfile') }}" 
+                class="btn btn-primary py-4 px-lg-4 rounded-0  d-lg-block"
+            >
                 Mi Perfil 
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form 
+                id="logout-form" 
+                action="{{ route('userLogout') }}" 
+                method="POST" 
+                style="display: none;"
+            >
                 @csrf
             </form>
-            <a id="cerrarSesionBtn"
-                    style="background:#7B311E;color:white;border:unset;" href="#" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();" class="btn
-                btn-warning py-4 px-lg-4 rounded-0 d-none d-lg-block">
+            <a 
+                id="cerrarSesionBtn"
+                style="background:#7B311E;color:white;border:unset;" 
+                href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-warning py-4 px-lg-4 rounded-0 d-none d-lg-block">
                 Cerrar Sesión
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>
         @else
-            <a id="iniciarSesionBtn2"  href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-4 rounded-0  d-lg-block">
+            <a 
+                id="iniciarSesionBtn2"  
+                href="{{ route('userLogin') }}" 
+                class="btn btn-primary py-4 px-lg-4 rounded-0  d-lg-block">
                 Iniciar Sesión
                 <i class="fa fa-arrow-right ms-3"></i>
             </a>

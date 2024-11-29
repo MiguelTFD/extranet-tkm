@@ -262,13 +262,23 @@ thead tr{
                     </table>
                 </div>
                 <div class="text-center mt-4">
-                    <form action="{{ route('generarPdf') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="idOrdenCompra" 
-                            value="{{ $datosOrdenCompra['idOrdenCompra'] }}">
-                            <button style="margin:0 auto"
-                                class="btn btn-primary order-details-btn" type="submit">Imprimir
-                            pedido</button>
+                    <form 
+                        action="{{ route('generatePdf') }}" 
+                        method="POST"
+                    >
+                        @csrf
+                        <input 
+                            type="hidden" 
+                            name="idOrdenCompra" 
+                            value="{{ $datosOrdenCompra['idOrdenCompra'] }}"
+                        >
+                        <button 
+                            style="margin:0 auto"
+                            class="btn btn-primary order-details-btn" 
+                            type="submit"
+                        >
+                            Imprimir pedido
+                        </button>
                         </form>
                 </div>
             </div>

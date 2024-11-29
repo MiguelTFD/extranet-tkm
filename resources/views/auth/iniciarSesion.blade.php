@@ -100,7 +100,7 @@ input[type="password"] {
                 Iniciar Sesion
             </h1>
             <form
-               action="{{route('login')}}"
+               action="{{route('userLogin')}}"
                method="POST"
                class="login-form"
             >
@@ -129,7 +129,7 @@ input[type="password"] {
                 </div>
                 <div class="form-group">
                 <a
-                    href="{{route('recuperarPassword')}}"
+                    href="{{route('passwordRestore')}}"
                     class="forgot-password"
                 >
                     Olvide mi contraseña
@@ -144,7 +144,7 @@ input[type="password"] {
                 <div class="register-link">
                     <p>¿No tienes una cuenta?</p>
                     <a
-                        href="{{route('registro')}}"
+                        href="{{route('userRegistration')}}"
                     >
                         Registrarme como cliente
                     </a>

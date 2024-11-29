@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Pais;
+use App\Models\TipoDocumentoIdentidad;
 
-use Illuminate\Http\Request;
 
 class NavigationController extends Controller
 {
@@ -11,11 +12,15 @@ class NavigationController extends Controller
         return view('pages.about');
     }
 
+    public function showContactPage(){
+        return view('pages.contact');
+    }
+
     public function showPasswordRestorePage(){
         return view('pages.recuperarPassword');
     }
 
-    public function showTermsandConditionsPage(){
+    public function showTermsAndConditionsPage(){
         return view('pages.terminosCondiciones');
     }
 
@@ -23,11 +28,29 @@ class NavigationController extends Controller
         return view('pages.politicaPrivacidad');
     }
 
-    public function showSecurityandPrivacyPage(){
+    public function showSecurityAndPrivacyPage(){
         return view('pages.seguridadPrivacidad');
     }
 
-    public function showCustomerRegistrationPage(){
-        return view('pages.registrarUsuario');
+    public function showUserRegistrationPage(){
+        $paises = Pais::all();
+        $tDocumentos = TipoDocumentoIdentidad::all();
+        return view('pages.registrarUsuario',compact('paises','tDocumentos'));
     }
+    public function showUserLoginPage(){
+        return view('auth.iniciarSesion');
+    }
+    //----
+    public function showProductsPage(){
+        return view('pages.productos');
+    }
+    public function showCartPage(){
+        return view('pages.carritoCompras');
+    }
+    public function showOrderRequestPage(){
+        return view('pages.registrarOrdenCompra');
+    }    
+
+
+
 }
