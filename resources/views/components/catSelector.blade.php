@@ -62,45 +62,7 @@
         id="categories-container"
         class="ul-cat"
     >
-        <li>
-            <form action="{{ route('filtrarProductos') }}" method="POST">
-                @csrf <!-- Token CSRF -->
-                <input type="hidden" name="idCategoria" value="">
-                <button 
-                    class="catList" 
-                    type="submit" 
-                    style="background: none; border: none; cursor: pointer;"
-                >
-                    <span  style="color:#C4B400;">  Todos </span>
-                </button>
-            </form>
-        </li>
-        @foreach($categorias as $categoria)
-        <li>
-            <form 
-                action="{{ route('filtrarProductos') }}" 
-                method="POST"
-            >
-            @csrf 
-                <input 
-                    type="hidden" 
-                    name="idCategoria" 
-                    value="{{ $categoria->idCategoria }}"
-                >
-                    <button 
-                        class="catList" 
-                        type="submit" 
-                        style="background: none; border: none;"
-                    >
-                    <span 
-                        style="color:#C4B400;"
-                    > 
-                        {{ $categoria->nombreCategoria }} 
-                    </span>
-                    </button>
-                </form>
-            </li>
-        @endforeach
+    
     </ul>
 </div>
 

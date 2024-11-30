@@ -29,50 +29,12 @@ margin: 0 auto;
 
 </style>
 
-
-
-<div class="container-fluid page-header page-products py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-3 text-white mb-4 animated slideInDown">
-            Tienda
-        </h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item">
-                   <a href="#">Inicio</a>
-                </li>
-                <li class="breadcrumb-item">
-                   <a href="#">Páginas</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  Tienda
-                </li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@include('components.bannerPageInfo')
 
 <div class="prodSectionCt">
-    @include('components.catSelector',['categorias'=>$categorias])
-    @include('components.catXprod', ['productos' => $productos])
+    @include('components.catSelector')
+    @include('components.catXprod')
 </div>
 
-    <script>
-        fetch('/tu-endpoint', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message); // Mostrar el mensaje de éxito
-                }
-            });
-
-    </script>
 
 @endsection

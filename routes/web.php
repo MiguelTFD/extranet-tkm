@@ -82,14 +82,16 @@ Route::get(
 
 //Products endpoints============================================================
 
-
 Route::get('/api/categories',
     [ProductoController::class, 'getCategories']
 );
 
-Route::get('/api/products/{id}',
-    [ProductoController::class, 'getProductsByCategory']
+Route::get('/api/products',
+    [ProductoController::class, 'getProducts']
 );
+
+Route::post('/api/filter-products', 
+    [ProductoController::class, 'filterProductsByCategory']); 
 
 /*----------------------------------------------------------------------------*/
 

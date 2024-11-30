@@ -76,97 +76,7 @@
 }
 </style>
 
-
-@if ($productos->isNotEmpty())
-    @foreach ($productos as $producto)
-        <div class="productCardMain">
-            @if($producto->descuento > 0)
-            <div class="productCardDesc">
-                <p>{{ intval($producto->descuento) }}%</p>
-            </div>
-            @else   
-            <div style="background:white;color:white" class="productCardDesc">
-                <p>.</p>
-            </div>
-            @endif
-            
-            @php
-                $precioActual = $producto->precioUnitario - 
-                ($producto->precioUnitario * ($producto->descuento / 100));
-                
-                $precioAntes = $producto->precioUnitario;
-                
-                // Obtener la primera imagen
-                $imagenUrl = $producto->imagenes->first() ?
-                $producto->imagenes->first()->urlImagenProducto :
-                asset('images/bf5k.png'); // Imagen por defecto si no hay
-            @endphp
-                <a
-                    href="{{ route('productosDetalle',
-                        $producto->idProducto) }}"
-                >
-            <figure>
-                <img 
-                    class="productCardImage" 
-                    src="{{ asset('images/' . $imagenUrl) }}" 
-                    alt="{{ $producto->nombreProducto }}"
-                >
-                <figcaption 
-                    class="nombreItem"
-                >
-                    <p 
-                        class="product-name"
-                    >
-                        {{$producto->nombreProducto }}
-                    </p>
-                </figcaption>
-                </a>
-                <figcaption 
-                    class="preciosItems"
-                >
-                    <strong>
-                        <p 
-                            class="offert-price"
-                        >
-                            S/.{{ number_format($precioActual, 2) }}
-                        </p>
-                    </strong>
-                    @if($producto->descuento > 0)
-                    <p 
-                        class="old-price"
-                    >
-                        S/.{{ number_format($precioAntes, 2) }}
-                    </p>
-                @endif
-                </figcaption>
-                <div 
-                    class="btnItems"
-                >
-                    <div class="cart-add">
-                        <form id="addToCartForm" action="{{ route('add') }}" method="POST">
-                            @csrf
-                            <input
-                                    type="hidden"
-                                    name="id"
-                                    value="{{$producto->idProducto}}"
-                            >
-                            <button
-                                    type="button"
-                                    class="addCar"
-                                    onclick="addToCart(this)"
-                            >
-                                Agregar al carrito
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </figure>
-        </div>
-    @endforeach
-@else
-    <p>No hay productos disponibles.</p>
-@endif
-
+{{--
 <script>
     function addToCart(button) {
         const csrfToken = 
@@ -205,5 +115,5 @@
             })
             .catch(error => console.error('Error:', error));
     }
-
 </script>
+--}}

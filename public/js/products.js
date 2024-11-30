@@ -6,22 +6,104 @@ function getCategories(){
             let categoriesContainer = 
                 document.getElementById('categories-container');
                 
-                categoriesContainer.innerHTML='';
+            categoriesContainer.innerHTML='';
                 
-                categories.forEach(category=>{
-                    let li = document.createElement('li');
-                    li.textContent=category.nombreCategoria;
-                    categoriesContainer.appendChild(li);
-                });
+            categories.forEach(category=>{
+                let li = document.createElement('li');
+                li.textContent=category.nombreCategoria;
+                categoriesContainer.appendChild(li);
+            });
+            
+            console.log(categories);
         })
         .catch(error => console.error('Error:', error));
 }
-/*
-function getProductsByCategory(){
-    fetch('/api/products/{id}')
+
+function getProducts() {
+    fetch('/api/products')
         .then(response => response.json())
-        .then(data=> console.log(data))
-        .catch(error=> console.log('Error: ', error));
+        .then(data => {
+            const cardCt = document.getElementById('card-container');
+            
+            let productos = data.productos;
+            
+            cardCt.innerHTML = '';
+            
+            if (productos.length === 0) {
+                cardCt.innerHTML = '<p>No hay productos disponibles.</p>';
+                return;
+            }
+            
+            productos.forEach(producto => {
+                const descuento = parseFloat(producto.descuento) || 0;
+                
+                const precioUnitario = parseFloat(producto.precioUnitario);
+                
+                const precioActual = 
+                    precioUnitario - (precioUnitario * (descuento / 100));
+                
+                const imagenUrl = producto.imagenes?.[0]?.urlImagenProducto
+                    ? '/images/' + producto.imagenes[0].urlImagenProducto
+                    : '/images/bf5k.png';
+
+                const productHTML = 
+                `<div class="productCardMain">
+                    <div 
+                        class="productCardDesc" 
+                        style="background: ${descuento > 0 ? '' : 'white'}; color: ${descuento > 0 ? '' : 'white'};">
+                        <p>
+                            ${descuento > 0 ? `${Math.floor(descuento)}%` : '.'}
+                        </p>
+                    </div>
+                    <a href="/productos/${producto.idProducto}">
+                        <figure>
+                            <img class="productCardImage" src="${imagenUrl}">
+                            <figcaption class="nombreItem">
+                                <p class="product-name">
+                                    ${producto.nombreProducto}
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                <figcaption class="preciosItems">
+                    <strong>
+                        <p class="offert-price">
+                            S/.${precioActual.toFixed(2)}
+                        </p>
+                    </strong>
+                    ${descuento > 0 ? `<p class="old-price">S/.${precioUnitario.toFixed(2)}</p>` : ''}
+                </figcaption>
+                <div class="btnItems">
+                    <div class="cart-add">
+                        <form 
+                            id="addToCartForm-${producto.idProducto}" 
+                            action="/add" 
+                            method="POST"
+                        >
+                            <input 
+                                type="hidden" 
+                                name="id" 
+                                value="${producto.idProducto}"
+                            >
+                            <button 
+                                type="button" 
+                                class="addCar" 
+                                onclick="addToCart(this)"
+                            >
+                                Agregar al carrito
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            `;
+                cardCt.innerHTML += productHTML;
+            });
+        })
+        .catch(error => console.error('Error:', error));
 }
-*/
-getCategories();
+
+document.addEventListener('DOMContentLoaded',()=>{
+    getCategories();
+    getProducts();
+});

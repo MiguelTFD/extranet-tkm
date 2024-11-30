@@ -9,62 +9,50 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
-    
-/*
-    public function index()
+    protected $productos;
+
+    public function __construct()
     {
-        $rq = new Request();
-        return $this->filtrarPorCategoria($rq);
+        $this->productos = null;
     }
 
-    public function show($id)
+    public function getCategories()
     {
-        $producto = Producto::with(['categoria', 'imagenes'])->findOrFail($id);
-        $productosRelacionados = Producto::where('idCategoria', $producto->idCategoria)
-        ->where('idProducto', '!=', $id)
-        ->with(['categoria', 'imagenes'])
-        ->inRandomOrder() 
-        ->take(3) 
-        ->get();
-        $categorias = Categoria::all();
-        return view('pages.detalleProducto', compact('producto','categorias', 'productosRelacionados'));
-    }
-
-
-    public function filtrarPorCategoria(Request $request)
-    {
-        $id = $request->input('idCategoria'); 
-        if (empty($id)) {
-            $productos = Producto::with(['categoria', 'imagenes'])->get();
-        } else {
-            $productos = Producto::where('idCategoria', $id)
-                ->with(['categoria', 'imagenes'])
-                ->get();
-        }
-        $categorias = Categoria::all();
-        return view('pages.productos',compact('productos','categorias'));
-    }
-     */
-
-    public function getCategories(){
         $categorias = Categoria::all();
         return response()->json([
-            'categorias'=>$categorias
+            'categorias' => $categorias
         ]);
     }
+
+    public function setProductos($productos)
+    {
+        $this->productos = $productos;
+    }
     
-    public function filterProductsByCategory(Request $request){
-        $id = $request->input('idCategoria'); 
-        if(empty($id)){
-            $productos = Producto::with(['categoria', 'imagenes'])->get();
-        }else {
-            $productos = Producto::where('idCategoria', $id)
+    public function filterProductsByCategory(Request $request)
+    {
+        $idCategory = $request->input('idCategoria'); 
+        
+        if (empty($idCategory)) {
+            $this->productos = 
+                Producto::with(['categoria', 'imagenes'])->get();
+        } else {
+            $this->productos = Producto::where('idCategoria', $idCategory)
                 ->with(['categoria', 'imagenes'])
                 ->get();
         }
-            
+
+    }
+    
+    public function getProducts()
+    {
+        if (is_null($this->productos)) {
+            $this->productos = 
+                Producto::with(['categoria', 'imagenes'])->get();
+        }
+        
         return response()->json([
-            'productos' => $productos
+            'productos' => $this->productos
         ]);
     }
 
