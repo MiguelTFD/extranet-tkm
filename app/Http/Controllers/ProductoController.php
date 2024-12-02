@@ -41,7 +41,9 @@ class ProductoController extends Controller
                 ->with(['categoria', 'imagenes'])
                 ->get();
         }
-
+        return response()->json([
+            'productos' => $this->productos
+        ]);
     }
     
     public function getProducts()
