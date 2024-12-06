@@ -163,8 +163,7 @@
             width:90% !important;
         }
         button.btn {
-            padding: 1.4em;
-            font-size: 1.2em;
+            padding: 9px !important;
         }
         .img-cart-tumb.imb{
             max-width: unset !important;
@@ -204,12 +203,14 @@
                                name="rowId"
                                value="{{$item->rowId}}"
                             >
-                            <input
-                                type="submit"
-                                name="btn"
-                                class="btn btn-danger btn-sm"
-                                value="✕"
-                            >
+                            
+                        <button
+                            type="submit"
+                            name="btn"
+                            class="btn btn-danger btn-sm"
+                        >
+                            <i class="fa-solid fa-trash"></i> 
+                        </button>
                         </form>
                      </div>
                       </div>
@@ -223,7 +224,6 @@
                             >
                         </div>
                     <div class="item-cart-product-count_image">
-                        {{--Aumentar cantidad--}}
                         <div class="product-quantity">
                             <div class="qty-label">
                                 <form
@@ -243,7 +243,6 @@
                                             value="-"
                                     >
                                 </form>
-
                                 <p class="form-control text-center my-1">{{$item->qty}}</p>
                                 <form
                                         action="{{route('increaseQuantity')}}"
@@ -296,12 +295,13 @@
                                name="rowId"
                                value="{{$item->rowId}}"
                             >
-                            <input
+                            <button
                                 type="submit"
                                 name="btn"
                                 class="btn btn-danger btn-sm"
-                                value="✕"
                             >
+                                <i class="fa-solid fa-trash"></i> 
+                            </button>
                         </form>
                      </div>
                           </div>

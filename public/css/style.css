@@ -1207,10 +1207,11 @@ list-style-type: none;
 }
 .registrarCompra-layout{
     display:grid;
-    grid-template-columns: 70% 30%;
     min-height: 100vh;
     margin: 0;
     padding:1em;
+    justify-content: center;
+    text-align: center;
 }
 @media(max-width:1400px){
     

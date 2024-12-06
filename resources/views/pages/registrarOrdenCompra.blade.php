@@ -2,9 +2,15 @@
 
 @section('content')
 <style>
-.formaPago-layout{
-    display:none;
+.steps-container{
+    margin-top:2em;
 }
+    #metodosDePago{
+        display:none;
+    }
+    .total-final-price{
+        display:none;
+    }
     .wsp-1-2{
         display:none;
     }
@@ -175,6 +181,9 @@
         display:none;
     }
     @media(max-width:672px){
+        .btn-continue-step-buy {
+              width: 100%;
+            }
         .cart-content-items {
             width:90% !important;
             flex-grow:0;
@@ -388,8 +397,7 @@
                             class="form-control" 
                             id="sedeAgencia" 
                             value="{{ old('sedeAgencia') }}" 
-                            placeholder="Ingresa la sede o direccion
-                            de tu agencia elegida." 
+                            placeholder="Ingresa la sede o direccion de tu agencia elegida." 
                             required
                         >
                         <p 
@@ -412,6 +420,26 @@
     <h1 style="text-align:center;">
         Registar Compra
     </h1>
+    <div class="steps-container">
+   <div class="stp active" id="step1-nav">
+      <span class="material-symbols-outlined st-icon fill-icon">
+            local_shipping
+      </span>
+   </div>
+   <div class="stp pending" >
+      <span 
+        id="step2-nav"
+          class="material-symbols-outlined st-icon ">
+         payments
+      </span>
+   </div>
+   <div class="stp pending" >
+      <span class="material-symbols-outlined st-icon "id="step3-nav">
+         verified
+      </span> 
+   </div>
+</div>
+    </div>
     <form method="Post" action="{{ route('newOrderRequest') }}">
     @csrf    
         <div class="registrarCompra-layout">
@@ -429,129 +457,25 @@
                     </div>
                     <div id="fe-layout" class="formaEntrega-layout">
                     </div>
-                    <div class="forma-pago-ct">
-                        <div class="forma-pago">
-                            <h3>Medio de pago</h3>
-                            <p>----------- ---- ---- </p>
-                        </div>
-                        <div class="forma-pago-lock">
-                            <i style="font-size: 3em;" class="fa-solid fa-lock"></i>
-                        </div>
-                    </div>
-                    <div class="formaPago-layout">
-                        <div class="pago-max card shadow-sm">
-                            <div class="card-body">
-                              <h3 class="card-title">Medio de Pago</h3>
-                              <p class="card-text text-muted">Selecciona un medio de pago para continuar con tu compra</p>
-                              <div class="alert alert-info d-flex align-items-center" role="alert">
-                                <i class="bi bi-info-circle-fill me-2"></i>
-                                Recuerda efectuar el pago luego de generar la orden de compra
-                              </div>
-                              <div class="accordion" id="paymentMethods">
-                                <!-- Deposito Bancario -->
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingBank">
-                                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBank" aria-expanded="false" aria-controls="collapseBank">
-                                      <img
-                                      src="https://pngimg.com/uploads/bank/bank_PNG3.png"
-                                      class="pay-img-max me-3" alt="Bank Icon"> Deposito Bancario
-                                    </button>
-                                  </h2>
-                                  <div id="collapseBank" class="accordion-collapse collapse" aria-labelledby="headingBank" data-bs-parent="#paymentMethods">
-                                     <div class="accordion-body">
-                                          <p>Selecciona una cuenta bancaria para efectuar el pago:</p>
-                                          <div class="form-check">
-                                              <input class="form-check-input"
-                                              type="radio" name="pago"
-                                              id="bbvaAccount"
-                                              value="Transferencia digital BBVA">
-                                              <label class="form-check-label" 
-                                                for="bbvaAccount">
-                                                  Usar cuenta BBVA
-                                              </label>
-                                          </div>
-                                          <div class="form-check">
-                                              <input class="form-check-input"
-                                              type="radio" name="pago"
-                                              id="bcpAccount"
-                                              value="Transferencia digital BCP">
-                                              <label class="form-check-label" for="bcpAccount">
-                                                  Usar cuenta BCP
-                                              </label>
-                                          </div>
-                                          <div class="form-check">
-                                              <input class="form-check-input"
-                                              type="radio" name="pago"
-                                              id="bancoNacionAccount"
-                                              value="Deposito en Banco de la Nacion">
-                                              <label class="form-check-label" for="bancoNacionAccount">
-                                                  Usar cuenta de Banco de la Nación
-                                              </label>
-                                          </div>
-                                          <p class="mt-3">Los detalles para efectuar el pago se mostrarán luego de generar la orden de compra.</p>
-                                        </div>
-                                  </div>
-                                </div>
-                                <!--  Yape -->
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingYape">
-                                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYape" aria-expanded="false" aria-controls="collapseYape">
-                                      <img src="https://images.seeklogo.com/logo-png/38/1/yape-logo-png_seeklogo-381640.png?v=638658858130000000" 
-                                      class="pay-img-max me-3" alt="Yape Icon"> Yape
-                                    </button>
-                                  </h2>
-                                  <div id="collapseYape" class="accordion-collapse collapse" aria-labelledby="headingYape" data-bs-parent="#paymentMethods">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                              <input class="form-check-input"
-                                              type="radio" name="pago" id="yape"
-                                              value="Pago en yape">
-                                              <label class="form-check-label"
-                                                  for="yape">
-                                                 Pagar con yape 
-                                              </label>
-                                          </div>
-                                          <small>
-                                              Los detalles para efectuar el pago se
-                                        mostraran luego de generar la orden de
-                                        compra
-                                          </small>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!-- Plin -->
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingPlin">
-                                    <button class="accordion-button collapsed d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlin" aria-expanded="false" aria-controls="collapsePlin">
-                                      <img src="https://images.seeklogo.com/logo-png/38/1/plin-logo-png_seeklogo-386806.png?v=638660522030000000" 
-                                      class="pay-img-max me-3" alt="Plin Icon"> Plin
-                                    </button>
-                                  </h2>
-                                  <div id="collapsePlin" class="accordion-collapse collapse" aria-labelledby="headingPlin" data-bs-parent="#paymentMethods">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                              <input class="form-check-input"
-                                              type="radio" name="pago" id="plin"
-                                              value="Pago en plin">
-                                              <label class="form-check-label"
-                                                  for="plin">
-                                                 Pagar con plin 
-                                              </label>
-                                          </div>
-                                          <small>
-                                                Los detalles para efectuar el pago se
-                                                mostraran luego de generar la orden de
-                                                compra
-                                          </small>
-                                    </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
+                    <div id="metodosDePago">
+                        @include('components.paymentsOptions')
+                        <div class="row" style="gap: 1em;">
+                        <button
+                            class="btn btn-secondary btn-continue-step-buy"
+                            type="button"
+                            onclick="irAtras()"
+                        >
+                            Retorceder 
+                        </button>
+                <button type="button" class="btn btn-primary btn-continue-step-buy" 
+                            id="nextBtnConfirm"
+                            onclick="showSumaryModal()"
+                        >
+                            Continuar
+                        </button>
                         </div>
                     </div>
-                </div>
-            <div class="total-final-price">
+            <div id ="idk23" class="total-final-price">
                 <div class="price-modal">
                     <div>
                     <div class="cart-total-card">
@@ -635,11 +559,22 @@
                         </button>
                         </div>
                     </div>
+                    <div class="row" style="gap: 1em;">
+                        <button
+                            class="btn btn-secondary btn-continue-step-buy"
+                            type="button"
+                            onclick="irAtras2()"
+                        >
+                            Retorceder
+                        </button>
                     <a 
                         href="{{route('checkout')}}"
-                        class="btn btn-secondary btn-continue-step-buy">
+                        class="btn btn-secondary btn-continue-step-buy"
+                        style="background: #b7b7b7; border: none;"
+                    >
                         Cancelar Solicitud 
                     </a >
+                    </div>
             </div>
         </div>
         <!-- Modal de confirmacion-->
@@ -766,25 +701,169 @@
     });
 
 const btnPagar = document.getElementById('pagarBtn');
-const pagoRadios = document.querySelectorAll('input[name="pago"]');
 
     btnPagar.disabled = true;
 
-pagoRadios.forEach(pago=> {
-    pago.addEventListener('change', () => {
-        const isChecked = document.querySelector('input[name="pago"]:checked');
-        btnPagar.disabled = !isChecked;
-        if (isChecked) {
-            btnPagar.classList.add('btn-success'); 
-            btnPagar.classList.remove('btn-primary'); 
-        } else {
-            btnPagar.classList.add('btn-primary'); 
-            btnPagar.classList.remove('btn-success'); 
-        }
-    });
+function viewPopUpNewAddress() {
+    let popUp = document.getElementById('orderPopUp');
+    popUp.style.display = 'flex';
+}
+function mostrarDelivery() {
+    let formaEntregaContainer = document.getElementById('fe-layout');
+
+    fetch('/api/direcciones')
+        .then(response => response.json())
+        .then(direcciones => {
+      console.log(direcciones);  
+            let htmlContent = `
+                <h3>Elige tu forma de entrega</h3>
+                <h5 style="color:#636363;margin-left: 24px;">
+                    Delivery | Elige tu dirección de entrega
+                </h5>
+                <div class="address-card-ct">`;
+
+            if (direcciones.length === 0) {
+                htmlContent += `<p>No tienes direcciones registradas.</p>`;
+            } else {
+                direcciones.forEach(direccion => {
+                    htmlContent += `
+                        <div class="address-card">
+                            <i class="medium-font fa-solid fa-location-dot"></i>
+                            <div class="address-details">
+                                <p>${direccion.pais}/${direccion.departamento}/${direccion.provincia}/${direccion.distrito}</p>
+                                <p>${direccion.agencia}</p>
+                                <p>${direccion.sedeAgencia}</p>
+                            </div>
+                            <input type="radio" id="direccion-${direccion.idDireccion}" name="direcciones" value="${direccion.idDireccion}">
+                        </div>`;
+                });
+            }
+
+            htmlContent += `
+                </div>
+                <style>
+                .info-icon::before{
+                    content:url(images/icon/info.svg);
+                }
+                </style>
+                <div class="entrega-options">
+                    <div class="entrega-options-1">
+                        <small>Agregar otra dirección de entrega</small>
+                        <a href="javascript:void(0);" id="addNewAddressPopUp">Agregar nueva dirección</a>
+                    </div>
+                </div>
+                <div class="row" style="gap: 1em;">
+                    <a 
+                        href="/cart/checkout"
+                        class="btn btn-secondary btn-continue-step-buy">
+                        Cancelar Solicitud 
+                    </a >
+                <button type="button" class="btn btn-primary  btn-continue-step-buy" id="btnContinuar" disabled>
+                    Continuar
+                </button>
+                </div>
+                `;
+            formaEntregaContainer.innerHTML = htmlContent;
+            document.getElementById('addNewAddressPopUp').addEventListener('click', viewPopUpNewAddress);
+            
+            const btnContinuar = document.getElementById('btnContinuar');
+            btnContinuar.addEventListener('click', nextStepBuy,nextStep); 
+            
+            const radios = document.querySelectorAll('input[name="direcciones"]');
+            btnContinuar.disabled = true;
+            
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    btnContinuar.disabled = !document.querySelector('input[name="direcciones"]:checked');
+                });
+            });
+                         
+
+            let currentStep = 1;
+            
+            function showStep(step){
+               document.querySelectorAll('.st-icon').forEach((element, index)=>{
+                  element.className='material-symbols-outlined st-icon ' +
+                  (index + 1 === step ? 'fill-icon' : (index + 1 < step ? 'fill-icon' : 'pending'));
+               });
+            
+               document.querySelectorAll('.step-content').forEach((element, index) => {
+                  element.className = 'step-content ' + (index + 1 === step ? 'active' : '');
+               });
+               }
+            function nextStep() {
+               if (currentStep === 1) {
+                  if (document.querySelector('input[name="payment"]:checked')) {
+                     currentStep++;
+                     showStep(currentStep);
+                  }
+                  else{
+                     alert('Selecciona un método de pago.');
+                  }
+               }
+               else if (currentStep === 2) {
+                  document.getElementById('confirmation-message').style.display = 'flex';
+                  document.getElementById('confirmation-message').style.justifyContent= 'center';
+                  document.getElementById('confirmation-message').style.height= '100%';
+                  currentStep++;
+                  showStep(currentStep);
+               }
+            }
+            
+            function prevStep() {
+               if (currentStep === 3) {
+                  document.getElementById('confirmation-message').style.display = 'none';
+               }
+               currentStep--;
+               showStep(currentStep);
+            }
+            function nextStepBuy(){
+                let successEntrega = document.getElementsByClassName('forma-entrega-layout'); 
+                let oldEntregaCt = document.getElementById('fe-layout');
+                let pagoShowCt = document.getElementById('metodosDePago');
+                oldEntregaCt.style.display='none';
+                pagoShowCt.style.display = 'inherit';
+                let pagoIcono= document.getElementById('step2-nav');
+                pagoIcono.style.color='#7B311E';
+            }
+           })
+                    .catch(error => console.error('Error cargando direcciones:', error));
+            }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    mostrarDelivery();
 });
+</script>
+    <script>
 
-
+function showSumaryModal(){
+    let successEntrega = document.getElementById('idk23'); 
+    let pagoShowCt = document.getElementById('metodosDePago');
+    pagoShowCt.style.display='none';
+    successEntrega.style.display='flex';
+    let verificadoIcono= document.getElementById('step3-nav');
+    verificadoIcono.style.color='#7b311e';
+    const btnPagar = document.getElementById('pagarBtn');
+    btnPagar.disabled = false;
+    btnPagar.classList.add('btn-success');
+}
+function irAtras(){
+    let pagoShowCt = document.getElementById('metodosDePago');
+    let successEntrega = document.getElementById('fe-layout'); 
+    pagoShowCt.style.display='none';
+    successEntrega.style.display='inherit';
+    let pagoIcono= document.getElementById('step2-nav');
+    pagoIcono.style.color='#525368';
+}
+function irAtras2(){
+    let pagoShowCt = document.getElementById('metodosDePago');
+    let summary = document.getElementById('idk23');
+    summary.style.display='none';
+    pagoShowCt.style.display='inherit';
+    let verificadoIcono= document.getElementById('step3-nav');
+    verificadoIcono.style.color='#525368';
+}
 </script>
 
 

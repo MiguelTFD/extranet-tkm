@@ -18,6 +18,12 @@
     display: inherit !important;
 }
 </style>
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+    </div>
+</div>
+<!-- Spinner End -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{ url('/') }}" 
         class="navbar-brand d-flex align-items-center px-4 px-lg-5"

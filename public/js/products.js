@@ -1,8 +1,8 @@
-function addToCart(idProducto) {
+function addToCart(idProducto, cantidad) {
     const token = 
         document.querySelector(
             'meta[name="csrf-token"]').getAttribute('content');
-    var cantidad = document.getElementById('cantidad');
+    cantidad = document.getElementById('cantidad');
     var cantidadValor = cantidad.value;
 
     fetch('/cart/add', {
@@ -35,7 +35,7 @@ function updateCartCount(cantidadCarro) {
 
     function getCartCount() {
     fetch('/cart/count') 
-        .then(response => response.json())  // Convierte la respuesta en JSON
+        .then(response => response.json())  
         .then(data => {
             if(data.cantidadCarro == undefined){
                 document.getElementById("cart-count-number").textContent = '0';
@@ -98,7 +98,7 @@ function filterProductsByCategory(idCategoria) {
             cardCt.innerHTML = '<p>No hay productos disponibles.</p>';
             return;
         }
-
+        
         productos.forEach(producto => {
             const descuento = parseFloat(producto.descuento) || 0;
             const precioUnitario = parseFloat(producto.precioUnitario);
@@ -106,7 +106,7 @@ function filterProductsByCategory(idCategoria) {
             const imagenUrl = producto.imagenes?.[0]?.urlImagenProducto
                 ? '/images/' + producto.imagenes[0].urlImagenProducto
                 : '/images/bf5k.png';
-
+            
             const productHTML = `
                 <div class="productCardMain">
                     <div class="productCardDesc" style="background:${descuento > 0 ? '' : 'white'};color:${descuento > 0 ? '' : 'white'};">
@@ -120,6 +120,7 @@ function filterProductsByCategory(idCategoria) {
                             </figcaption>
                         </figure>
                     </a>
+                    <input type="hidden" value=1 id=cantidad name=cantidad>
                     <figcaption class="preciosItems">
                         <strong><p class="offert-price">S/.${precioActual.toFixed(2)}</p></strong>
                         ${descuento > 0 ? `<p class="old-price">S/.${precioUnitario.toFixed(2)}</p>` : ''}
@@ -131,25 +132,27 @@ function filterProductsByCategory(idCategoria) {
                     </div>
                 </div>
             `;
-
+            
             cardCt.innerHTML += productHTML;
         });
-
-        // Adding event listeners to dynamically created addCart buttons
+        
         const addCartBtns = document.querySelectorAll('.addCar');
+        
         addCartBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                const productId = 
-                    productos.find(producto => 
-                        producto.nombreProducto === this.closest(
-                            '.productCardMain').querySelector(
-                                '.product-name').textContent.trim()
-                    ).idProducto;
-                addToCart(productId);
+                const productCard = this.closest('.productCardMain');
+                const productId = productos.find(producto => 
+                    producto.nombreProducto === productCard.querySelector(
+                        '.product-name').textContent.trim()
+                ).idProducto;
+                const cantidadInput = 
+                    productCard.querySelector('input[name="cantidad"]');
+                const cantidad = cantidadInput ? parseInt(
+                    cantidadInput.value, 10) || 1 : 1;
+                addToCart(productId, cantidad);
             });
         });
-
-        // Adding event listeners to product info links
+        
         const productInfoLinks = document.querySelectorAll('.productInfoClick');
         productInfoLinks.forEach(link => {
             link.addEventListener('click', function () {
@@ -289,7 +292,6 @@ const relacionadosHtml = productosRelacionados?.length > 0 ? `
     
     content.innerHTML += relacionadosHtml;
 
-        // Adding event listeners to dynamically created "Agregar al carrito" buttons
         const addCartBtns = document.querySelectorAll('.addCar');
         addCartBtns.forEach(btn => {
             btn.addEventListener('click', function() {
@@ -298,7 +300,6 @@ const relacionadosHtml = productosRelacionados?.length > 0 ? `
             });
         });
 
-        // Adding event listeners to product info links
         const productInfoLinks = document.querySelectorAll('.productInfoClick');
         productInfoLinks.forEach(link => {
             link.addEventListener('click', function () {
@@ -311,8 +312,6 @@ const relacionadosHtml = productosRelacionados?.length > 0 ? `
     .catch(error => {
         console.error('Error al obtener la información del producto:', error);
     });
-
-
 }
 
 

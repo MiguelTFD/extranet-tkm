@@ -10,7 +10,7 @@ let pagoEnYape=`
     </i><span>QR:</span></p>
 
 
-     <img style="max-width: 400px; width: 100%" src="images/yape-qr.png" alt="QR" />
+    <img style="max-width: 400px; width: 100%" src="images/yape-qr.png" alt="QR" />
 `;
 let pagoEnPlin=`
     Número de destino: +51 983 929 015<br>

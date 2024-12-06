@@ -106,8 +106,7 @@
                 class="form-control" 
                 id="sedeAgencia" 
                 value="{{ old('sedeAgencia') }}" 
-                placeholder="Ingresa la sede o direccion
-                de tu agencia elegida." 
+                placeholder="Ingresa la sede o direccion de tu agencia elegida." 
                 required
             >
             <p 
