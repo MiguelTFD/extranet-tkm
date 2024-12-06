@@ -27,10 +27,7 @@ display:flex;
     </div>
     <div class="cntew">
         <div class="cntew">
-            <form action="{{ route('filtrarProductos') }}" method="POST">
-                @csrf <!-- Token CSRF -->
-                <input type="hidden" name="idCategoria" value="">
-                <button class="addCar" type="submit" >
+                <button class="addCar" type="button" >
                     Ver todos los productos
                 </button>
             </form>

@@ -329,53 +329,66 @@
                         >
                             País
                         </label>
-                        <select id="pais" name="pais" class="form-select">
-                            <option value="" selected>Selecciona tu País</option>
+                            <select id="edit-pais" name="pais" class="form-select">
+                                <option value="" selected>Selecciona tu País</option>
                             @foreach($paises as $pais)
                                 <option value="{{ $pais->idPais }}">
                                     {{ $pais->nombrePais }}
                                 </option>
                             @endforeach
                         </select>
-
                     </div>
                     <div class="col-md-3">
                         <label for="departamento" class="form-label">Departamento</label>
-                        <select id="departamento" name="departamento" class="form-select">
-                            <option selected disabled>Selecciona tu Departamento</option>
+                        <select id="edit-departamento" name="departamento" class="form-select">    
+                        <option selected disabled>Selecciona tu Departamento</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="provincia" class="form-label">Provincia</label>
-                        <select id="provincia" name="provincia" class="form-select">
-                            <option value="">Selecciona tu Provincia</option>
+                        <select id="edit-provincia" name="provincia" class="form-select">    
+                        <option value="">Selecciona tu Provincia</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="idDistrito" class="form-label">Distrito</label>
-                        <select id="idDistrito" name="idDistrito" class="form-select">
-                            <option value="">Selecciona tu Distrito</option>
+                        <select id="edit-idDistrito" name="idDistrito" class="form-select">     
+                        <option value="">Selecciona tu Distrito</option>
                         </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="idTipoDireccion" class="form-label">Tipo de Dirección</label>
-                        <select name="idTipoDireccion" class="form-select" id="idTipoDireccion" required>
-                            <option value="">Seleccione el tipo de dirección</option>
-                            @foreach($tiposDireccion as $tipoDireccion)
-                                <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="direccionExacta" class="form-label">Dirección Exacta</label>
-                        <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="referencia" class="form-label">Referencia</label>
-                    <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
+                    <label for="agencia">Agencia de envio</label>
+                                <input type="text" name="agencia" 
+                                class="form-control" 
+                                id="agencia" 
+                                value="{{ old('agencia') }}" 
+                                placeholder="Shalom, Olva, Etc." required>
+                                <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
+                </div>
+                <div class="mb-3">
+                    <label 
+                        for="sedeAgencia"
+                    >
+                        Agencia de envio
+                    </label>
+                    <input 
+                        type="text" 
+                        name="sedeAgencia" 
+                        class="form-control" 
+                        id="sedeAgencia" 
+                        value="{{ old('sedeAgencia') }}" 
+                        placeholder="Ingresa la sede o direccion
+                        de tu agencia elegida." 
+                        required
+                    >
+                    <p 
+                        class="info-icon" 
+                        style="color:#949494;font-size:0.9em;text-align:left; "
+                    >
+                        Esta direccion sera util para enviarte 
+                        tu pedido lo mas cerca a tu ubicacion
+                    </p>
                 </div>
             <div class="d-flex justify-content-between mt-4">
                 <button style="padding:1em;" type="button" id="btn-cancelar-dir" class="btn btn-secondary">Cancelar</button>
@@ -409,8 +422,8 @@
                                         >
                                             País
                                         </label>
-                                        <select id="pais" name="pais" class="form-select">
-                                            <option value="">Selecciona tu País</option>
+                                        <select id="add-pais" name="pais" class="form-select">    
+                                        <option value="">Selecciona tu País</option>
                                             @foreach($paises as $pais)
                                                 <option value="{{ $pais->idPais }}">{{ $pais->nombrePais }}</option>
                                             @endforeach
@@ -418,42 +431,69 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="departamento" class="form-label">Departamento</label>
-                                        <select id="departamento" name="departamento" class="form-select">
+                                        <select id="add-departamento" name="departamento" class="form-select">
                                             <option selected disabled>Selecciona tu Departamento</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="provincia" class="form-label">Provincia</label>
-                                        <select id="provincia" name="provincia" class="form-select">
+                                        <select id="add-provincia" name="provincia" class="form-select">
                                             <option value="">Selecciona tu Provincia</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="idDistrito" class="form-label">Distrito</label>
-                                        <select id="idDistrito" name="idDistrito" class="form-select">
+                                        <select id="add-idDistrito" name="idDistrito" class="form-select">
                                             <option value="">Selecciona tu Distrito</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="idTipoDireccion" class="form-label">Tipo de Dirección</label>
-                                        <select name="idTipoDireccion" class="form-select" id="idTipoDireccion" required>
-                                            <option value="">Seleccione el tipo de dirección</option>
-                                            @foreach($tiposDireccion as $tipoDireccion)
-                                                <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="direccionExacta" class="form-label">Dirección Exacta</label>
-                                        <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" 
-                                        value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
-                                    </div>
+                                <div class="mb-3">
+                                    <label 
+                                        for="agencia"
+                                    >
+                                        Agencia de envio
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="agencia" 
+                                        class="form-control" 
+                                        id="agencia" 
+                                        value="{{ old('agencia') }}" 
+                                        placeholder="Shalom, Olva, Etc." 
+                                        required
+                                    >
+                                    <p 
+                                        class="info-icon" 
+                                        style="color:#949494;font-size:0.9em;text-align:left; "
+                                    >
+                                        Usaremos esta agencia para 
+                                        proceder con el envio de tu compra
+                                    </p>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="referencia" class="form-label">Referencia</label>
-                                    <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
+                                    <label 
+                                        for="sedeAgencia"
+                                    >
+                                        Agencia de envio
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="sedeAgencia" 
+                                        class="form-control" 
+                                        id="sedeAgencia" 
+                                        value="{{ old('sedeAgencia') }}" 
+                                        placeholder="Ingresa la sede o direccion
+                                        de tu agencia elegida." 
+                                        required
+                                    >
+                                    <p 
+                                        class="info-icon" 
+                                        style="color:#949494;font-size:0.9em;text-align:left; "
+                                    >
+                                        Esta direccion sera util para enviarte 
+                                        tu pedido lo mas cerca a tu ubicacion
+                                    </p>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" id="cerrarBtn" onclick="cerrarPopUp()" class="btn btn-secondary">Cancelar</button>
@@ -471,7 +511,7 @@
 <div id="te-layout">
 
 </div>
-         </div>
+</div>
 </div>
  </div>
 </div>
@@ -485,29 +525,29 @@ function cerrarPopUp(){
                 popUpLayout.style.display = 'none';        
             })
 }
-    $(document).ready(function() {
-        $('#pais').on('change', function() {
-            var paisId = $(this).val();
-            if (paisId) {
-                $.ajax({
-                    url: '{{ route("getDepartamentos") }}',
-                    type: 'GET',
-                    data: { pais_id: paisId },
-                    success: function(data) {
-                        $('#departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
-                        $.each(data, function(key, value) {
-                            $('#departamento').append('<option value="' + value.idDepartamento + '">' + value.nombreDepartamento + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('#departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
-                $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
-                $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
-            }
-        });
-
-        $('#departamento').on('change', function() {
+$(document).ready(function() {
+    // Para el formulario de agregar dirección
+    $('#add-pais').on('change', function() {
+        const paisId = $(this).val();
+        if (paisId) {
+            $.ajax({
+                url: '{{ route("getDepartamentos") }}',
+                type: 'GET',
+                data: { pais_id: paisId },
+                success: function(data) {
+                    $('#add-departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+                    $.each(data, function(key, value) {
+                        $('#add-departamento').append('<option value="' + value.idDepartamento + '">' + value.nombreDepartamento + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#add-departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+            $('#add-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+            $('#add-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+        }
+    });
+        $('#add-departamento').on('change', function() {
             var departamentoId = $(this).val();
             if (departamentoId) {
                 $.ajax({
@@ -515,19 +555,19 @@ function cerrarPopUp(){
                     type: 'GET',
                     data: { departamento_id: departamentoId },
                     success: function(data) {
-                        $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                        $('#add-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
                         $.each(data, function(key, value) {
-                            $('#provincia').append('<option value="' + value.idProvincia + '">' + value.nombreProvincia + '</option>');
+                            $('#add-provincia').append('<option value="' + value.idProvincia + '">' + value.nombreProvincia + '</option>');
                         });
                     }
                 });
             } else {
-                $('#provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
-                $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                $('#add-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                $('#add-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
             }
         });
 
-        $('#provincia').on('change', function() {
+        $('#add-provincia').on('change', function() {
             var provinciaId = $(this).val();
             if (provinciaId) {
                 $.ajax({
@@ -535,18 +575,80 @@ function cerrarPopUp(){
                     type: 'GET',
                     data: { provincia_id: provinciaId },
                     success: function(data) {
-                        $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                        $('#add-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
                         $.each(data, function(key, value) {
-                            $('#idDistrito').append('<option value="' + value.idDistrito + '">' + value.nombreDistrito + '</option>');
+                            $('#add-idDistrito').append('<option value="' + value.idDistrito + '">' + value.nombreDistrito + '</option>');
                         });
                     }
                 });
             } else {
-                $('#idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                $('#add-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+            }
+        });
+    
+    // Para el formulario de editar direccion 
+    $('#edit-pais').on('change', function() {
+        const paisId = $(this).val();
+        if (paisId) {
+            $.ajax({
+                url: '{{ route("getDepartamentos") }}',
+                type: 'GET',
+                data: { pais_id: paisId },
+                success: function(data) {
+                    $('#edit-departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+                    $.each(data, function(key, value) {
+                        $('#edit-departamento').append('<option value="' + value.idDepartamento + '">' + value.nombreDepartamento + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#edit-departamento').empty().append('<option value="">Selecciona tu Departamento</option>');
+            $('#edit-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+            $('#edit-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+        }
+    });
+        $('#edit-departamento').on('change', function() {
+            var departamentoId = $(this).val();
+            if (departamentoId) {
+                $.ajax({
+                    url: '{{ route("getProvincias") }}',
+                    type: 'GET',
+                    data: { departamento_id: departamentoId },
+                    success: function(data) {
+                        $('#edit-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                        $.each(data, function(key, value) {
+                            $('#edit-provincia').append('<option value="' + value.idProvincia + '">' + value.nombreProvincia + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#edit-provincia').empty().append('<option value="">Selecciona tu Provincia</option>');
+                $('#edit-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
             }
         });
 
+        $('#edit-provincia').on('change', function() {
+            var provinciaId = $(this).val();
+            if (provinciaId) {
+                $.ajax({
+                    url: '{{ route("getDistritos") }}',
+                    type: 'GET',
+                    data: { provincia_id: provinciaId },
+                    success: function(data) {
+                        $('#edit-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+                        $.each(data, function(key, value) {
+                            $('#edit-idDistrito').append('<option value="' + value.idDistrito + '">' + value.nombreDistrito + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#edit-idDistrito').empty().append('<option value="">Selecciona tu Distrito</option>');
+            }
+        });
+
+
     });
+
 document.addEventListener('DOMContentLoaded', () => {
     // Maneja el clic en el botón "Editar"
     document.querySelectorAll('.btn-edit').forEach(button => {
@@ -600,11 +702,11 @@ function viewPopUpNewAddress() {
                 direcciones.forEach(direccion => {
                     htmlContent += `
                         <div class="address-card">
-                            <i class="medium-font fa-solid fa-house"></i>
+                            <i class="medium-font fa-solid fa-location-dot"></i>
                             <div class="address-details">
                                 <p>${direccion.pais}/${direccion.departamento}/${direccion.provincia}/${direccion.distrito}</p>
-                                <p>${direccion.direccionExacta}</p>
-                                <p>${direccion.referencia}</p>
+                                <p>${direccion.agencia}</p>
+                                <p>${direccion.sedeAgencia}</p>
                             </div>
                             <button class="btn btn-primary btn-edit" style="padding:1em;" data-id="${direccion.idDireccion}">Editar</button>
                         </div>
@@ -638,13 +740,14 @@ function viewPopUpNewAddress() {
                         .then(response => response.json())
                         .then(data => {
                             document.getElementById('editIdDireccion').value = data.idDireccion;
-                            document.getElementById('pais').value = data.pais;
-                            document.getElementById('departamento').value = data.departamento;
-                            document.getElementById('provincia').value = data.provincia;
-                            document.getElementById('idDistrito').value = data.distrito;
-                            document.getElementById('idTipoDireccion').value = data.idTipoDireccion;
-                            document.getElementById('direccionExacta').value = data.direccionExacta;
-                            document.getElementById('referencia').value = data.referencia;
+                            document.getElementById('edit-pais').value = data.pais;
+                            document.getElementById('edit-departamento').value = data.departamento;
+                            document.getElementById('edit-provincia').value = data.provincia;
+                            document.getElementById('edit-idDistrito').value = data.distrito;
+                            document.getElementById('agencia').value =
+                                data.agencia;
+                            document.getElementById('sedeAgencia').value =
+                                data.sedeAgencia;
 
                             // Show the edit popup
                             document.getElementById('editPopUp').style.display = 'flex';

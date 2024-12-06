@@ -85,26 +85,41 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="direccionExacta">Dirección Exacta</label>
-            <input type="text" name="direccionExacta" class="form-control" id="direccionExacta" value="{{ old('direccionExacta') }}" placeholder="Ingresa tu dirección exacta" required>
+            <div class="form-group">
+                <label for="agencia">Agencia de envio</label>
+                <input type="text" name="agencia" 
+                class="form-control" 
+                id="agencia" 
+                value="{{ old('agencia') }}" 
+                placeholder="Shalom, Olva, Etc." required>
+                <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
+        </div>
+        <div class="mb-3">
+            <label 
+                for="sedeAgencia"
+            >
+                Agencia de envio
+            </label>
+            <input 
+                type="text" 
+                name="sedeAgencia" 
+                class="form-control" 
+                id="sedeAgencia" 
+                value="{{ old('sedeAgencia') }}" 
+                placeholder="Ingresa la sede o direccion
+                de tu agencia elegida." 
+                required
+            >
+            <p 
+                class="info-icon" 
+                style="color:#949494;font-size:0.9em;text-align:left; "
+            >
+                Esta direccion sera util para enviarte 
+                tu pedido lo mas cerca a tu ubicacion
+            </p>
         </div>
 
-        <div class="form-group">
-            <label for="referencia">Referencia</label>
-            <input type="text" name="referencia" class="form-control" id="referencia" value="{{ old('referencia') }}" placeholder="Danos una referencia de tu dirección" required>
-        </div>
-
-        <div class="form-group">
-            <label for="idTipoDireccion">Tipo de Dirección</label>
-            <select name="idTipoDireccion" class="form-control" id="idTipoDireccion" required>
-                <option value="">Seleccione el tipo de dirección</option>
-                @foreach($tiposDireccion as $tipoDireccion)
-                    <option value="{{ $tipoDireccion->idTipoDireccion }}">{{ $tipoDireccion->nombreTipo }}</option>
-                @endforeach
-            </select>
-        </div>
-
+        
         <button type="submit" class="btn btn-primary">Registrar Usuario</button>
     </form>
 </div>

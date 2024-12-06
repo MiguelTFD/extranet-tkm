@@ -249,16 +249,37 @@ select {
                 </div>
             </div>
             <div class="form-group">
-                <label for="agencia">Dirección Exacta</label>
-                    <input 
-                        type="text" 
-                        name="agencia" 
-                        class="form-control" 
-                        id="agencia" 
-                        value="{{ old('agencia') }}" 
-                        placeholder="Ingresa tu dirección exacta" 
-                        required
-                    >
+                <label for="agencia">Agencia de envio</label>
+                <input type="text" name="agencia" 
+                class="form-control" 
+                id="agencia" 
+                value="{{ old('agencia') }}" 
+                placeholder="Shalom, Olva, Etc." required>
+                <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
+            </div>
+            <div class="mb-3">
+                <label 
+                    for="sedeAgencia"
+                >
+                    Agencia de envio
+                </label>
+                <input 
+                    type="text" 
+                    name="sedeAgencia" 
+                    class="form-control" 
+                    id="sedeAgencia" 
+                    value="{{ old('sedeAgencia') }}" 
+                    placeholder="Ingresa la sede o direccion
+                    de tu agencia elegida." 
+                    required
+                >
+                <p 
+                    class="info-icon" 
+                    style="color:#949494;font-size:0.9em;text-align:left; "
+                >
+                    Esta direccion sera util para enviarte 
+                    tu pedido lo mas cerca a tu ubicacion
+                </p>
             </div>
             <div class="row">
                 <div class="form-group">

@@ -8,12 +8,8 @@
     @endcomponent
     @component('components.topfeatures')
     @endcomponent
-    @component('components.categoriesProducts')
-    @endcomponent
 
     @component('components.featuresStats')
-    @endcomponent
-    @component('components.bestProducts')
     @endcomponent
     @component('components.paymentsMethods')
     @endcomponent

@@ -65,8 +65,8 @@ class EmailController extends Controller
                 nombreDistrito
             }";
         
-        $direccionExacta = $direccion->direccionExacta;
-        $referencia = $direccion->referencia;
+        $agencia= $direccion->agencia;
+        $sedeAgencia = $direccion->sedeAgencia;
         
         $datosOrdenCompra = [
             'idOrdenCompra' => $ordenCompra->idOrdenCompra,
@@ -86,8 +86,8 @@ class EmailController extends Controller
             'instruccionEntrega' => $ordenCompra->instruccionEntrega,
             'tipoEntrega' => $ordenCompra->tipoEntrega,
             'metodoPago' => $ordenCompra->metodoPago,
-            'direccionExacta' => $direccionExacta,
-            'referencia' => $referencia,
+            'agencia' => $agencia,
+            'sedeAgencia'=>$sedeAgencia,
             'direccion' => $nombreDireccion,
             'estadoOrdenCompra' => $ordenCompra->estadoOrdenCompra,
             'precioTotal' => $ordenCompra->precioTotal,

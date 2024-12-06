@@ -234,39 +234,31 @@ width: 100px !important;
             <span class="old-price">S/{{ number_format($producto->precioUnitario, 2) }}</span>
            @endif
         </div>
-
-        <div class="product-quantity">
-            <label style="color:#C4B400" for="cantidad">Cantidad</label>
-            <div class="d-flex">
-                <button class="btn " type="button" onclick="decrement()">-</button>
-                <input id="cantidad"
-                    type="number"
-                    class="form-control text-center my-1"
-                    name="cantidad"
-                    value="1"
-                    min="1"
-                    step="1"
-                    style="width: 40px;"
-                >
-                <button class="btn " type="button" onclick="increment()">+</button>
-                </div>
-        </div>
         <form id="addToCartForm" action="{{ route('add') }}" method="POST">
-            @csrf
-            <input
-                    type="hidden"
-                    name="id"
-                    value="{{$producto->idProducto}}"
+    @csrf
+    <div class="product-quantity">
+        <label style="color:#C4B400" for="cantidad">Cantidad</label>
+        <div class="d-flex">
+            <button class="btn" type="button" onclick="decrement()">-</button>
+            <input id="cantidad"
+                type="number"
+                class="form-control text-center my-1"
+                name="cantidad"
+                value="1"
+                min="1"
+                step="1"
+                style="width: 40px;"
             >
-            <button
-                    type="button"
-                    class="addCar"
-                    onclick="addToCart(this)"
-            >
-                Agregar al carrito
-            </button>
-        </form>
+            <button class="btn" type="button" onclick="increment()">+</button>
+        </div>
     </div>
+    <input type="hidden" name="id" value="{{$producto->idProducto}}">
+    <button type="button" class="addCar" onclick="addToCart(this)">
+        Agregar al carrito
+    </button>
+</form>
+        
+        </div>
 
     <div style="margin-top:9em" class="catXprodCt">
         <div class="titleCategories">
@@ -350,58 +342,16 @@ width: 100px !important;
 
 
 <script>
+<script>
 function increment() {
     var cantidad = document.getElementById("cantidad");
-    cantidad.stepUp();
+    cantidad.value = Math.max(1, parseInt(cantidad.value) + 1);
 }
 
 function decrement() {
     var cantidad = document.getElementById("cantidad");
-    cantidad.stepDown();
+    cantidad.value = Math.max(1, parseInt(cantidad.value) - 1);
 }
-</script>
-
-<script>
-    function addToCart(button) {
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
-        // Obtener el formulario relacionado
-        const form = button.closest('form');
-        const formData = new FormData(form);
-
-        // Enviar la solicitud AJAX
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json', // Asegúrate de solicitar JSON
-            },
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json(); // Esto convierte la respuesta JSON automáticamente
-            })
-            .then(data => {
-                if (data.success) {
-                    // Mostrar mensaje de éxito
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = 'alert alert-success';
-                    messageDiv.textContent = data.message;
-                    document.body.appendChild(messageDiv);
-
-                    // Ocultar el mensaje después de 3 segundos
-                    setTimeout(() => {
-                        messageDiv.remove();
-                    }, 3000);
-                } else {
-                    alert('Hubo un error al agregar el producto.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
 
 
 </script>

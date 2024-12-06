@@ -40,6 +40,11 @@ Route::get(
     [NavigationController::class, 'showPasswordRestorePage']
 )->name('passwordRestore');
 //listo
+
+Route::get(
+    '/cart/checkout',
+    [NavigationController::class, 'showCartPage']
+)->name('checkout');
 Route::get(
     '/userRegistration',
     [NavigationController::class, 'showUserRegistrationPage']
@@ -48,7 +53,7 @@ Route::get(
 Route::get(
     '/userLogin',
     [NavigationController::class, 'showUserLoginPage']
-)->name('userLogin');
+)->name('login');
 
 Route::get(
     '/termsAndConditions',
@@ -64,17 +69,6 @@ Route::get(
     '/securityAndPrivacy',
     [NavigationController::class, 'showSecurityAndPrivacyPage']
 )->name('securityAndPrivacy');
-
-//Auth
-Route::get(
-    '/showUserProfile', 
-    [UsuarioController::class, 'showUserProfilePage']
-)->name('showUserProfile');
-
-Route::get(
-    '/showOrderRequest',
-    [OrdenCompraController::class, 'showOrderRequestPage']
-)->name('showOrderRequest');
 
 
 /*----------------------------------------------------------------------------*/
@@ -92,6 +86,9 @@ Route::get('/api/products',
 
 Route::post('/api/filter-products', 
     [ProductoController::class, 'filterProductsByCategory']); 
+
+Route::post('/api/productDetail', 
+    [ProductoController::class, 'getProductInfo']); 
 
 /*----------------------------------------------------------------------------*/
 
@@ -140,7 +137,6 @@ Route::post('/direccionNueva', [UbicacionController::class, 'newDirection'])->na
 
 //para el carrito de compras
 Route::post('/cart/add', [CartController::class, 'add'])->name('add');
-Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('remove');
 Route::post('/cart/increaseQuantity', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
@@ -194,6 +190,19 @@ Route::middleware(['auth:usuario'])->group(function(){
         '/api/direccion/{id}', 
         [UbicacionController::class, 'getDireccion']
     );
+
+//Auth
+Route::get(
+    '/showUserProfile', 
+    [UsuarioController::class, 'showUserProfilePage']
+)->name('showUserProfile');
+
+Route::get(
+    '/showOrderRequest',
+    [NavigationController::class, 'showOrderRequestPage']
+)->name('showOrderRequest');
+
+
     
     Route::post(
         '/direccion-actualizar', 

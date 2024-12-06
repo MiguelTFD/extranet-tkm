@@ -12,6 +12,7 @@ use App\Models\OrdenCompra;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pais;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
@@ -29,6 +30,7 @@ class UsuarioController extends Controller
             'correo' => 'required|email|unique:usuario,correo',
             'idDistrito' => 'required',
             'agencia' => 'required',
+            'sedeAgencia'=>'required',
             'numeroDocumentoIdentidad' =>
             'required|unique:documentoIdentidad,numeroDocumentoIdentidad',
             'idTipoDocumentoIdentidad' => 'required'
@@ -37,7 +39,8 @@ class UsuarioController extends Controller
         try {
             $direccion = Direccion::create([
                 'idDistrito' => $validated['idDistrito'],
-                'agencia' => $validated['agencia']
+                'agencia' => $validated['agencia'],
+                'sedeAgencia'=> $validated['sedeAgencia']
             ]);
             $usuario = new Usuario([
                 'username' => $validated['username'],
@@ -71,16 +74,18 @@ class UsuarioController extends Controller
         }
     }
 
-    public function showUserProfilePage()
-    {
-        $usuario = Auth::guard('usuario')->user();
-        $documentoIdentidad = $usuario->documentoIdentidad->numeroDocumentoIdentidad;
-        $tiposDocumento = TipoDocumentoIdentidad::all();
-        return view(
-            'auth.perfil',
-            compact('usuario', 'documentoIdentidad', 'tiposDocumento')
-        );
-    }
+   public function showUserProfilePage()
+{
+    $usuario = Auth::guard('usuario')->user();
+    $documentoIdentidad = $usuario->documentoIdentidad; 
+    $tiposDocumento = TipoDocumentoIdentidad::all();
+
+    return view(
+        'auth.perfil',
+        compact('usuario', 'documentoIdentidad', 'tiposDocumento')
+    );
+}
+ 
 
     //Listo
     public function updateUser(Request $request)
@@ -162,9 +167,9 @@ class UsuarioController extends Controller
             "{$direccion->distrito->provincia->nombreProvincia}/" .
             "{$direccion->distrito->nombreDistrito}";
 
-        $direccionExacta = $direccion->direccionExacta;
 
-        $referencia = $direccion->referencia;
+        $agencia= $direccion->agencia;
+        $sedeAgencia = $direccion->sedeAgencia;
 
         $datosOrdenCompra = [
             'idOrdenCompra' => $ordenCompra->idOrdenCompra,
@@ -173,8 +178,8 @@ class UsuarioController extends Controller
             'instruccionEntrega' => $ordenCompra->instruccionEntrega,
             'tipoEntrega' => $ordenCompra->tipoEntrega,
             'metodoPago' => $ordenCompra->metodoPago,
-            'direccionExacta' => $direccionExacta,
-            'referencia' => $referencia,
+            'agencia' => $agencia,
+            'sedeAgencia'=> $sedeAgencia,
             'direccion' => $nombreDireccion,
             'estadoOrdenCompra' => $ordenCompra->estadoOrdenCompra,
             'precioTotal' => $ordenCompra->precioTotal,
@@ -211,8 +216,10 @@ class UsuarioController extends Controller
             "{$direccion->distrito->provincia->departamento->nombreDepartamento}/" .
             "{$direccion->distrito->provincia->nombreProvincia}/" .
             "{$direccion->distrito->nombreDistrito}";
-        $direccionExacta = $direccion->direccionExacta;
-        $referencia = $direccion->referencia;
+
+        $agencia= $direccion->agencia;
+
+        $sedeAgencia = $direccion->sedeAgencia;
 
         $datosOrdenCompra = [
             'idOrdenCompra' => $ordenCompra->idOrdenCompra,
@@ -221,8 +228,8 @@ class UsuarioController extends Controller
             'instruccionEntrega' => $ordenCompra->instruccionEntrega,
             'tipoEntrega' => $ordenCompra->tipoEntrega,
             'metodoPago' => $ordenCompra->metodoPago,
-            'direccionExacta' => $direccionExacta,
-            'referencia' => $referencia,
+            'agencia' => $agencia,
+            'sedeAgencia' => $sedeAgencia,
             'direccion' => $nombreDireccion,
             'estadoOrdenCompra' => $ordenCompra->estadoOrdenCompra,
             'precioTotal' => $ordenCompra->precioTotal,
@@ -289,7 +296,7 @@ class UsuarioController extends Controller
                 $metodoPagoLayout = '<p>Algo salió mal :(</p>';
                 break;
         }
-
+                $usuario = Auth::guard('usuario')->user();
         $pdf = Pdf::loadView(
             'auth.pdfPedidos',
             compact('datosOrdenCompra', 'metodoPagoLayout', 'usuario')

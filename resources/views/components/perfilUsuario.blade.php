@@ -66,7 +66,8 @@
                 name="numeroDocumentoIdentidad" 
                 id="numeroDocumentoIdentidad" 
                 class="form-control" 
-                value="{{ old('numeroDocumentoIdentidad', $documentoIdentidad->numeroDocumentoIdentidad) }}" required>
+                value="{{ old('numeroDocumentoIdentidad', $documentoIdentidad) }}" required>
+
         </div>
 
         <div class="form-group">

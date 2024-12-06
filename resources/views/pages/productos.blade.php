@@ -36,5 +36,21 @@ margin: 0 auto;
     @include('components.catXprod')
 </div>
 
+<script>
+function increment() {
+    var cantidad = document.getElementById("cantidad");
+    cantidad.stepUp();
+}
+
+function decrement() {
+    var cantidad = document.getElementById("cantidad");
+    cantidad.stepDown();
+}
+</script>
+
+<script>
+
+</script>
+
 
 @endsection

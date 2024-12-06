@@ -45,19 +45,17 @@ class UbicacionController extends Controller
     public function newDirection(Request $request)
     {
         $validated = $request->validate([
-            'direccionExacta' => 'required',
-            'referencia' => 'required',
             'idDistrito' => 'required',
-            'idTipoDireccion' => 'required'
+            'agencia' => 'required',
+            'sedeAgencia'=>'required'
         ]);
         $usuario = Auth::guard('usuario')->user();
         DB::beginTransaction();
         try {
             $direccion = Direccion::create([
-                'direccionExacta' => $validated['direccionExacta'],
                 'idDistrito' => $validated['idDistrito'],
-                'referencia' => $validated['referencia'],
-                'idTipoDireccion' => $validated['idTipoDireccion']
+                'agencia' => $validated['agencia'],
+                'sedeAgencia'=>$validated['sedeAgencia']
             ]);
 
             DB::table('direccionXusuario')->insert([
@@ -78,7 +76,6 @@ class UbicacionController extends Controller
     public function obtenerDirecciones()
     {
         $usuario = Auth::guard('usuario')->user();
-
         if (!$usuario) {
             return response()->json(['error' => 'Usuario no autenticado'], 401);
         }
@@ -89,8 +86,8 @@ class UbicacionController extends Controller
         $direccionesConNombres = $direcciones->map(function ($direccion) {
             return [
                 'idDireccion' => $direccion->idDireccion,
-                'direccionExacta' => $direccion->direccionExacta,
-                'referencia' => $direccion->referencia,
+                'agencia' => $direccion->agencia,
+                'sedeAgencia'=>$direccion->sedeAgencia,
                 'distrito' => $direccion->distrito ? $direccion->distrito->nombreDistrito : null,
                 'provincia' => $direccion->distrito && $direccion->distrito->provincia ? $direccion->distrito->provincia->nombreProvincia : null,
                 'departamento' => $direccion->distrito && $direccion->distrito->provincia && $direccion->distrito->provincia->departamento ? $direccion->distrito->provincia->departamento->nombreDepartamento : null,
@@ -106,22 +103,20 @@ public function getDireccion($id) {
 
     return response()->json([
         'idDireccion' => $direccion->idDireccion,
-        'direccionExacta' => $direccion->direccionExacta,
-        'referencia' => $direccion->referencia,
+        'agencia' => $direccion->agencia,
+        'sedeAgencia' => $direccion->sedeAgencia,
         'distrito' => $direccion->distrito->idDistrito,
         'provincia' => $direccion->distrito->provincia->idProvincia,
         'departamento' => $direccion->distrito->provincia->departamento->idDepartamento,
         'pais' => $direccion->distrito->provincia->departamento->pais->idPais,
-        'idTipoDireccion' => $direccion->idTipoDireccion,
     ]);
 }
 public function updateDirection(Request $request) {
     $validated = $request->validate([
         'idDireccion' => 'required|exists:direccion,idDireccion',
-        'direccionExacta' => 'required',
-        'referencia' => 'required',
-        'idDistrito' => 'required',
-        'idTipoDireccion' => 'required',
+        'agencia' => 'required',
+        'sedeAgencia' =>'required',
+        'idDistrito' => 'required'
     ]);
 
     try {

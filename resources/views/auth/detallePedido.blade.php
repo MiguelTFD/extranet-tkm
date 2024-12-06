@@ -199,22 +199,21 @@ thead tr{
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-6"><strong>Direccion</strong></div>
+                    <div class="col-6"><strong>Agencia</strong></div>
                     <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['direccionExacta']}}
+                        {{ $datosOrdenCompra['agencia']}}
                         </p>
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-6"><strong>Referencia</strong></div>
+                    <div class="col-6"><strong>Sede de Agencia</strong></div>
                     <div class="col-6 text-end rdp">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $datosOrdenCompra['referencia']}}
+                        {{ $datosOrdenCompra['sedeAgencia']}}
                         </p>
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col-6"><strong>Método de pago</strong></div>
                     <div class="col-6 text-end rdp">

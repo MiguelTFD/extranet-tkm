@@ -47,8 +47,11 @@ class NavigationController extends Controller
     public function showCartPage(){
         return view('pages.carritoCompras');
     }
+    
     public function showOrderRequestPage(){
-        return view('pages.registrarOrdenCompra');
+        $paises = Pais::all();
+        $tiposDocumento = TipoDocumentoIdentidad::all();
+        return view('pages.registrarOrdenCompra', compact('tiposDocumento',  'paises'));
     }    
 
 

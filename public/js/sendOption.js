@@ -9,7 +9,7 @@ function mostrarDelivery() {
     fetch('/api/direcciones')
         .then(response => response.json())
         .then(direcciones => {
-
+      console.log(direcciones);  
             let htmlContent = `
                 <h3>Elige tu forma de entrega</h3>
                 <h5 style="color:#636363;margin-left: 24px;">
@@ -23,11 +23,11 @@ function mostrarDelivery() {
                 direcciones.forEach(direccion => {
                     htmlContent += `
                         <div class="address-card">
-                            <i class="medium-font fa-solid fa-house"></i>
+                            <i class="medium-font fa-solid fa-location-dot"></i>
                             <div class="address-details">
                                 <p>${direccion.pais}/${direccion.departamento}/${direccion.provincia}/${direccion.distrito}</p>
-                                <p>${direccion.direccionExacta}</p>
-                                <p>${direccion.referencia}</p>
+                                <p>${direccion.agencia}</p>
+                                <p>${direccion.sedeAgencia}</p>
                             </div>
                             <input type="radio" id="direccion-${direccion.idDireccion}" name="direcciones" value="${direccion.idDireccion}">
                         </div>`;
@@ -45,22 +45,6 @@ function mostrarDelivery() {
                     <div class="entrega-options-1">
                         <small>Agregar otra dirección de entrega</small>
                         <a href="javascript:void(0);" id="addNewAddressPopUp">Agregar nueva dirección</a>
-                    </div>
-                </div>
-                 <div class="row justify-content-center">
-                    <div class="col-md-6 w-100">
-                        <div class="mb-3 ">
-                            <label style="text-align:left;margin-left:0px !important" for="instruccionEntrega" class="form-label"><b>Elige tu agencia de envios</b></label>
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                id="instruccionEntrega" 
-                                name="instruccionEntrega" 
-                                placeholder="Shalom.."
-                                required
-                            >
-                            <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
-                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary  btn-continue-step-buy" id="btnContinuar" disabled>

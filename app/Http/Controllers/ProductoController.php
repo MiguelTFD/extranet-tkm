@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
-
+use View;
 
 class ProductoController extends Controller
 {
@@ -29,6 +29,7 @@ class ProductoController extends Controller
         $this->productos = $productos;
     }
     
+   
     public function filterProductsByCategory(Request $request)
     {
         $idCategory = $request->input('idCategoria'); 
@@ -55,6 +56,24 @@ class ProductoController extends Controller
         
         return response()->json([
             'productos' => $this->productos
+        ]);
+    }
+
+    public function getProductInfo(Request $request){
+            $id = $request->input('idProducto');
+        $producto = 
+            Producto::with(['categoria', 'imagenes'])->findOrFail($id);
+        $productosRelacionados = 
+            Producto::where('idCategoria', $producto->idCategoria)
+        ->where('idProducto', '!=', $id)
+        ->with(['categoria', 'imagenes'])
+        ->inRandomOrder() 
+        ->take(3) 
+        ->get();
+        
+        return response()->json([
+            'producto' => $producto,
+            'productosRelacionados' => $productosRelacionados
         ]);
     }
 

@@ -3,21 +3,7 @@
 <html lang="es">
 <head>
     <script>
-        function getCartCount() {
-            fetch("{{ route('countCart') }}")  // Llama a la ruta de countCart
-                .then(response => response.json())  // Convierte la respuesta en JSON
-                .then(data => {
-                    if (data.cantidadCarro !== undefined) {
-                        // Actualiza el contador del carrito en el elemento con id "cart-count-number"
-                        document.getElementById("cart-count-number").textContent = data.cantidadCarro;
-                    }
-                })
-                .catch(error => console.error('Error al obtener el carrito:', error));
-        }
-
-        // Llama a la función cada 500 milisegundos para obtener la cantidad actualizada del carrito
-        setInterval(getCartCount, 100);
-    </script>
+               </script>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="x-icon" href="{{asset('images/icon/Logo.png')}}" >

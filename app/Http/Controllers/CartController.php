@@ -11,16 +11,29 @@ class CartController extends Controller
 
 public function add(Request $request)
 {
-
-    $producto = Producto::with(['categoria', 'imagenes'])->find($request->id);
+    // Parse JSON input
+    $data = $request->json()->all();
+    
+    $producto = Producto::with(['categoria', 'imagenes'])
+        ->find($data['id']);
+    
     if (empty($producto)) {
-        return redirect('/')->with('error', 'Producto no encontrado.');
+        return response()->json([
+            'success' => false, 
+            'message' => 'Producto no encontrado.'
+        ], 404);
     }
-
+    
+    // Use the cantidad from JSON data, default to 1 if not provided
+    $qty = $data['cantidad'] ?? 1;
+    if ($qty < 1) {
+        $qty = 1;
+    }
+    
     Cart::add(
         $producto->idProducto,
         $producto->nombreProducto,
-        1,
+        $qty,
         $producto->precioUnitario,
         [
             'descuento' => $producto->descuento,
@@ -28,10 +41,14 @@ public function add(Request $request)
             'descripcion' => $producto->descripcion
         ]
     );
-    $this->countCart();
+    
+    // Get updated cart count
+    $cartCount = Cart::count();
+    
     return response()->json([
         'success' => true,
-        'message' => "El producto " . $producto->nombreProducto . " fue agregado a su carrito"
+        'message' => "El producto " . $producto->nombreProducto . " fue agregado a su carrito",
+        'cantidadCarro' => $cartCount
     ]);
 }
     public function countCart(){

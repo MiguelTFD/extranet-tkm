@@ -134,8 +134,8 @@
                         Doc: {{$usuario->documentoIdentidad->tipoDocumentoIdentidad->nombreTipoDocumentoIdentidad}}
                         |{{$usuario->documentoIdentidad->numeroDocumentoIdentidad}}<br />
                         Loc: {{ $datosOrdenCompra['direccion']}}<br/>
-                        Dir: {{ $datosOrdenCompra['direccionExacta']}}<br/>
-                        Ref: {{ $datosOrdenCompra['referencia']}}<br/>
+                        Agencia: {{ $datosOrdenCompra['agencia']}}<br/>
+                        Sede: {{ $datosOrdenCompra['sedeAgencia']}}<br/>
                         </td>
                     </tr>
                 </tbody>

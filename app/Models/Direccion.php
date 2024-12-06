@@ -35,6 +35,7 @@ class Direccion extends Model
     protected $fillable = [
         'idDistrito',
         'agencia',
+        'sedeAgencia',
     ];
     
     //Direccion *------ 1 ordenCompra

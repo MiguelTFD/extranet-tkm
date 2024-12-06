@@ -217,22 +217,21 @@ thead tr{
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-6"><strong>Direccion</strong></div>
+                    <div class="col-6"><strong>Agencia</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $data['direccionExacta']}}
+                        {{ $data['agencia']}}
                         </p>
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-6"><strong>Referencia</strong></div>
+                    <div class="col-6"><strong>Sede de Agencia</strong></div>
                     <div class="col-6 text-end">
                         <p style="color:#2D2D2E;font-weight:bold"> 
-                        {{ $data['referencia']}}
+                        {{ $data['sedeAgencia']}}
                         </p>
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col-6"><strong>Método de pago</strong></div>
                     <div class="col-6 text-end">
