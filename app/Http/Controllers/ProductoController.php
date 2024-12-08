@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
-use View;
 
 class ProductoController extends Controller
 {
@@ -60,7 +59,7 @@ class ProductoController extends Controller
     }
 
     public function getProductInfo(Request $request){
-            $id = $request->input('idProducto');
+        $id = $request->input('idProducto');
         $producto = 
             Producto::with(['categoria', 'imagenes'])->findOrFail($id);
         $productosRelacionados = 

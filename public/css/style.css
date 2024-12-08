@@ -1451,16 +1451,6 @@ display:flex;
     margin-bottom: 6em;
 }
 
-@media(max-width:500px){
-}
-.prodSectionCt{
-    display:grid;
-    grid-template-columns:25% 75%;
-    width: 70%;
-    margin: 0 auto;
-    min-height:100vh;
-}
-
 @media (max-width: 1200px) {
 
     .prodSectionCt{

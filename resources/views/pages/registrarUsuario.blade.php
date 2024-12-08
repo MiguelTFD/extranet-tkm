@@ -249,19 +249,32 @@ select {
                 </div>
             </div>
             <div class="form-group">
-                <label for="agencia">Agencia de envio</label>
-                <input type="text" name="agencia" 
-                class="form-control" 
-                id="agencia" 
-                value="{{ old('agencia') }}" 
-                placeholder="Shalom, Olva, Etc." required>
-                <p class="info-icon" style="color:#949494;font-size:0.9em;text-align:left; "> Usaremos esta agencia para proceder con el envio de tu compra</p>
+                <label 
+                    for="agencia"
+                >
+                    Agencia de envio
+                </label>
+                <input 
+                    type="text" 
+                    name="agencia" 
+                    class="form-control" 
+                    id="agencia" 
+                    value="{{ old('agencia') }}" 
+                    placeholder="Shalom, Olva, Etc." required
+                >
+                <p 
+                    class="info-icon" 
+                    style="color:#949494;font-size:0.9em;text-align:left;"
+                > 
+                    Usaremos esta agencia para proceder 
+                    con el envio de tu compra
+                </p>
             </div>
             <div class="mb-3">
                 <label 
                     for="sedeAgencia"
                 >
-                    Agencia de envio
+                   Sede de la Agencia 
                 </label>
                 <input 
                     type="text" 

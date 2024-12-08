@@ -19,13 +19,12 @@
     <div class="paymentsCt">
         <div class="openPayCards">
             <h2>
-                Paga en linea mediante deposito 
-                 o transferencia
+                Pago en línea mediante depósito o transferencia 
             </h2>
             <p 
                 style="color:#9D9D9D;"
             >
-                (Cuenta BCP, BBVA y Banco de la nacion)
+                (Cuenta BCP, BBVA y Banco de la Nación) 
             </p>
             <div class="payList">
                 <span>
@@ -55,7 +54,7 @@
             <p 
                 style="color:#9D9D9D;"
             >
-                (Pagos mediante Yapeo o Plin)
+                (Pagos mediante Yape o Plin)
             </p>
                  <span>
                      <img class="svg-py-mt"

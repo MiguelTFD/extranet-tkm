@@ -1,5 +1,3 @@
-
-{{--resources/views/pages/iniciarSesion.blade.php--}}
 @extends('layouts.base')
 
 @section('content')
@@ -128,12 +126,13 @@ input[type="password"] {
                     >
                 </div>
                 <div class="form-group">
-                <a
-                    href="{{route('passwordRestore')}}"
-                    class="forgot-password"
-                >
-                    Olvide mi contraseña
-                </a>
+                    Olvidaste tu Contraseña?
+                    <a
+                        href="https://api.whatsapp.com/send?phone=51983929015&text=Hola deseo recuperar mi Contraseña"
+                        class="forgot-password"
+                    >
+                        Solicitar recuperacion de Contraseña
+                    </a>
                 </div>
                 <button
                     type="submit"

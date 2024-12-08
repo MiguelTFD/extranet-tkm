@@ -7,10 +7,14 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="x-icon" href="{{asset('images/icon/Logo.png')}}" >
-    <title>The King Moss</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta content="" name="keywords">
 	<meta content="" name="description">
+
+    <title>Venta de Musgos en Perú | Musgos Sphagnum y Más | The King Moss</title>
+    <meta name="description" content="Compra musgos en Perú, incluyendo musgo sphagnum y musgos decorativos en The King Moss. Envíos a todo el país. ¡Haz tu pedido hoy!">
+<meta name="keywords" content="venta de musgos en Perú, musgo sphagnum, musgos decorativos,plantas carnivoras , compra musgos Perú">
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

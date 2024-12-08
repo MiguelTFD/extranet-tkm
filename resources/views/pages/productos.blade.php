@@ -3,13 +3,6 @@
 
 @section('content')
 <style>
-.prodSectionCt{
-    display:grid;
-    grid-template-columns:25% 75%;
-        width: 70%;
-margin: 0 auto;
-}
-
 @media (max-width: 1200px) {
 
     .prodSectionCt{
