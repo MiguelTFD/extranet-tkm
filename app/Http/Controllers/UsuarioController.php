@@ -136,8 +136,7 @@ class UsuarioController extends Controller
     public function getUserAddress()
     {
         $paises = Pais::all();
-        $tiposDireccion = TipoDireccion::all();
-        return view('auth.direcciones', compact('paises', 'tiposDireccion'));
+        return view('auth.direcciones', compact('paises'));
     }
 
     public function getUserOrders()

@@ -2,8 +2,8 @@
 @section('content')
 <style>
 .register-container {
-   width: 90%; /* Cambiado de 80% a 90% para pantallas más pequeñas */
-   max-width: 600px; /* Añadido un ancho máximo */
+   width: 90%; 
+   max-width: 600px; 
    margin: 50px auto;
    padding: 20px;
    background-color: #fff;
@@ -96,7 +96,7 @@ select {
    border-radius: 5px;
    cursor: pointer;
    font-size: 16px;
-   margin-top: 10px; /* Añadido margen superior */
+   margin-top: 10px;
 }
 
 .register-btn:hover {
@@ -453,7 +453,6 @@ const passwordMatchMessage = document.getElementById('password-match-message');
     }
   }
 
-// Función para validar las contraseñas
 function validatePasswords() {
   if (confirmPasswordField.value === passwordField.value && passwordField.value !== '') {
     passwordMatchMessage.textContent = '✓ Las contraseñas coinciden.';
@@ -466,7 +465,6 @@ function validatePasswords() {
   }
 }
 
-// Escuchar cambios en ambos campos
 passwordField.addEventListener('input', validatePasswords);
 confirmPasswordField.addEventListener('input', validatePasswords);
  

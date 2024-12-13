@@ -94,43 +94,7 @@ thead tr{
         @include('components.opcionesUsuario')
         <div class="col-md-9 content">
             
-            <div>
-            @php
-                $carnivora = 0;
-            @endphp
-            @foreach($datosOrdenCompra['detalles'] as $detalle)
-                @if($detalle['idCategoria']==1)
-                    @php
-                    $carnivora += 1; 
-                @endphp
-                @endif
-            @endforeach
-            @if($carnivora >0)
-                <div 
-                    style="flex-direction: column" 
-                    class="d-flex align-items-center justify-content-center"
-                >
-                    <h3>
-                        Manual para el cuidado de plantas carnivoras: 
-                    </h3>
-                    <a 
-                        style="max-width: 300px;"
-                        href="https://drive.google.com/file/d/1Vq6C3SlNoL7OddajESp5w6FgIY44BREW/view?usp=sharing"
-                        target="_blank"
-                    >
-                        <img 
-                            style="width: 100%" 
-                            src="{{ asset('images/manualCarnivoras.png') }}"
-                        >
-                    </a>
-                </div>
-                <hr>
-            @endif
-            </div>
-            <div>
-                @include('components.paymentsOptions')
-            </div>
-            <hr>
+           
             <div class="container my-5">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -146,7 +110,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    N° Orden Compra
+                                    N掳 Orden Compra
                                 </strong>
                             </div>
                             <div 
@@ -206,7 +170,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    Información de la compra
+                                    Informaci贸n de la compra
                                 </strong>
                             </div>
                             <div class="col-6 text-end rdp">
@@ -220,7 +184,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    Instrucción de entrega
+                                    Instrucci贸n de entrega
                                 </strong>
                             </div>
                             <div 
@@ -394,9 +358,56 @@ thead tr{
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                    Deseas modificar los datos de tu pedido?
+                <a
+                    href="https://api.whatsapp.com/send?phone=51983929015&text=Hola deseo modificar los datos de mi pedido"
+                    class="forgot-password"
+                >
+                    Solicitar modificacion de los datos del pedido
+                </a>
+                </div>
+             <div>
+            @php
+                $carnivora = 0;
+            @endphp
+            @foreach($datosOrdenCompra['detalles'] as $detalle)
+                @if($detalle['idCategoria']==4)
+                    @php
+                    $carnivora += 1; 
+                @endphp
+                @endif
+            @endforeach
+            @if($carnivora >0)
+                <div 
+                    style="flex-direction: column" 
+                    class="d-flex align-items-center justify-content-center"
+                >
+                    <h3>
+                        Manual para el cuidado de plantas carnivoras: 
+                    </h3>
+                    <a 
+                        style="max-width: 300px;"
+                        href="https://drive.google.com/file/d/1Vq6C3SlNoL7OddajESp5w6FgIY44BREW/view?usp=sharing"
+                        target="_blank"
+                    >
+                        <img 
+                            style="width: 100%" 
+                            src="{{ asset('images/manualCarnivoras.png') }}"
+                        >
+                    </a>
+                </div>
+                <hr>
+            @endif
+            </div>
+            <div>
+                @include('components.paymentsOptions')
+            </div>
+            <hr>
             <a href="{{ url()->previous() }}">Volver</a>
         </div>
     </div>
 </div>
 <script src="{{asset('js/showPayOption.js')}}"></script>
 @endsection
+

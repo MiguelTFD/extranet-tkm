@@ -11,16 +11,25 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
 
-    public function userLogin(Request $request){
-        $credentials = $request->only('username','password');
-        $user = Usuario::where('username', $credentials['username'])->first();
-        if($user && Hash::check($credentials['password'],$user->password)){
-            Auth::guard('usuario')->login($user);
-            return redirect()->intended('/');
-        }
+    public function userLogin(Request $request) {
+    $credentials = $request->only('username','password');
+    
+    $user = Usuario::where('username', $credentials['username'])->first();
+    
+    if (!$user) {
         return back()->withErrors([
-            'username'=> 'Las credenciales son incorrectas',
+            'username' => 'El usuario no existe'
         ]);
     }
+    
+    if (!Hash::check($credentials['password'], $user->password)) {
+        return back()->withErrors([
+            'username' => 'Contrase単a incorrecta'
+        ]);
+    }
+    
+    Auth::guard('usuario')->login($user);
+    return redirect()->intended('/');
+}
 
 }

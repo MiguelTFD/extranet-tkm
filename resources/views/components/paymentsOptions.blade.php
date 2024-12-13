@@ -303,45 +303,6 @@
         <div class="card-body">
             <h3 class="card-title">Medios de Pago</h3>
         </div>
-        <div 
-            class="alert alert-warning align-items-center" 
-            role="alert"
-        >
-            <p> 
-                <i 
-                    class="bi bi-info-circle-fill me-2"
-                >
-                </i>
-                Recuerda enviar tu <b>Número de pedido</b> o tu 
-                <b>nombre completo</b> al momento de hacer el pago en 
-                <b>Yape</b> o por <b>BCP</b>
-            </p>
-        </div>
-        <div 
-            class="alert alert-info align-items-center" 
-            role="alert"
-        >
-            <p> 
-                <i 
-                    class="bi bi-info-circle-fill me-2"
-                >
-                </i>
-                Envia la <b> Constancia de tu pago </b> a nuestro 
-                <a
-                    href="https://api.whatsapp.com/send?phone=51983929015" 
-                    target="_blank"
-                >
-                    Whatsapp
-                </a> 
-                o a nuestro correo electronico 
-                <a 
-                    href="mailto:henry.management@thekingmoss.com" 
-                    target="_blank"
-                >
-                    henry.management@thekingmoss.com
-                </a>
-            </p>
-        </div>
         <div class="accordion" id="paymentMethods">
             <!-- Yape -->
             <div class="accordion-item">
