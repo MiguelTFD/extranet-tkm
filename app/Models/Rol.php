@@ -25,11 +25,10 @@ class Rol extends Model
 
     protected $table = 'rol';
     protected $primaryKey = 'idRol';
-    public $timestamps = false; // Si no tienes `created_at` o `updated_at`
+    public $timestamps = false; 
 
     protected $fillable = ['nombreRol'];
 
-    // Relación con Usuario (tabla pivote 'usuarioRol')
     public function usuarios()
     {
         return $this->belongsToMany(Usuario::class, 'usuarioRol', 'idRol', 'idUsuario');

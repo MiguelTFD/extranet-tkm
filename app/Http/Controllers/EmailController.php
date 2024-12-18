@@ -23,7 +23,9 @@ class EmailController extends Controller
         
         Mail::to('henry.management@thekingmoss.com')
             ->send(new ContactoMailable($request->all()));
-        return redirect()->back()->with("success", "Se ha enviado el mensaje");
+        return redirect()->back()->with(
+            "success", "Se ha enviado el mensaje"
+        );
     }
 
     public function sendOrderRequestEmail($id)

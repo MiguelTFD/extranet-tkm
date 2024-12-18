@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller
 {
 
-    //Funcional 22-11-2024    
     public function createNewUser(Request $request)
     {
         $validated = $request->validate([
@@ -66,28 +65,32 @@ class UsuarioController extends Controller
             $usuario->roles()->attach(1);
             DB::commit();
             Auth::login($usuario);
-            return redirect()->route('home')->with('success', '¡Bienvenido ' . $usuario->nombre . '!');
+            return redirect()
+            ->route('home')
+            ->with('success', '¡Bienvenido ' . $usuario->nombre . '!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' =>
-                'Error al registrar el usuario: ' . $e->getMessage()]);
+            return redirect()
+            ->back()
+            ->withErrors([
+                'error' =>'Error al registrar el usuario: ' 
+                . $e->getMessage()
+            ]);
         }
     }
 
-   public function showUserProfilePage()
-{
-    $usuario = Auth::guard('usuario')->user();
-    $documentoIdentidad = $usuario->documentoIdentidad; 
-    $tiposDocumento = TipoDocumentoIdentidad::all();
+    public function showUserProfilePage()
+    {
+        $usuario = Auth::guard('usuario')->user();
+        $documentoIdentidad = $usuario->documentoIdentidad; 
+        $tiposDocumento = TipoDocumentoIdentidad::all();
+        
+        return view(
+            'auth.perfil',
+            compact('usuario', 'documentoIdentidad', 'tiposDocumento')
+        );
+    }
 
-    return view(
-        'auth.perfil',
-        compact('usuario', 'documentoIdentidad', 'tiposDocumento')
-    );
-}
- 
-
-    //Listo
     public function updateUser(Request $request)
     {
         $usuario = Auth::guard('usuario')->user();
@@ -130,7 +133,9 @@ class UsuarioController extends Controller
             'idTipoDocumentoIdentidad' =>
             $validated['idTipoDocumentoIdentidad'],
         ]);
-        return redirect()->route('showUserProfile')->with('success', '¡Datos actualizados correctamente!');
+        return redirect()
+        ->route('showUserProfile')
+        ->with('success', '¡Datos actualizados correctamente!');
     }
 
     public function getUserAddress()
@@ -142,7 +147,10 @@ class UsuarioController extends Controller
     public function getUserOrders()
     {
         $usuario = Auth::guard('usuario')->user();
-        $pedidos = $usuario->ordenes()->orderBy('idOrdenCompra', 'desc')->get();
+        
+        $pedidos = $usuario->ordenes()
+        ->orderBy('idOrdenCompra', 'desc')->get();
+        
         return view('auth.pedidos', compact('pedidos'));
     }
 
@@ -153,23 +161,24 @@ class UsuarioController extends Controller
             'direccion.distrito.provincia.departamento.pais',
             'productos'
         ])->where('idOrdenCompra', $idOrdenCompra)->firstOrFail();
-
-        $ordenCompra->informacionOrdenCompra = $ordenCompra->informacionOrdenCompra ?? 'No Aplica';
-
-        $ordenCompra->instruccionEntrega = $ordenCompra->instruccionEntrega ?? 'No Aplica';
-
+        
+        $ordenCompra->informacionOrdenCompra = $ordenCompra->
+            informacionOrdenCompra ?? 'No Aplica';
+       
+        $ordenCompra->instruccionEntrega = $ordenCompra->
+            instruccionEntrega ?? 'No Aplica';
+        
         $direccion = $ordenCompra->direccion;
-
+        
         $nombreDireccion =
             "{$direccion->distrito->provincia->departamento->pais->nombrePais}/" .
             "{$direccion->distrito->provincia->departamento->nombreDepartamento}/" .
             "{$direccion->distrito->provincia->nombreProvincia}/" .
             "{$direccion->distrito->nombreDistrito}";
-
-
+        
         $agencia= $direccion->agencia;
         $sedeAgencia = $direccion->sedeAgencia;
-
+        
         $datosOrdenCompra = [
             'idOrdenCompra' => $ordenCompra->idOrdenCompra,
             'fechaOrdenCompra' => $ordenCompra->fecha_orden_compra_formato,
@@ -205,21 +214,25 @@ class UsuarioController extends Controller
             'direccion.distrito.provincia.departamento.pais',
             'productos'
         ])->where('idOrdenCompra', $idOrdenCompra)->firstOrFail();
-
-        $ordenCompra->informacionOrdenCompra = $ordenCompra->informacionOrdenCompra ?? 'No Aplica';
-        $ordenCompra->instruccionEntrega = $ordenCompra->instruccionEntrega ?? 'No Aplica';
+        
+        $ordenCompra->informacionOrdenCompra = $ordenCompra
+                    ->informacionOrdenCompra ?? 'No Aplica';
+        
+        $ordenCompra->instruccionEntrega = $ordenCompra
+                    ->instruccionEntrega ?? 'No Aplica';
+        
         $direccion = $ordenCompra->direccion;
-
+        
         $nombreDireccion =
             "{$direccion->distrito->provincia->departamento->pais->nombrePais}/" .
             "{$direccion->distrito->provincia->departamento->nombreDepartamento}/" .
             "{$direccion->distrito->provincia->nombreProvincia}/" .
             "{$direccion->distrito->nombreDistrito}";
-
+        
         $agencia= $direccion->agencia;
-
+        
         $sedeAgencia = $direccion->sedeAgencia;
-
+        
         $datosOrdenCompra = [
             'idOrdenCompra' => $ordenCompra->idOrdenCompra,
             'fechaOrdenCompra' => $ordenCompra->fecha_orden_compra_formato,
@@ -234,47 +247,47 @@ class UsuarioController extends Controller
             'precioTotal' => $ordenCompra->precioTotal,
             'detalles' => []
         ];
-
+        
         foreach ($ordenCompra->productos as $producto) {
             $datosOrdenCompra['detalles'][] = [
                 'nombreProducto' => $producto->nombreProducto,
                 'cantidad' => $producto->pivot->cantidad,
             ];
         }
-
+        
         $pagoElegido = $ordenCompra->metodoPago;
-
+        
         $pagoEnYape = '
             Número de destino: +51 983 929 015<br>
             Destinatario: Henry Obed Cholan Romero<br>
         ';
-
+        
         $pagoEnPlin = '
             Número de destino: +51 983 929 015<br>
             Destinatario: Henry Obed Cholan Romero<br>
         ';
-
+        
         $depositoBancoNacion = '
             <p>Cuenta de ahorros en Soles Banco de la Nación: 04-487-189109</p>
             <p>Titular: Henry Obed Cholan Romero</p>
             <small><i class="fa-solid fa-circle-info"></i>' .
             ' Depósito en agente</small>
         ';
-
+        
         $transferenciaBBVA = '
             <p>Número de cuenta BBVA Soles: 0011-0628-0200241090</p>
             <p>Titular: Henry Obed Cholan Romero</p>
             <small><i class="fa-solid fa-circle-info"></i>' .
             ' ¡SOLO TRANSFERENCIA DIGITAL!</small>
         ';
-
+        
         $transferenciaBCP = '
             <p>Número de cuenta BCP Soles: 19132941359098</p>
             <p>Titular: Henry Obed Cholan Romero</p>
             <small><i class="fa-solid fa-circle-info"></i>' .
             ' ¡SOLO TRANSFERENCIA DIGITAL!</small>
         ';
-
+        
         switch ($pagoElegido) {
             case 'Pago en yape':
                 $metodoPagoLayout = $pagoEnYape;

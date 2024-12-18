@@ -55,27 +55,26 @@ class Producto extends Model
     ];
 
     protected $casts = [
-        'precioUnitario' => 'decimal:2',  // Precio con dos decimales
-        'descuento' => 'decimal:2',       // Descuento con dos decimales
-        'stockProducto' => 'integer',     // El stock es un entero
-        'peso' => 'decimal:2',            // El peso es decimal con dos decimales
+        'precioUnitario' => 'decimal:2',  
+        'descuento' => 'decimal:2',      
+        'stockProducto' => 'integer',   
+        'peso' => 'decimal:2',         
     ];
 
-    // Relación muchos a uno: Un producto pertenece a una categoría
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, 'idCategoria');
     }
 
-    // Relación uno a muchos: Un producto puede tener muchas imágenes
     public function imagenes()
     {
         return $this->hasMany(ImagenProducto::class, 'idProducto');
     }
-     // Método para obtener la URL de la primera imagen o una por defecto
+    
     public function obtenerImagenUrl()
     {
-        return $this->imagenes->isNotEmpty() ? $this->imagenes->first()->urlImagenProducto : asset('images/bf5k.png');
+        return $this->imagenes->isNotEmpty() ? 
+            $this->imagenes->first()->
+            urlImagenProducto : asset('images/bf5k.png');
     }
-
 }

@@ -51,7 +51,10 @@ class NavigationController extends Controller
     public function showOrderRequestPage(){
         $paises = Pais::all();
         $tiposDocumento = TipoDocumentoIdentidad::all();
-        return view('pages.registrarOrdenCompra', compact('tiposDocumento',  'paises'));
+        return view(
+            'pages.registrarOrdenCompra', 
+            compact('tiposDocumento',  'paises')
+        );
     }    
 
 

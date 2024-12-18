@@ -35,13 +35,11 @@ class Departamento extends Model
         'nombreDepartamento'
     ];
 
-   // Relación muchos a uno: Un producto pertenece a una categoría
     public function pais()
     {
         return $this->belongsTo(Pais::class, 'idPais');
     }
 
-    // Relación uno a muchos: Un producto puede tener muchas imágenes
     public function provincias()
     {
         return $this->hasMany(Provincia::class, 'idDepartamento');

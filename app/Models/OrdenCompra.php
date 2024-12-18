@@ -62,11 +62,10 @@ class OrdenCompra extends Model
         'metodoPago',
         'estadoOrdenCompra'
     ];
-    //muchas ordenes de compra pueden pertenecer a un usuario 
+    
     public function usuario(){
         return $this->belongsTo(Usuario::class,'idUsuario');
     }
-
 
     public function productos()
     {
@@ -78,12 +77,13 @@ class OrdenCompra extends Model
         )->withPivot('cantidad');
     }
 
-    //muchas ordenes de compra pueden tener la misma direccion
     public function direccion(){
         return $this->belongsTo(Direccion::class,'idDireccion');
     }
     public function getFechaOrdenCompraFormatoAttribute()
-{
-    return Carbon::parse($this->fechaOrdenCompra)->translatedFormat('j \d\e F \d\e\l Y');
-}
+    {
+        return Carbon::parse(
+            $this->fechaOrdenCompra
+        )->translatedFormat('j \d\e F \d\e\l Y');
+    }
 }

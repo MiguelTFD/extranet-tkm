@@ -38,27 +38,23 @@ class Direccion extends Model
         'sedeAgencia',
     ];
     
-    //Direccion *------ 1 ordenCompra
     public function ordenes()
     {
         return $this->hasMany(OrdenCompra::class, 'idDireccion');
     }
 
-
-    // Relación Direccion  *-----1 Distrito
     public function distrito()
     {
         return $this->belongsTo(Distrito::class, 'idDistrito');
     }
 
-    
-    // Relación con Usuario (tabla pivote 'direccionXusuario')
     public function usuarios()
     {
-        return $this->
-            belongsToMany(Usuario::class, 
-            'direccionXusuario', 'idDireccion', 'idUsuario');
+        return $this->belongsToMany(
+            Usuario::class, 
+            'direccionXusuario', 
+            'idDireccion', 
+            'idUsuario'
+        );
     }
-
- 
 }

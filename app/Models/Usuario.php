@@ -60,27 +60,39 @@ class Usuario extends Authenticatable
         return $this->password;
     }
     
-    // Relacion Usuario  *-----* Direccion (tabla pivote 'direccionXusuario')
     public function direcciones()
     {
-        return $this->belongsToMany(Direccion::class, 'direccionXusuario','idUsuario','idDireccion');
+        return $this->belongsToMany(
+            Direccion::class, 
+            'direccionXusuario',
+            'idUsuario',
+            'idDireccion'
+        );
     }
 
-    // Relación Usuario *-----* Rol (tabla pivote 'usuarioRol')
     public function roles()
     {
-        return $this->belongsToMany(Rol::class, 'usuarioRol', 'idUsuario', 'idRol');
+        return $this->belongsToMany(
+            Rol::class, 
+            'usuarioRol', 
+            'idUsuario', 
+            'idRol'
+        );
     }
     
-    //Direccion *------ 1 ordenCompra
     public function ordenes()
     {
-        return $this->hasMany(OrdenCompra::class, 'idUsuario');
+        return $this->hasMany(
+            OrdenCompra::class, 
+            'idUsuario'
+        );
     }
 
-    // Relación Usuario 1---1 DocIdentidad; 
     public function documentoIdentidad()
     {
-        return $this->hasOne(DocumentoIdentidad::class, 'idUsuario');
+        return $this->hasOne(
+            DocumentoIdentidad::class, 
+            'idUsuario'
+        );
     }
 }

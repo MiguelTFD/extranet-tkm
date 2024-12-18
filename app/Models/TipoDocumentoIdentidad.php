@@ -31,8 +31,9 @@ class TipoDocumentoIdentidad extends Model
     protected $fillable = ['nombreTipoDocumentoIdentidad'];
 
     public function documentosIdentidad(){
-       return $this->hasMany(DocumentoIdentidad::class, 'idTipoDocumentoIdentidad'); 
+        return $this->hasMany(
+            DocumentoIdentidad::class, 
+            'idTipoDocumentoIdentidad'
+        ); 
     }
-
-
 }

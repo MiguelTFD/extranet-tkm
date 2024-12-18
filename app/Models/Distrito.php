@@ -35,13 +35,11 @@ class Distrito extends Model
         'nombreDistrito'
     ];
 
-   // Relación muchos a uno: Una provinci pertenece a un departamento 
     public function provincia()
     {
         return $this->belongsTo(Provincia::class, 'idProvincia');
     }
 
-    // Relación uno a muchos: Un producto puede tener muchas imágenes
     public function direcciones()
     {
         return $this->hasMany(Direccion::class, 'idDistrito');

@@ -37,12 +37,10 @@ class DocumentoIdentidad extends Model
         'idUsuario'
     ];
 
-    //Relacion DocumentoIdentidad *---1 TipoDocumentoIdentidad
     public function tipoDocumentoIdentidad(){
         return $this->belongsTo(TipoDocumentoIdentidad::class,'idTipoDocumentoIdentidad');
     }
    
-    // Relación inversa uno a uno con Usuario
     public function usuario()
     {
         return $this->belongsTo(Usuario::class, 'idUsuario');
