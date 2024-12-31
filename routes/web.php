@@ -90,6 +90,9 @@ Route::post('/api/filter-products',
 Route::post('/api/productDetail', 
     [ProductoController::class, 'getProductInfo']); 
 
+
+
+
 /*----------------------------------------------------------------------------*/
 
 

@@ -46,6 +46,7 @@ class ProductoController extends Controller
         ]);
     }
     
+
     public function getProducts()
     {
         if (is_null($this->productos)) {

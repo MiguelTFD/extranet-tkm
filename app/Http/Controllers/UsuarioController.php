@@ -19,7 +19,9 @@ class UsuarioController extends Controller
 {
 
     public function createNewUser(Request $request)
-    {
+{
+    try {
+        // Validación con mensajes personalizados
         $validated = $request->validate([
             'username' => 'required|unique:usuario,username',
             'password' => 'required',
@@ -30,54 +32,73 @@ class UsuarioController extends Controller
             'idDistrito' => 'required',
             'agencia' => 'required',
             'sedeAgencia'=>'required',
-            'numeroDocumentoIdentidad' =>
-            'required|unique:documentoIdentidad,numeroDocumentoIdentidad',
-            'idTipoDocumentoIdentidad' => 'required'
+            'numeroDocumentoIdentidad' => 'required|unique:documentoIdentidad,numeroDocumentoIdentidad',
+            'idTipoDocumentoIdentidad' => 'required',
+        ], [
+            'username.unique' => 'El nombre de usuario ya está en uso.',
+            'correo.unique' => 'El correo electrónico ya está registrado.',
+            'numeroDocumentoIdentidad.unique' => 'El número de documento de identidad ya está registrado.',
+            'required' => 'El campo :attribute es obligatorio.',
         ]);
+
         DB::beginTransaction();
-        try {
-            $direccion = Direccion::create([
-                'idDistrito' => $validated['idDistrito'],
-                'agencia' => $validated['agencia'],
-                'sedeAgencia'=> $validated['sedeAgencia']
-            ]);
-            $usuario = new Usuario([
-                'username' => $validated['username'],
-                'nombre' => $validated['nombre'],
-                'apellido' => $validated['apellido'],
-                'telefono' => $validated['telefono'],
-                'correo' => $validated['correo'],
-            ]);
-            $usuario->password = Hash::make($validated['password']);
-            $usuario->save();
-            DB::table('direccionXusuario')->insert([
-                'idUsuario' => $usuario->idUsuario,
-                'idDireccion' => $direccion->idDireccion
-            ]);
-            DocumentoIdentidad::create([
-                'numeroDocumentoIdentidad' =>
-                $validated['numeroDocumentoIdentidad'],
-                'idTipoDocumentoIdentidad' =>
-                $validated['idTipoDocumentoIdentidad'],
-                'idUsuario' =>
-                $usuario->idUsuario
-            ]);
-            $usuario->roles()->attach(1);
-            DB::commit();
-            Auth::login($usuario);
-            return redirect()
-            ->route('home')
-            ->with('success', '¡Bienvenido ' . $usuario->nombre . '!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()
-            ->back()
-            ->withErrors([
-                'error' =>'Error al registrar el usuario: ' 
-                . $e->getMessage()
-            ]);
-        }
+
+        // Creación de Dirección
+        $direccion = Direccion::create([
+            'idDistrito' => $validated['idDistrito'],
+            'agencia' => $validated['agencia'],
+            'sedeAgencia'=> $validated['sedeAgencia']
+        ]);
+
+        // Creación del Usuario
+        $usuario = new Usuario([
+            'username' => $validated['username'],
+            'nombre' => $validated['nombre'],
+            'apellido' => $validated['apellido'],
+            'telefono' => $validated['telefono'],
+            'correo' => $validated['correo'],
+        ]);
+        $usuario->password = Hash::make($validated['password']);
+        $usuario->save();
+
+        // Relación Dirección y Usuario
+        DB::table('direccionXusuario')->insert([
+            'idUsuario' => $usuario->idUsuario,
+            'idDireccion' => $direccion->idDireccion
+        ]);
+
+        // Creación del Documento de Identidad
+        DocumentoIdentidad::create([
+            'numeroDocumentoIdentidad' => $validated['numeroDocumentoIdentidad'],
+            'idTipoDocumentoIdentidad' => $validated['idTipoDocumentoIdentidad'],
+            'idUsuario' => $usuario->idUsuario
+        ]);
+
+        // Asignar rol al usuario
+        $usuario->roles()->attach(1);
+
+        DB::commit();
+        Auth::login($usuario);
+
+        return response()->json([
+            'message' => 'Usuario registrado exitosamente',
+            'data' => $usuario
+        ], 201);
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Manejo de errores de validación
+        return response()->json([
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        // Manejo de otros errores
+        return response()->json([
+            'error' => 'Error al registrar el usuario: ' . $e->getMessage()
+        ], 500);
     }
+}
+
 
     public function showUserProfilePage()
     {
@@ -92,27 +113,61 @@ class UsuarioController extends Controller
     }
 
     public function updateUser(Request $request)
-    {
+{
+    try {
         $usuario = Auth::guard('usuario')->user();
+
+        if (!$usuario) {
+            return back()->withErrors([
+                'usuario' => 'El usuario autenticado no existe.',
+            ]);
+        }
         $validated = $request->validate([
-            'username' =>
-            'required|unique:usuario,username,' . Auth::id() . ',idUsuario',
+            'username' => 'required',
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required',
-            'correo' =>
-            'required|email|unique:usuario,correo,' . Auth::id() .
-                ',idUsuario',
-            'numeroDocumentoIdentidad' =>
-            'required|unique:documentoIdentidad,' .
-                'numeroDocumentoIdentidad,' .
-                Auth::user()->documentoIdentidad->idDocumentoIdentidad .
-                ',idDocumentoIdentidad',
-            'idTipoDocumentoIdentidad' =>
-            'required|exists:tipoDocumentoIdentidad,' .
-                'idTipoDocumentoIdentidad',
+            'correo' => 'required|email',
+            'numeroDocumentoIdentidad' => 'required',
+            'idTipoDocumentoIdentidad' => 'required|exists:tipoDocumentoIdentidad,idTipoDocumentoIdentidad',
             'password' => 'nullable|min:8',
+        ], [
+            'required' => 'El campo :attribute es obligatorio.',
+            'correo.email' => 'El correo debe ser una dirección válida.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ]);
+
+        $usernameExistente = Usuario::where('username', $validated['username'])
+            ->where('idUsuario', '!=', $usuario->idUsuario)
+            ->first();
+
+        if ($usernameExistente) {
+            return back()->withErrors([
+                'username' => 'El nombre de usuario ya está registrado por otro usuario.',
+            ]);
+        }
+
+        $correoExistente = Usuario::where('correo', $validated['correo'])
+            ->where('idUsuario', '!=', $usuario->idUsuario)
+            ->first();
+
+        if ($correoExistente) {
+            return back()->withErrors([
+                'correo' => 'El correo electrónico ya está registrado por otro usuario.',
+            ]);
+        }
+
+        $documentoExistente = DocumentoIdentidad::where('numeroDocumentoIdentidad', $validated['numeroDocumentoIdentidad'])
+            ->where('idDocumentoIdentidad', '!=', $usuario->documentoIdentidad->idDocumentoIdentidad)
+            ->first();
+
+        if ($documentoExistente) {
+            return back()->withErrors([
+                'numeroDocumentoIdentidad' => 'El número de documento de identidad ya está registrado por otro usuario.',
+            ]);
+        }
+
+        DB::beginTransaction();
 
         $usuario->update([
             'username' => $validated['username'],
@@ -127,16 +182,36 @@ class UsuarioController extends Controller
             $usuario->save();
         }
 
+        if (!$usuario->documentoIdentidad) {
+            return back()->withErrors([
+                'documentoIdentidad' => 'El documento de identidad no está asociado al usuario.',
+            ]);
+        }
+
         $usuario->documentoIdentidad->update([
-            'numeroDocumentoIdentidad' =>
-            $validated['numeroDocumentoIdentidad'],
-            'idTipoDocumentoIdentidad' =>
-            $validated['idTipoDocumentoIdentidad'],
+            'numeroDocumentoIdentidad' => $validated['numeroDocumentoIdentidad'],
+            'idTipoDocumentoIdentidad' => $validated['idTipoDocumentoIdentidad'],
         ]);
+
+        DB::commit();
+
         return redirect()
-        ->route('showUserProfile')
-        ->with('success', '¡Datos actualizados correctamente!');
+            ->route('showUserProfile')
+            ->with('success', '¡Datos actualizados correctamente!');
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Manejo de errores de validación
+        return back()->withErrors($e->errors());
+    } catch (\Exception $e) {
+        DB::rollBack();
+        // Manejo de otros errores
+        return back()->withErrors([
+            'error' => 'Error al actualizar los datos del usuario: ' . $e->getMessage(),
+        ]);
     }
+}
+
+
+
 
     public function getUserAddress()
     {

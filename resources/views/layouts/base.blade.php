@@ -43,6 +43,8 @@
 
 </head>
 <body>
+
+    @include('partials.msg')
     @include('layouts.topbar')
     @include('layouts.header') 
     

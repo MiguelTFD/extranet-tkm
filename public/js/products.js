@@ -308,6 +308,13 @@ const relacionadosHtml = productosRelacionados?.length > 0 ? `
             });
         });
 
+        //Con esto evito que me devuelva a otra pagina
+        window.history.pushState(null, null, window.location.href);
+        
+        window.addEventListener("popstate", function (event) {
+            filterProductsByCategory(0);
+           window.history.pushState(null, null, window.location.href);
+        });
     })
     .catch(error => {
         console.error('Error al obtener la información del producto:', error);

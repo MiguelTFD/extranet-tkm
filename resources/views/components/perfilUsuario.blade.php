@@ -1,3 +1,5 @@
+
+
 <style>
 
 .table td{
@@ -8,7 +10,7 @@
         backdrop-filter: blur(5px);
         height: 100%;
         top: 0;
-        z-index: 99999999999999999;
+        z-index: 9999999;
         display: none;
         justify-content: center;
         align-items: center;
@@ -32,59 +34,207 @@
     <div class="popUpModal">
     <div class="container">
     <h2>Editar Perfil</h2>
-    <form action="{{ route('updateUser') }}" method="POST">
+    <form
+        id="update-form"
+        action="{{ route('updateUser') }}" 
+        method="POST"
+        class="register-form needs-validation"
+        novalidate
+    >
         @csrf
         @method('PUT')
-
-        <!-- Datos del Usuario -->
-
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" value="{{ old('nombre', $usuario->nombre) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input type="text" name="apellido" id="apellido" class="form-control" value="{{ old('apellido', $usuario->apellido) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" id="telefono" class="form-control" value="{{ old('telefono', $usuario->telefono) }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="correo">Correo Electrónico</label>
-            <input type="email" name="correo" id="correo" class="form-control" value="{{ old('correo', $usuario->correo) }}" required>
-        </div>
-
-        <!-- Documento de Identidad -->
-        <div class="form-group">
-            <label for="numeroDocumentoIdentidad">Número de Documento</label>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="nombre"
+            >
+                Nombre
+            </label>
             <input 
                 type="text" 
-                name="numeroDocumentoIdentidad" 
-                id="numeroDocumentoIdentidad" 
+                name="nombre" 
+                id="nombre" 
                 class="form-control" 
-                value="{{ old('numeroDocumentoIdentidad', $documentoIdentidad) }}" required>
-
+                value="{{ old('nombre', $usuario->nombre) }}" 
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un nombre valido
+            </div> 
         </div>
-
-        <div class="form-group">
-            <label for="idTipoDocumentoIdentidad">Tipo de Documento</label>
-            <select name="idTipoDocumentoIdentidad" id="idTipoDocumentoIdentidad" class="form-control" required>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="apellido"
+            >
+                Apellido
+            </label>
+            <input 
+                type="text" 
+                name="apellido" 
+                id="apellido" 
+                class="form-control" 
+                value="{{ old('apellido', $usuario->apellido) }}" 
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un apellido valido
+            </div> 
+        </div>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="telefono"
+            >
+                Teléfono
+            </label>
+            <input 
+                type="text" 
+                name="telefono" 
+                id="telefono" 
+                class="form-control" 
+                value="{{ old('telefono', $usuario->telefono) }}"
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un número de telefono valido
+            </div> 
+        </div>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="correo"
+            >
+                Correo Electrónico
+            </label>
+            <input 
+                type="email" 
+                name="correo" 
+                id="correo" 
+                class="form-control" 
+                value="{{ old('correo', $usuario->correo) }}"
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un correo electronico valido
+            </div> 
+        </div>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="idTipoDocumentoIdentidad"
+            >
+                Tipo de Documento
+            </label>
+            <select 
+                name="idTipoDocumentoIdentidad" 
+                id="idTipoDocumentoIdentidad" 
+                class="form-control" 
+                required
+            >
+            <option value="">
+                Seleccione el tipo de documento
+            </option>
                 @foreach ($tiposDocumento as $tipo)
-                    <option value="{{ $tipo->idTipoDocumentoIdentidad }}"
+                <option value="{{ $tipo->idTipoDocumentoIdentidad }}"
                         {{ old('idTipoDocumentoIdentidad', $documentoIdentidad->idTipoDocumentoIdentidad) == $tipo->idTipoDocumentoIdentidad ? 'selected' : '' }}>
                         {{ $tipo->nombreTipoDocumentoIdentidad }}
                     </option>
                 @endforeach
             </select>
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Selecciona un tipo de Documento 
+            </div> 
         </div>
-
-        <div class="form-group">
-            <label for="username">Usuario</label>
-            <input type="text" name="username" id="username" class="form-control" value="{{ old('username', $usuario->username) }}" required>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="numeroDocumentoIdentidad"
+            >
+                Número de Documento
+            </label>
+            <input 
+                type="text" 
+                name="numeroDocumentoIdentidad" 
+                id="numeroDocumentoIdentidad" 
+                class="form-control" 
+                value="{{ old('numeroDocumentoIdentidad', $documentoIdentidad) }}" 
+                required
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un número  de documento valido
+            </div> 
+        </div>
+        <div 
+            class="form-group"
+        >
+            <label 
+                for="username"
+            >
+                Usuario
+            </label>
+            <input 
+                type="text" 
+                name="username" 
+                id="username" 
+                class="form-control" 
+                value="{{ old('username', $usuario->username) }}" 
+                required
+            >
+            <div 
+                class="valid-feedback"
+            >
+               Listo 
+            </div> 
+            <div 
+                class="invalid-feedback"
+            >
+                Ingresa un username valido
+            </div> 
         </div>
  <div class="form-group">
   <label for="password">Contraseña</label>
@@ -251,6 +401,96 @@ function validatePasswords() {
 passwordField.addEventListener('input', validatePasswords);
 confirmPasswordField.addEventListener('input', validatePasswords);
  
+</script>
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('update-form');
+    
+    function validateNameField(input) {
+        input.addEventListener('input', function(e) {
+            this.value = this.value.replace(/\s/g, '');
+            this.value = this.value.replace(/[^a-zA-Z]/g, '');
+        });
+    }
+
+    validateNameField(document.getElementById('nombre'));
+    validateNameField(document.getElementById('apellido'));
+
+
+    const emailInput = document.getElementById('correo');
+    
+    emailInput.addEventListener('input', function(e) {
+        
+        this.value = this.value.replace(/\s/g, '');
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (!emailRegex.test(this.value)) {
+            this.setCustomValidity('Ingresa un correo electrónico válido');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    const usernameInput = document.getElementById('username');
+    usernameInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        if (this.value.length < 6 || this.value.length > 12) {
+            this.setCustomValidity('El username debe tener entre 6 y 12 caracteres');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    const phoneInput = document.getElementById('telefono');
+    phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+        const phoneRegex = /^9\d{8}$/;
+        if (!phoneRegex.test(this.value)) {
+            this.setCustomValidity('El número debe empezar con 9 y tener 9 dígitos');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    const dniInput = document.getElementById('numeroDocumentoIdentidad');
+
+    const tipoDocumentoSelect = 
+            document.getElementById('idTipoDocumentoIdentidad');
+
+    dniInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+        
+        if (tipoDocumentoSelect.value === '1') { 
+            if (this.value.length !== 8) {
+                this.setCustomValidity('El DNI debe tener '+
+                    'exactamente 8 dígitos'
+                );
+            } else {
+                this.setCustomValidity('');
+            }
+        }
+    });
+
+    form.addEventListener('submit', function(event) {
+        if (!this.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});    
+    </script>
+
+<script> 
+    let inputNumDoc = document.getElementById('numeroDocumentoIdentidad');
+    let tipoDoc = document.getElementById('idTipoDocumentoIdentidad');
+
+    tipoDoc.addEventListener('change',()=>{
+        inputNumDoc.value = '';
+    })
+
 </script>
 
 

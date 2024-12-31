@@ -39,14 +39,14 @@
 }
 
 .form-group {
-   flex: 1 1 45%; /* Permitir que las columnas se reduzcan en tamaños más pequeños */
+   flex: 1 1 45%; 
    margin: 0 10px 20px 10px;
 }
 
 @media (max-width: 600px) {
    .form-group {
-      flex: 1 1 100%; /* En pantallas pequeñas, cada grupo ocupa el 100% */
-      margin: 0 0 20px 0; /* Margen reducido */
+      flex: 1 1 100%; 
+      margin: 0 0 20px 0;
    }
 }
 
@@ -112,23 +112,35 @@ select {
     <div class="register-container">
         <h2>REGISTRAR USUARIO</h2>
         <form 
+            id="register-form"
             action="{{ route('createUser') }}" 
             method="POST" 
-            class="register-form"
+            class="register-form needs-validation"
+            novalidate
         >
         @csrf
             <div class="row">
                 <div class="form-group">
                     <label for="nombre">Nombres</label>
-                        <input 
-                            type="text" 
-                            name="nombre" 
-                            class="form-control" 
-                            id="nombre" 
-                            value="{{ old('nombre') }}" 
-                            placeholder="Ingresa tus nombres"  
-                            required
-                        >
+                    <input 
+                        type="text" 
+                        name="nombre" 
+                        class="form-control" 
+                        id="nombre" 
+                        value="{{ old('nombre') }}" 
+                        placeholder="Ingresa tus nombres"  
+                        required
+                    >
+                    <div 
+                        class="valid-feedback"
+                    >
+                       Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                        Ingresa un nombre valido
+                    </div> 
                 </div>
                 <div 
                     class="form-group"
@@ -147,6 +159,16 @@ select {
                         placeholder="Ingresa tus apellidos" 
                         required
                     >
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa un apellido valido 
+                    </div> 
                 </div>
             </div>
             <div class="row">
@@ -161,6 +183,16 @@ select {
                         placeholder="Ingresa tu teléfono" 
                         required
                     >
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa un telefono valido 
+                    </div> 
                 </div>
                 <div class="form-group">
                     <label for="correo">Correo</label>
@@ -173,6 +205,16 @@ select {
                         placeholder="Ingresa tu email" 
                         required
                     >
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa un correo valido 
+                    </div> 
                 </div>
             </div>
             <div class="row">
@@ -199,6 +241,17 @@ select {
                             </option>
                         @endforeach
                     </select>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                       Selecciona un tipo de Documento
+                    </div>
+                    <div>
                     <label 
                         for="numeroDocumentoIdentidad"
                     >
@@ -213,6 +266,17 @@ select {
                         placeholder="Ingresa tu documento de identidad"  
                         required
                     >
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa un numero de documento valido 
+                    </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -228,24 +292,64 @@ select {
                             </option>
                         @endforeach
                     </select>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                       Selecciona un pais valido
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="departamento">Departamento</label>
                     <select id="departamento" name="departamento" required>
                         <option value="">Selecciona tu Departamento</option>
                     </select>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                       Selecciona un departamento
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="provincia">Provincia</label>
                     <select id="provincia" name="provincia" required>
                         <option value="">Selecciona tu Provincia</option>
                     </select>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                       Selecciona una tipo provincia
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="idDistrito">Distrito</label>
                     <select id="idDistrito" name="idDistrito" required>
                         <option value="">Selecciona tu Distrito</option>
                     </select>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                       Selecciona un distrito
+                    </div>
                 </div>
             </div>
             <div class="form-group">
@@ -269,6 +373,16 @@ select {
                     Usaremos esta agencia para proceder 
                     con el envio de tu compra
                 </p>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa una agencia de envio valida 
+                    </div> 
             </div>
             <div class="mb-3">
                 <label 
@@ -292,6 +406,16 @@ select {
                     Esta direccion sera util para enviarte 
                     tu pedido lo mas cerca a tu ubicacion
                 </p>
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa una sede de agencia valida 
+                    </div> 
             </div>
             <div class="row">
                 <div class="form-group">
@@ -305,6 +429,16 @@ select {
                         placeholder="Ingresa un nombre de usuario" 
                         required
                     >
+                    <div 
+                        class="valid-feedback"
+                    >
+                      Listo 
+                    </div> 
+                    <div 
+                        class="invalid-feedback"
+                    >
+                      Ingresa un username valido 
+                    </div> 
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
@@ -360,12 +494,10 @@ select {
             <button type="submit" class="register-btn">Registrarme</button>
         </form>
     </div>
-
     <script 
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     >
     </script>
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('#pais').on('change', function() {
@@ -465,10 +597,104 @@ function validatePasswords() {
   }
 }
 
+
 passwordField.addEventListener('input', validatePasswords);
 confirmPasswordField.addEventListener('input', validatePasswords);
- 
 </script>
 
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('register-form');
+    
+    function validateNameField(input) {
+        input.addEventListener('input', function(e) {
+            this.value = this.value.replace(/\s/g, '');
+            this.value = this.value.replace(/[^a-zA-Z]/g, '');
+        });
+    }
+
+    validateNameField(document.getElementById('nombre'));
+    validateNameField(document.getElementById('agencia'));
+    validateNameField(document.getElementById('apellido'));
+
+
+    const emailInput = document.getElementById('correo');
+    
+    emailInput.addEventListener('input', function(e) {
+        
+        this.value = this.value.replace(/\s/g, '');
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (!emailRegex.test(this.value)) {
+            this.setCustomValidity('Ingresa un correo electrónico válido');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    // Validación de username
+    const usernameInput = document.getElementById('username');
+    usernameInput.addEventListener('input', function(e) {
+        // Remover espacios y caracteres especiales automáticamente
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        if (this.value.length < 6 || this.value.length > 12) {
+            this.setCustomValidity('El username debe tener entre 6 y 12 caracteres');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    const phoneInput = document.getElementById('telefono');
+    phoneInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+        const phoneRegex = /^9\d{8}$/;
+        if (!phoneRegex.test(this.value)) {
+            this.setCustomValidity('El número debe empezar con 9 y tener 9 dígitos');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
+    const dniInput = document.getElementById('numeroDocumentoIdentidad');
+
+    const tipoDocumentoSelect = 
+            document.getElementById('idTipoDocumentoIdentidad');
+
+    dniInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '');
+        
+        if (tipoDocumentoSelect.value === '1') { 
+            if (this.value.length !== 8) {
+                this.setCustomValidity('El DNI debe tener '+
+                    'exactamente 8 dígitos'
+                );
+            } else {
+                this.setCustomValidity('');
+            }
+        }
+    });
+
+        // Prevenir envío del formulario si hay errores
+    form.addEventListener('submit', function(event) {
+        if (!this.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});    
+    </script>
+
+<script> 
+    let inputNumDoc = document.getElementById('numeroDocumentoIdentidad');
+    let tipoDoc = document.getElementById('idTipoDocumentoIdentidad');
+
+    tipoDoc.addEventListener('change',()=>{
+        inputNumDoc.value = '';
+    })
+
+</script>
 
 @endsection

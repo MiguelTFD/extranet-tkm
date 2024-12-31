@@ -167,5 +167,4 @@
 </div>
 
 
-@include('partials.msg')
 
