@@ -474,7 +474,7 @@
                                     <label 
                                         for="sedeAgencia"
                                     >
-                                        Agencia de envio
+                                        Sede de la agencia 
                                     </label>
                                     <input 
                                         type="text" 
@@ -768,5 +768,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 </script>
+    
+<!--Validaciones-->
+<script>
+
+    
+
+    
+</script>
+
 
 @endsection

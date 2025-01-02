@@ -55,6 +55,8 @@ class UbicacionController extends Controller
             'idDistrito' => 'required',
             'agencia' => 'required',
             'sedeAgencia'=>'required'
+        ],[
+            'required' => 'El campo :attribute no puede estar vacio'
         ]);
         $usuario = Auth::guard('usuario')->user();
         DB::beginTransaction();
@@ -73,7 +75,10 @@ class UbicacionController extends Controller
                 'success', 
                 'Dirección registrada correctamente.'
             );
-        } catch (\Exception $e) {
+        }catch(\Illuminate\Validation\ValidationException $e){
+            return back()->withErrors($e->errors());
+        } 
+        catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors([
                 'error' => 'Error al registrar la dirección: ' 
@@ -152,6 +157,9 @@ class UbicacionController extends Controller
             'agencia' => 'required',
             'sedeAgencia' =>'required',
             'idDistrito' => 'required'
+        ],[
+            'required' => 'El campo :attribute no puede estar vacio',
+
         ]);
         
         try {
@@ -161,7 +169,10 @@ class UbicacionController extends Controller
                 'success', 
                 'Dirección actualizada correctamente.'
             );
-        } catch (\Exception $e) {
+        }catch(\Illuminate\Validation\ValidationException $e){
+            return back()->withErrors($e->errors());
+        } 
+        catch (\Exception $e) {
             return redirect()->back()->withErrors([
                 'error' => 'Error al actualizar la dirección: ' . 
                 $e->getMessage()

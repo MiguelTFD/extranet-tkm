@@ -206,6 +206,7 @@ thead tr{
                         <p style="color:#2D2D2E;font-weight:bold"> 
                         {{ $data['tipoEntrega'] }}
                         </p>
+                                        Agencia de envio
                     </div>
                 </div>
                 <div class="row mb-2">

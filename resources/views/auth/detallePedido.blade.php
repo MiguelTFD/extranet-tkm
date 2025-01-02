@@ -110,7 +110,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    N掳 Orden Compra
+                                    N# Orden Compra
                                 </strong>
                             </div>
                             <div 
@@ -170,7 +170,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    Informaci贸n de la compra
+                                    Información de la compra
                                 </strong>
                             </div>
                             <div class="col-6 text-end rdp">
@@ -184,7 +184,7 @@ thead tr{
                                 class="col-6"
                             >
                                 <strong>
-                                    Instrucci贸n de entrega
+                                    Instrucción de entrega
                                 </strong>
                             </div>
                             <div 
@@ -364,7 +364,7 @@ thead tr{
                     href="https://api.whatsapp.com/send?phone=51983929015&text=Hola deseo modificar los datos de mi pedido"
                     class="forgot-password"
                 >
-                    Solicitar modificacion de los datos del pedido
+                    Solicitar modificación de los datos del pedido
                 </a>
                 </div>
              <div>
