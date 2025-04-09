@@ -1499,7 +1499,6 @@ display:flex;
 .product-info {
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
     max-width: 350px;
 }
 
@@ -1614,3 +1613,6 @@ width: fit-content !important;
     transform: translateY(-20px);
 }
 
+.grecaptcha-badge {
+    top: 70% !important;
+}

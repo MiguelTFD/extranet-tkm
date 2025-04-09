@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 
 use Illuminate\Http\Request;
-
+//idk code for new dadasda asdaasd
 class HomeController extends Controller
 {
     public function index()

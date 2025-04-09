@@ -160,9 +160,9 @@
     </div>
 
     <div class="wsp-1-2">
-        <button class="btn-base-wsp-contact dfn-wsp">
+        <div class="btn-base-wsp-contact dfn-wsp">
         <img class="wsp-1-2_wsp-logo" src="{{asset('images/wsp_light_logo.png')}}"/>
-        </button>
+        </div>
     </div>
 </div>
 

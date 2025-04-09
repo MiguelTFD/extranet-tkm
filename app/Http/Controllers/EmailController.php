@@ -6,27 +6,35 @@ use App\Mail\ContactoMailable;
 use App\Mail\PedidosMailable;
 use App\Models\OrdenCompra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function sendContactEmail(Request $request)
+   public function sendContactEmail(Request $request)
     {
-        
         $request->validate([
             'name' => 'required',
             'subject' => 'required',
             'telefono' => 'required',
             'email' => 'required|email',
-            'message' => 'required'
+            'message' => 'required',
+            'g-recaptcha-response' => 'required', 
         ]);
         
-        Mail::to('henry.management@thekingmoss.com')
-            ->send(new ContactoMailable($request->all()));
-        return redirect()->back()->with(
-            "success", "Se ha enviado el mensaje"
-        );
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET'),
+            'response' => $request->input('g-recaptcha-response'),
+        ])->object();
+        if ($response->success && $response->score >= 0.6) {
+            Mail::to('henry.management@thekingmoss.com')
+                ->send(new ContactoMailable($request->all()));
+            return redirect()->back()->with('success', 'Se ha enviado el mensaje');
+        }
+     
+        return redirect()->back()->with('error', 'Error al verificar reCAPTCHA. Por favor, inténtalo nuevamente.');
     }
+ 
 
     public function sendOrderRequestEmail($id)
     {

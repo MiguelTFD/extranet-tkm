@@ -18,10 +18,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const notifications = document.querySelectorAll('.notification');
 
-    if (notifications.length === 0) {
-        console.log('No hay notificaciones disponibles en el DOM.');
-    }
-
     notifications.forEach(notification => {
         console.log('Notificación encontrada:', notification.textContent.trim());
         setTimeout(() => {

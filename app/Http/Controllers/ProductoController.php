@@ -35,10 +35,13 @@ class ProductoController extends Controller
         
         if (empty($idCategory)) {
             $this->productos = 
-                Producto::with(['categoria', 'imagenes'])->get();
+                Producto::with(['categoria', 'imagenes'])
+                ->orderBy('ordenListado')
+                ->get();
         } else {
             $this->productos = Producto::where('idCategoria', $idCategory)
                 ->with(['categoria', 'imagenes'])
+                ->orderBy('ordenListado')
                 ->get();
         }
         return response()->json([
@@ -51,7 +54,9 @@ class ProductoController extends Controller
     {
         if (is_null($this->productos)) {
             $this->productos = 
-                Producto::with(['categoria', 'imagenes'])->get();
+                Producto::with(['categoria', 'imagenes'])
+                ->orderBy('ordenListado')
+                ->get();
         }
         
         return response()->json([
