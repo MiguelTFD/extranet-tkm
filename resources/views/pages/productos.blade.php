@@ -12,6 +12,7 @@
 @media (max-width: 1200px) {
 
     .prodSectionCt{
+        width: 100%;
         display:flex;
         flex-direction:column;
     }
@@ -24,7 +25,6 @@
         flex-direction:column;
     }
 }
-
 
 </style>
 

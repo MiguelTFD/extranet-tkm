@@ -24,7 +24,7 @@ class LoginController extends Controller
     
     if (!Hash::check($credentials['password'], $user->password)) {
         return back()->withErrors([
-            'username' => 'Contrase単a incorrecta'
+            'username' => 'Contraseña incorrecta'
         ]);
     }
     

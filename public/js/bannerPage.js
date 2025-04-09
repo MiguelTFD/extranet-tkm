@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded',()=>{
                     }
                     break;
             default:
-                console.log("no hay pagina");
+
+                break; 
         }
     }
 
@@ -54,7 +55,8 @@ document.addEventListener('DOMContentLoaded',()=>{
                     ` center center / cover no-repeat`;
                 break;
             default:
-                console.log("sin fondos");
+                
+                break;
         }
     }
 

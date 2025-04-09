@@ -41,6 +41,31 @@
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <!-- Recaptcha -->
+    <script 
+        src="https://www.google.com/recaptcha/api.js?render=6LckCrsqAAAAAC4bB0FoiiNNwvdk42R0SLCwqbdp"
+    >
+    </script>
+    
+    <script>
+        document.addEventListener('submit', function(e){
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LckCrsqAAAAAC4bB0FoiiNNwvdk42R0SLCwqbdp', {action: 'submit'})
+                .then(function(token) {
+                    let form = e.target;
+                    let input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'g-recaptcha-response';
+                    input.value = token;
+                    form.appendChild(input);
+                    form.submit();
+                });
+            });
+        })
+    </script>
+
+
 </head>
 <body>
 

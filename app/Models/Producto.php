@@ -51,13 +51,15 @@ class Producto extends Model
         'descuento',
         'descripcion',
         'tamanio',
-        'peso'
+        'peso',
+        'ordenListado'
     ];
 
     protected $casts = [
         'precioUnitario' => 'decimal:2',  
         'descuento' => 'decimal:2',      
         'stockProducto' => 'integer',   
+        'ordenListado' => 'integer',   
         'peso' => 'decimal:2',         
     ];
 
