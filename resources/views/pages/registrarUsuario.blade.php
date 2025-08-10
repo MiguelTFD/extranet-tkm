@@ -569,7 +569,6 @@ const confirmPasswordField = document.getElementById('confirm-password');
 const passwordMatchMessage = document.getElementById('password-match-message');
 
 
- // Mostrar/ocultar contraseña
   function togglePassword(fieldId) {
     const passwordField = document.getElementById(fieldId);
     const icon = passwordField.nextElementSibling.firstElementChild;
@@ -634,10 +633,8 @@ confirmPasswordField.addEventListener('input', validatePasswords);
         }
     });
 
-    // Validación de username
     const usernameInput = document.getElementById('username');
     usernameInput.addEventListener('input', function(e) {
-        // Remover espacios y caracteres especiales automáticamente
         this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
         if (this.value.length < 6 || this.value.length > 12) {
             this.setCustomValidity('El username debe tener entre 6 y 12 caracteres');
@@ -676,7 +673,6 @@ confirmPasswordField.addEventListener('input', validatePasswords);
         }
     });
 
-        // Prevenir envío del formulario si hay errores
     form.addEventListener('submit', function(event) {
         if (!this.checkValidity()) {
             event.preventDefault();
